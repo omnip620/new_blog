@@ -1,13 +1,145 @@
 /**
  * Created by pan on 14-9-2.
  */
-
 @import "../../node_modules/bootstrap/less/normalize";
+@import "../../node_modules/bootstrap/less/mixins/vendor-prefixes";
+
+//@import "animation/animations.less";
 
 @bg-primary: #EEEEEE;
 @bg-dark: #222222;
 
-@text-primary:#222222;
-@text-primary:#EEEEEE;
-@text-bright:#0000CC;
+@text-primary: #222222;
+@text-white: #EEEEEE;
+@text-bright: #CC0000;
+
+@link-color: #000099;
+@link-hover-color: #0000FF;
+
+body {
+  font-family: "Microsoft YaHei", "LiHei Pro Medium", "WenQuanYi Micro He", Sans-serif;
+  font-size: 16px;
+  background-color: lighten(@bg-primary, 5%);
+  color: @text-primary;
+}
+
+* {
+  box-sizing: border-box;
+  &:after, &:before {
+    box-sizing: border-box;
+  }
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*blockquote*/
+blockquote {
+  p {
+    margin: 6px auto;
+  }
+  footer {
+    font-size: 80%;
+    color: lighten(@text-primary, 13%);
+    float: right;
+    &:before {
+      content: '\2014 \00A0';
+    }
+    cite {
+      font-style: normal;
+    }
+  }
+}
+
+a {
+  color: @text-primary;
+  &:hover {
+    text-decoration: none;
+    .transition(all 280ms linear 0);
+  }
+}
+
+.after-clear {
+  &:after {
+    clear: both;
+    display: table;
+    content: ' ';
+  }
+}
+
+@sidebar-width: 260px;
+.sidebar {
+  width: @sidebar-width;
+  text-align: center;
+  position: fixed;
+  border-right: 1px solid darken(@bg-primary, 12%);
+  height: 100%;
+  .after-clear;
+  .avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    margin-top: 150px;
+    margin-bottom: 10px;
+  }
+  .proverbs {
+    margin-bottom: 80px;
+  }
+  nav, .me {
+    a {
+      padding: 8px;
+    }
+  }
+  nav {
+    margin-bottom: 30px;
+  }
+}
+
+@right-nav-width: 300px;
+@right-nav-r: 80px;
+.right-nav {
+  width: @right-nav-width;
+  position: fixed;
+  padding-top: 50px;
+  right: @right-nav-r;
+  top: 0;
+  > section {
+    margin: 10px 10px 20px 10px;
+    header {
+      padding-left: 8px;
+      border-bottom: 1px solid @text-primary;
+      font-size: 18px;
+    }
+    ul {
+      padding-top: 6px;
+      li {
+        padding: 6px 0 6px 8px;
+
+        a {
+          text-decoration: none;
+          color: lighten(@text-primary, 12%);
+        }
+      }
+
+    }
+
+  }
+}
+
+.main-wrapper {
+  float: left;
+  width: 100%;
+  padding-left: @sidebar-width;
+  padding-right: @right-nav-width+@right-nav-r;
+  .main {
+    height: 500px;
+    padding-left: 54px;
+    padding-top: 34px;
+  }
+}
+
+
 

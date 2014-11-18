@@ -1,23 +1,30 @@
 {
-    "name": "blog",
-    "version": "0.0.1",
-    "private": true,
-    "scripts": {
-        "start": "node ./bin/www"
-    },
-    "dependencies": {
-        "express": "~4.2.0",
-        "static-favicon": "~1.0.0",
-        "morgan": "~1.0.0",
-        "cookie-parser": "~1.0.1",
-        "body-parser": "~1.0.0",
-        "debug": "~0.7.4",
-        "ejs": "~0.8.5",
-        "bootstrap": "~3.0.2",
-        "mongoose":"~3.8.14"
-    },
-    "description": "pan's blog",
-    "main": "app.js",
-    "author": "panew",
-    "license": "BSD-2-Clause"
+  "name": "blog",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.0.0",
+    "bootstrap": "^3.2.0",
+    "cookie-parser": "~1.0.1",
+    "debug": "~0.7.4",
+    "ejs": "~0.8.5",
+    "express": "~4.2.0",
+    "express-handlebars": "^1.1.0",
+    "mongoose": "~3.8.14",
+    "morgan": "~1.0.0",
+    "path": "~0.4.9",
+    "static-favicon": "~1.0.0"
+  },
+  "description": "pan's blog",
+  "main": "app.js",
+  "author": "panew",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-recess": "^1.0.0"
+  }
 }
