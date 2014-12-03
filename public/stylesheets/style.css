@@ -1,7 +1,7 @@
 /**
  * Created by pan on 14-9-2.
  */
-/*! normalize.css v3.0.1 | MIT License | git.io/normalize */
+/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -19,6 +19,7 @@ footer,
 header,
 hgroup,
 main,
+menu,
 nav,
 section,
 summary {
@@ -40,7 +41,7 @@ template {
   display: none;
 }
 a {
-  background: transparent;
+  background-color: transparent;
 }
 a:active,
 a:hover {
@@ -219,14 +220,24 @@ a {
 }
 a:hover {
   text-decoration: none;
-  -webkit-transition: all 280ms linear 0;
-  -o-transition: all 280ms linear 0;
-  transition: all 280ms linear 0;
+  -webkit-transition: all 200ms linear 0;
+  -o-transition: all 200ms linear 0;
+  transition: all 200ms linear 0;
+  color: #0066cc;
 }
 .after-clear:after {
   clear: both;
   display: table;
   content: ' ';
+}
+.sidebar-show {
+  -webkit-transition: all 150ms linear 0;
+  -o-transition: all 150ms linear 0;
+  transition: all 150ms linear 0;
+  opacity: 0.4;
+}
+.sidebar-show:hover {
+  opacity: 1;
 }
 .sidebar {
   width: 260px;
@@ -234,6 +245,13 @@ a:hover {
   position: fixed;
   border-right: 1px solid #cfcfcf;
   height: 100%;
+  -webkit-transition: all 150ms linear 0;
+  -o-transition: all 150ms linear 0;
+  transition: all 150ms linear 0;
+  opacity: 0.4;
+}
+.sidebar:hover {
+  opacity: 1;
 }
 .sidebar:after {
   clear: both;
@@ -261,8 +279,15 @@ a:hover {
   width: 300px;
   position: fixed;
   padding-top: 50px;
-  right: 80px;
+  right: 60px;
   top: 0;
+  -webkit-transition: all 150ms linear 0;
+  -o-transition: all 150ms linear 0;
+  transition: all 150ms linear 0;
+  opacity: 0.4;
+}
+.right-nav:hover {
+  opacity: 1;
 }
 .right-nav > section {
   margin: 10px 10px 20px 10px;
@@ -282,14 +307,75 @@ a:hover {
   text-decoration: none;
   color: #414141;
 }
+.right-nav > section ul li a:hover {
+  text-decoration: underline;
+}
 .main-wrapper {
   float: left;
   width: 100%;
   padding-left: 260px;
-  padding-right: 380px;
+  padding-right: 360px;
 }
 .main-wrapper .main {
   height: 500px;
-  padding-left: 54px;
-  padding-top: 34px;
+  padding-left: 80px;
+  padding-top: 50px;
+  padding-right: 60px;
+}
+.main-wrapper .main .articles {
+  margin-bottom: 12px;
+  padding-top: 12px;
+  border-bottom: 1px dashed transparent;
+  border-top: 1px dashed transparent;
+  -webkit-transition: all 100ms linear 0;
+  -o-transition: all 100ms linear 0;
+  transition: all 100ms linear 0;
+}
+.main-wrapper .main .articles:hover {
+  border-bottom: 1px dashed #7b7b7b;
+  border-top: 1px dashed #7b7b7b;
+}
+.main-wrapper .main .articles .content a {
+  text-decoration: none;
+}
+.main-wrapper .main .articles .content h2 {
+  font: 300 24px/40px 'Microsoft YaHei';
+  margin: 0 auto;
+}
+.main-wrapper .main .articles .content h2:after {
+  clear: both;
+  display: table;
+  content: ' ';
+}
+.main-wrapper .main .articles .content .info {
+  margin-bottom: 20px;
+}
+.main-wrapper .main .articles .content .info ul:after {
+  clear: both;
+  display: table;
+  content: ' ';
+}
+.main-wrapper .main .articles .content .info ul li {
+  float: left;
+  margin-right: 14px;
+  font: 300 13px/18px 'Tahoma';
+}
+.main-wrapper .main .articles .content .summary {
+  margin-top: 10px;
+  font: 16px/24px 'Tahoma';
+}
+.main-wrapper .main .articles .content .summary a:hover {
+  color: #222222;
+}
+@media all and (max-width: 1440px) {
+  .main-wrapper .main {
+    padding-left: 60px;
+    padding-right: 40px;
+  }
+}
+@media all and (max-width: 1280px) {
+  .main-wrapper .main {
+    padding-left: 40px;
+    padding-right: 30px;
+  }
 }

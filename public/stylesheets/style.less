@@ -14,7 +14,8 @@
 @text-bright: #CC0000;
 
 @link-color: #000099;
-@link-hover-color: #0000FF;
+@link-hover-color: #0066CC;
+
 
 body {
   font-family: "Microsoft YaHei", "LiHei Pro Medium", "WenQuanYi Micro He", Sans-serif;
@@ -58,7 +59,8 @@ a {
   color: @text-primary;
   &:hover {
     text-decoration: none;
-    .transition(all 280ms linear 0);
+    .transition(all 200ms linear 0);
+    color: @link-hover-color;
   }
 }
 
@@ -71,12 +73,21 @@ a {
 }
 
 @sidebar-width: 260px;
+.sidebar-show {
+  .transition(all 150ms linear 0);
+  opacity: 0.4;
+  &:hover {
+    opacity: 1;
+  }
+}
+
 .sidebar {
   width: @sidebar-width;
   text-align: center;
   position: fixed;
   border-right: 1px solid darken(@bg-primary, 12%);
   height: 100%;
+  .sidebar-show;
   .after-clear;
   .avatar {
     width: 120px;
@@ -99,13 +110,15 @@ a {
 }
 
 @right-nav-width: 300px;
-@right-nav-r: 80px;
+@right-nav-r: 60px;
 .right-nav {
+
   width: @right-nav-width;
   position: fixed;
   padding-top: 50px;
   right: @right-nav-r;
   top: 0;
+  .sidebar-show;
   > section {
     margin: 10px 10px 20px 10px;
     header {
@@ -117,10 +130,12 @@ a {
       padding-top: 6px;
       li {
         padding: 6px 0 6px 8px;
-
         a {
           text-decoration: none;
           color: lighten(@text-primary, 12%);
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
 
@@ -136,8 +151,65 @@ a {
   padding-right: @right-nav-width+@right-nav-r;
   .main {
     height: 500px;
-    padding-left: 54px;
-    padding-top: 34px;
+    padding-left: 80px;
+    padding-top: 50px;
+    padding-right: 60px;
+    .articles {
+      margin-bottom: 12px;
+      padding-top: 12px;
+      border-bottom: 1px dashed transparent;
+      border-top:1px dashed transparent;
+      .transition(all 100ms linear 0);
+      &:hover{
+        border-bottom: 1px dashed lighten(@text-primary,35%);
+        border-top:1px dashed lighten(@text-primary,35%);
+      }
+      .content {
+        a {
+          text-decoration: none;
+        }
+        h2 {
+          font: 300 24px/40px 'Microsoft YaHei';
+          margin: 0 auto;
+          .after-clear;
+        }
+        .info{
+          margin-bottom: 20px;
+          ul{
+            .after-clear;
+            li{
+              float: left;
+              margin-right: 14px;
+              font: 300 13px/18px 'Tahoma';
+
+            }
+          }
+        }
+        .summary {
+          margin-top: 10px;
+          font: 16px/24px 'Tahoma';
+          a:hover{
+            color: @text-primary;
+          }
+        }
+      }
+    }
+  }
+}
+@media all and (max-width: 1440px) {
+  .main-wrapper {
+    .main {
+      padding-left: 60px;
+      padding-right: 40px;
+    }
+  }
+}
+@media all and (max-width: 1280px) {
+  .main-wrapper {
+    .main {
+      padding-left: 40px;
+      padding-right: 30px;
+    }
   }
 }
 
