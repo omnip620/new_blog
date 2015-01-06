@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="admin">
+<head>
+  <!--<script src="/javascripts/webcomponents.min.js"></script>-->
+
+  <link rel="stylesheet" href="/stylesheets/admin.css"/>
+  <link rel="stylesheet" href="/stylesheets/font.css"/>
+</head>
+<body>
+<!--<sidebar-element></sidebar-element>-->
+<div class="sidebar">
+  <ul>
+    {{#each categeories}}
+      <li><a href="{{url}}">{{name}}</a></li>
+    {{/each}}
+  </ul>
+</div>
+<div class="main" ng-view=""></div>
+
+<script src="/javascripts/papaparse.min.js"></script>
+<script src="/javascripts/angular.min.js"></script>
+<script src="/javascripts/lodash.min.js"></script>
+<script src="/javascripts/angular-route.min.js"></script>
+
+<script src="/admin/app.js"></script>
+<script src="/admin/AdminController.js"></script>
+<script src="/admin/articles/articlesController.js"></script>
+<script src="/admin/article/articleController.js"></script>
+</body>
+</html>

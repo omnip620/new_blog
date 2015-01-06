@@ -1,0 +1,27 @@
+<div class="articles">
+  <ul class="tools">
+    <li><a href="javascript:;" ng-click="deleteArticles()">删除</a></li>
+    <li><a href="#/article/add">新增</a></li>
+  </ul>
+  <table>
+    <tr>
+      <th><input type="checkbox" ng-model="all" ng-change="selectAll()"/></th>
+      <th ng-repeat="title in titles" width="{{title.width}}"><a href="" ng-click="reverse=!reverse;sort(reverse);">{{title.name}}</a>
+        <small ng-show="title.active"><i class="icon-arrow-down"></i></small>
+      </th>
+    </tr>
+    <tr ng-repeat="article in articles | offset: currentPage*pageSize | limitTo: pageSize">
+      <td><input type="checkbox" ng-checked="all" ng-model="confirmed" ng-click="change()"/></td>
+      <td>{{$index + 1}}</td>
+      <td>{{article.title}}</td>
+      <td>{{article.source}}</td>
+      <td>{{article.top | top}}</td>
+      <td>{{article.tags | tagsStyle}}</td>
+      <td>{{article.views}}</td>
+      <td>{{article.comments}}</td>
+      <td>{{article.updated_at | date:'M-d HH:mm:ss'}}</td>
+    </tr>
+  </table>
+  <a href="javascript:;" ng-click="prevPage()">前一页</a>
+  <a href="javascript:;" ng-click="nextPage()">后一页</a>
+</div>

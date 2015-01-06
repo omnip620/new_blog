@@ -5,28 +5,37 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exhbs = require('express-handlebars');
-
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var routers = require('./routers');
+var mongoose=require('mongoose');
+var config=require('./config');
 
 var app = express();
 
-// view engine setup
-app.engine('hbs', exhbs({extname: 'hbs', defaultLayout: 'layout', helpers: {
-  block: function (name) {
-    var blocks = this._blocks;
-    content = blocks && blocks[name];
-
-    return content ? content.join('\n') : null;
-  },
-  contentFor: function (name, options) {
-    var blocks = this._blocks || (this._blocks = {}),
-      block = blocks[name] || (blocks[name] = []);
-
-    block.push(options.fn(this));
+mongoose.connect(config.db,function(err){
+  if(err){
+    console.error('connect to %s error: ', config.db, err.message);
+    process.exit(1);
   }
-}}));
+});
+
+
+// view engine setup
+app.engine('hbs', exhbs({
+  extname: 'hbs', defaultLayout: 'layout', helpers: {
+    block: function (name) {
+      var blocks = this._blocks;
+      content = blocks && blocks[name];
+
+      return content ? content.join('\n') : null;
+    },
+    contentFor: function (name, options) {
+      var blocks = this._blocks || (this._blocks = {}),
+        block = blocks[name] || (blocks[name] = []);
+
+      block.push(options.fn(this));
+    }
+  }
+}));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
@@ -38,8 +47,7 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+app.use('/', routers);
 
 /// catch 404 and forward to error handler
 app.use(function (req, res, next) {

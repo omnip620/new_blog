@@ -1,0 +1,9 @@
+name,value,width,active
+编号,,,
+标题,title,100px,
+来源,source,50px,
+置顶,top,,
+标签,tags,200px,
+浏览量,views,,
+评论量,comments,,
+日期,updated_at,,

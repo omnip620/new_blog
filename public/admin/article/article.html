@@ -1,0 +1,29 @@
+<form  ng-submit="processForm()">
+  <div class="form-group">
+    <label for="title">标题</label>
+    <input type="text" name="title" id="title" ng-model="article.title"/>
+  </div>
+  <div class="form-group">
+    <label for="content">内容</label>
+    <input type="text" name="content" id="content" ng-model="article.content"/>
+  </div>
+  <div class="form-group">
+    <label for="source">来源</label>
+    <input type="text" name="source" id="source" ng-model="article.source"/>
+  </div>
+  <div class="form-group">
+    <label for="source">置顶</label>
+    <input type="checkbox" name="top" id="top" ng-model="article.top"/>
+  </div>
+  <div class="form-group">
+    <label for="source">标签</label>
+    <input tags-style type="text" name="tags" id="tags" ng-model="article.tags"/>
+  </div>
+  <div class="form-group">
+    <label for="source">浏览量</label>
+    <input type="text" name="views" id="views" ng-model="article.views"/>
+  </div>
+  <div class="form-group">
+    <input type="submit" value="提交"/>
+  </div>
+</form>

@@ -12,10 +12,10 @@
 @text-primary: #222222;
 @text-white: #EEEEEE;
 @text-bright: #CC0000;
+@text-muted: #959595;
 
 @link-color: #000099;
 @link-hover-color: #0066CC;
-
 
 body {
   font-family: "Microsoft YaHei", "LiHei Pro Medium", "WenQuanYi Micro He", Sans-serif;
@@ -67,7 +67,7 @@ a {
 .after-clear {
   &:after {
     clear: both;
-    display: table;
+    display: block;
     content: ' ';
   }
 }
@@ -154,15 +154,26 @@ a {
     padding-left: 80px;
     padding-top: 50px;
     padding-right: 60px;
+    .info {
+      margin-bottom: 20px;
+      ul {
+        .after-clear;
+        li {
+          display: inline;
+          margin-right: 14px;
+          font: 300 13px/18px 'Tahoma';
+        }
+      }
+    }
     .articles {
       margin-bottom: 12px;
       padding-top: 12px;
       border-bottom: 1px dashed transparent;
-      border-top:1px dashed transparent;
-      .transition(all 100ms linear 0);
-      &:hover{
-        border-bottom: 1px dashed lighten(@text-primary,35%);
-        border-top:1px dashed lighten(@text-primary,35%);
+      border-top: 1px dashed transparent;
+      .transition(all 150ms linear 0);
+      &:hover {
+        border-bottom: 1px dashed lighten(@text-primary, 45%);
+        border-top: 1px dashed lighten(@text-primary, 45%);
       }
       .content {
         a {
@@ -173,29 +184,44 @@ a {
           margin: 0 auto;
           .after-clear;
         }
-        .info{
-          margin-bottom: 20px;
-          ul{
-            .after-clear;
-            li{
-              float: left;
-              margin-right: 14px;
-              font: 300 13px/18px 'Tahoma';
-
-            }
-          }
-        }
         .summary {
           margin-top: 10px;
           font: 16px/24px 'Tahoma';
-          a:hover{
+          a:hover {
             color: @text-primary;
           }
         }
       }
     }
+    .article {
+      .article-title {
+        font-weight: normal;
+        margin: 0;
+        text-align: center;
+      }
+      .info {
+        margin-bottom: 12px;
+        margin-top: 8px;
+        border-bottom: 1px solid lighten(@text-muted,26%);
+        padding-bottom: 12px;
+        text-align: center;
+        color: @text-muted;
+        a {
+          text-decoration: none;
+          color: @text-muted;
+          &:hover {
+            color: @link-hover-color;
+          }
+        }
+      }
+      .article-cont {
+        padding-bottom: 16px;
+        border-bottom: 1px solid lighten(@text-muted,26%);
+      }
+    }
   }
 }
+
 @media all and (max-width: 1440px) {
   .main-wrapper {
     .main {
@@ -204,6 +230,7 @@ a {
     }
   }
 }
+
 @media all and (max-width: 1280px) {
   .main-wrapper {
     .main {
@@ -212,6 +239,7 @@ a {
     }
   }
 }
+
 
 
 

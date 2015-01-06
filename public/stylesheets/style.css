@@ -227,7 +227,7 @@ a:hover {
 }
 .after-clear:after {
   clear: both;
-  display: table;
+  display: block;
   content: ' ';
 }
 .sidebar-show {
@@ -255,7 +255,7 @@ a:hover {
 }
 .sidebar:after {
   clear: both;
-  display: table;
+  display: block;
   content: ' ';
 }
 .sidebar .avatar {
@@ -322,18 +322,31 @@ a:hover {
   padding-top: 50px;
   padding-right: 60px;
 }
+.main-wrapper .main .info {
+  margin-bottom: 20px;
+}
+.main-wrapper .main .info ul:after {
+  clear: both;
+  display: block;
+  content: ' ';
+}
+.main-wrapper .main .info ul li {
+  display: inline;
+  margin-right: 14px;
+  font: 300 13px/18px 'Tahoma';
+}
 .main-wrapper .main .articles {
   margin-bottom: 12px;
   padding-top: 12px;
   border-bottom: 1px dashed transparent;
   border-top: 1px dashed transparent;
-  -webkit-transition: all 100ms linear 0;
-  -o-transition: all 100ms linear 0;
-  transition: all 100ms linear 0;
+  -webkit-transition: all 150ms linear 0;
+  -o-transition: all 150ms linear 0;
+  transition: all 150ms linear 0;
 }
 .main-wrapper .main .articles:hover {
-  border-bottom: 1px dashed #7b7b7b;
-  border-top: 1px dashed #7b7b7b;
+  border-bottom: 1px dashed #959595;
+  border-top: 1px dashed #959595;
 }
 .main-wrapper .main .articles .content a {
   text-decoration: none;
@@ -344,21 +357,8 @@ a:hover {
 }
 .main-wrapper .main .articles .content h2:after {
   clear: both;
-  display: table;
+  display: block;
   content: ' ';
-}
-.main-wrapper .main .articles .content .info {
-  margin-bottom: 20px;
-}
-.main-wrapper .main .articles .content .info ul:after {
-  clear: both;
-  display: table;
-  content: ' ';
-}
-.main-wrapper .main .articles .content .info ul li {
-  float: left;
-  margin-right: 14px;
-  font: 300 13px/18px 'Tahoma';
 }
 .main-wrapper .main .articles .content .summary {
   margin-top: 10px;
@@ -366,6 +366,30 @@ a:hover {
 }
 .main-wrapper .main .articles .content .summary a:hover {
   color: #222222;
+}
+.main-wrapper .main .article .article-title {
+  font-weight: normal;
+  margin: 0;
+  text-align: center;
+}
+.main-wrapper .main .article .info {
+  margin-bottom: 12px;
+  margin-top: 8px;
+  border-bottom: 1px solid #d7d7d7;
+  padding-bottom: 12px;
+  text-align: center;
+  color: #959595;
+}
+.main-wrapper .main .article .info a {
+  text-decoration: none;
+  color: #959595;
+}
+.main-wrapper .main .article .info a:hover {
+  color: #0066cc;
+}
+.main-wrapper .main .article .article-cont {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #d7d7d7;
 }
 @media all and (max-width: 1440px) {
   .main-wrapper .main {
