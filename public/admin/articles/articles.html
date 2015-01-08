@@ -10,7 +10,7 @@
         <small ng-show="title.active"><i class="icon-arrow-down"></i></small>
       </th>
     </tr>
-    <tr ng-repeat="article in articles | offset: currentPage*pageSize | limitTo: pageSize">
+    <tr ng-repeat="article in articles  | limitTo: pageSize">
       <td><input type="checkbox" ng-checked="all" ng-model="confirmed" ng-click="change()"/></td>
       <td>{{$index + 1}}</td>
       <td>{{article.title}}</td>
