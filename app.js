@@ -13,7 +13,7 @@ var app = express();
 
 if (process.env.VCAP_SERVICES) {
   var mongodb_config = JSON.parse(process.env.VCAP_SERVICES).mongodb[0].credentials;
-  config.db.host = mongodb_config.hostname;
+  config.db.host = mongodb_config.host;
   config.db.port = mongodb_config.port;
   config.db.user = mongodb_config.username;
   config.db.password = mongodb_config.password;
