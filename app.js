@@ -16,11 +16,10 @@ if (process.env.VCAP_SERVICES) {
   config.db.host = mongodb_config.host;
   config.db.port = mongodb_config.port;
   config.db.user = mongodb_config.username;
-  config.db.password = mongodb_config.password;
+  config.db.pwd = mongodb_config.password;
   config.db.database = mongodb_config.name;
 }
 var dburi='mongodb://'+config.db.user+':'+config.db.pwd+'@'+config.db.host+':'+config.db.port+'/'+config.db.database;
-console.log('dburi:'+dburi);
 mongoose.connect(dburi,function(err){
   if(err){
     console.error('connect to %s error: ', dburi, err.message);
