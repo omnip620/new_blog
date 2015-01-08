@@ -11,9 +11,19 @@ var config=require('./config');
 
 var app = express();
 
-mongoose.connect(config.db,function(err){
+if (process.env.VCAP_SERVICES) {
+  var mongodb_config = JSON.parse(process.env.VCAP_SERVICES).mongodb[0].credentials;
+  config.db.host = mongodb_config.hostname;
+  config.db.port = mongodb_config.port;
+  config.db.user = mongodb_config.username;
+  config.db.password = mongodb_config.password;
+  config.db.database = mongodb_config.name;
+}
+var dburi='mongodb://'+config.db.user+':'+config.db.pwd+'@'+config.db.host+':'+config.db.port+'/'+config.db.database;
+
+mongoose.connect(dburi,function(err){
   if(err){
-    console.error('connect to %s error: ', config.db, err.message);
+    console.error('connect to %s error: ', dburi, err.message);
     process.exit(1);
   }
 });
