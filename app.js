@@ -20,7 +20,7 @@ if (process.env.VCAP_SERVICES) {
   config.db.database = mongodb_config.name;
 }
 var dburi='mongodb://'+config.db.user+':'+config.db.pwd+'@'+config.db.host+':'+config.db.port+'/'+config.db.database;
-
+console.log('dburi:'+dburi);
 mongoose.connect(dburi,function(err){
   if(err){
     console.error('connect to %s error: ', dburi, err.message);

@@ -12,7 +12,6 @@ angular.module('admin').controller('ArticlesController', function ($scope, $http
     header: true,
     complete: function (results) {
       $scope.titles = results.data;
-      console.log(results.data);
     }
   });
 
