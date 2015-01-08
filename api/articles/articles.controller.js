@@ -14,6 +14,7 @@ exports.index = function (req, res) {
 };
 
 exports.create = function (req, res) {
+  console.log(111);
   Article.create(req.body, function (err, article) {
     if (err) {
       return handleError(res, err);

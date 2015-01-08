@@ -7,7 +7,7 @@ angular.module('admin').controller('ArticlesController', function ($scope, $http
   $scope.selectedArticles = [];
   $scope.sortIco = true;
   $scope.titles = [];
-  Papa.parse("http://0.0.0.0:3000/admin/articles/articleHeader.csv", {
+  Papa.parse("/admin/articles/articleHeader.csv", {
     download: true,
     header: true,
     complete: function (results) {
