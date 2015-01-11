@@ -1,29 +1,51 @@
-<form  ng-submit="processForm()">
-  <div class="form-group">
-    <label for="title">标题</label>
-    <input type="text" name="title" id="title" ng-model="article.title"/>
-  </div>
-  <div class="form-group">
-    <label for="content">内容</label>
-    <input type="text" name="content" id="content" ng-model="article.content"/>
-  </div>
-  <div class="form-group">
-    <label for="source">来源</label>
-    <input type="text" name="source" id="source" ng-model="article.source"/>
-  </div>
-  <div class="form-group">
-    <label for="source">置顶</label>
-    <input type="checkbox" name="top" id="top" ng-model="article.top"/>
-  </div>
-  <div class="form-group">
-    <label for="source">标签</label>
-    <input tags-style type="text" name="tags" id="tags" ng-model="article.tags"/>
-  </div>
-  <div class="form-group">
-    <label for="source">浏览量</label>
-    <input type="text" name="views" id="views" ng-model="article.views"/>
-  </div>
-  <div class="form-group">
-    <input type="submit" value="提交"/>
-  </div>
-</form>
+<div class="col-md-9 m-t-10" role="main">
+  <form role="form" class="form-horizontal" ng-submit="processForm()">
+    <div class="form-group">
+      <label for="title" class="col-sm-2 control-label">标题</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="title" id="title" ng-model="article.title"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="content" class="col-sm-2 control-label">内容</label>
+
+      <div class="col-sm-10">
+        <textarea rows="5"  class="form-control" name="content" id="content" ng-model="article.content">
+
+        </textarea>
+
+        <!--<input type="text" class="form-control" name="content" id="content" ng-model="article.content"/>-->
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="source" class="col-sm-2 control-label">来源</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="source" id="source" ng-model="article.source"/></div>
+    </div>
+    <div class="form-group">
+      <label for="top" class="col-sm-2 control-label">置顶</label>
+
+      <div class="col-sm-10">
+        <input type="checkbox" name="top" id="top" ng-model="article.top"/></div>
+    </div>
+    <div class="form-group">
+      <label for="tags" class="col-sm-2 control-label">标签</label>
+
+      <div class="col-sm-10">
+        <input tags-style type="text" class="form-control" name="tags" id="tags" ng-model="article.tags"/></div>
+    </div>
+    <div class="form-group">
+      <label for="views" class="col-sm-2 control-label">浏览量</label>
+
+      <div class="col-sm-10">
+        <input type="text" name="views" class="form-control" id="views" ng-model="article.views"/></div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <input type="submit" value="提交" class="btn btn-default pull-right"/>
+      </div>
+    </div>
+  </form>
+</div>

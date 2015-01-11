@@ -4,6 +4,7 @@
 var Article = require('../../models/article');
 var async = require('async');
 var Promise = require('bluebird');
+var _=require('lodash')
 exports.index = function (req, res) {
   Article.find({}, 'title top source tags views comments updated_at created_at ', function (err, articles) {
     if (err) {
@@ -22,6 +23,45 @@ exports.create = function (req, res) {
   });
 };
 
+exports.update = function (req, res) {
+  var id;
+  if (req.body._id) {
+    id = req.body._id;
+    delete req.body._id;
+  }
+  Article.update({_id:id},req.body,function(err,article,raw){
+    if(err){
+      return handleError(res, err);
+    }
+    return res.json(200);
+  });
+
+
+  //Article.findById(id, function (err, article) {
+  //  if (err) {
+  //    return handleError(res, err);
+  //  }
+  //  var updated = _.merge(article, req.body);
+  //  console.log(updated);
+  //  updated.save(function (err) {
+  //    if (err) {
+  //      return handleError(res, err);
+  //    }
+  //
+  //    return res.json(200, article);
+  //  });
+  //});
+};
+
+exports.show = function (req, res) {
+  Article.findById(req.params.id, function (err, article) {
+    if (err) {
+      return handleError(res, err);
+    }
+    return res.json(200, article);
+  });
+};
+
 exports.generate = function (req, res) {
 
   var num = req.params.num;
@@ -30,13 +70,13 @@ exports.generate = function (req, res) {
   for (var i = 0; i < num; i++) {
     obj.title = Math.random().toString(16).substring(2);
     obj.top = (function () {
-      if(Math.random()*10>5){
+      if (Math.random() * 10 > 5) {
         return 'true';
       }
       return 'false';
     })();
-    obj.views=(function(){
-      var v=Math.round(Math.random()*1000);
+    obj.views = (function () {
+      var v = Math.round(Math.random() * 1000);
       console.log(v);
 
       return v;

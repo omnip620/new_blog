@@ -2,7 +2,7 @@
  * Created by panew on 14-12-9.
  */
 angular.module('admin', ['ngRoute'])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider,$locationProvider) {
     $routeProvider.when('/', {
       controller: 'AdminController',
       template: ''
@@ -13,4 +13,5 @@ angular.module('admin', ['ngRoute'])
       controller:'ArticleController',
       templateUrl:'/admin/article/article.html'
     }).otherwise({redirectTo: '/'});
+    $locationProvider.html5Mode(true);
   });

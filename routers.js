@@ -10,8 +10,6 @@ var admin=require('./controllers/admin');
 
 router.get('/',index.show);
 router.get('/article',article.show);
-router.get('/admin',admin.show);
-router.get('/admin/categories',admin.categories);
 
 router.use('/api/articles',require('./api/articles'));
 //router.use('/api/admin',require('./api/admin'));

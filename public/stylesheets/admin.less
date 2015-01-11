@@ -1,18 +1,17 @@
+@import "../../node_modules/bootstrap/less/bootstrap";
 html, body {
   margin: 0;
   padding: 0;
 }
-
-* {
-  box-sizing: border-box;
-}
-
 ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
+.m-t-10{
+  margin-top: 10px;
+}
 @sidebar-width: 100px;
 .sidebar {
   width: @sidebar-width;
@@ -29,22 +28,3 @@ ul {
   padding-left: @sidebar-width+20;
 }
 
-.articles {
-  .tools {
-    li {
-      display: inline;
-    }
-  }
-  table {
-    border-collapse: collapse;
-    td, th {
-      border: solid #000 1px;
-      text-align: center;
-    }
-    th{
-      a{
-        color: #000000;
-      }
-    }
-  }
-}

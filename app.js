@@ -58,6 +58,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routers);
 
+///admin router
+app.use(function(req,res){
+  if(req.path.indexOf('/admin')>=0){
+    res.render('admin/index', {layout: false,categeories:[{name:"设置",url:"/admin"},{name:"文章",url:"/admin/articles"}]});
+  }
+});
+
+
 /// catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err = new Error('Not Found');

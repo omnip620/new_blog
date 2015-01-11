@@ -21,6 +21,7 @@ angular.module('admin').controller('ArticlesController', function ($scope, $http
     headers: {'Content-Type': 'application/json;charset=utf8'}
   }).success(function (data) {
     $scope.articles = data;
+    $scope.sort('-updated_at',false);
   });
 
   $scope.deleteArticles = function () {
@@ -53,13 +54,9 @@ angular.module('admin').controller('ArticlesController', function ($scope, $http
         return item !== self.article._id;
       });
   };
-  $scope.sort = function (reverse) {
-    console.log(this);
-    var value = this.hasOwnProperty('title') ? this.title.value : '-updated_at';
-    $scope.articles = orderBy($scope.articles, value, reverse);
+  $scope.sort = function (predicate,reverse) {
+    $scope.articles = orderBy($scope.articles, predicate, reverse);
   };
-  $scope.sort(false);
-
   $scope.currentPage = 0;
   $scope.pageSize = 10;
   $scope.prevPage = function () {
@@ -85,8 +82,10 @@ angular.module('admin').controller('ArticlesController', function ($scope, $http
 
 angular.module('admin').filter('offset', function () {
   return function (input, start) {
-   start = parseInt(start, 10);
-    return input.slice(start);
+    if (input.length) {
+      start = parseInt(start, 10);
+      return input.slice(start);
+    }
   };
 });
 
