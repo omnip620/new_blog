@@ -86,6 +86,7 @@ angular.module('admin').controller('ArticlesController', function ($scope, $http
   };
 
   $scope.clickPageLink = function () {
+    console.log(11);
     $scope.currentPage=this.item.value;
     generatePageLinkItem();
   };
