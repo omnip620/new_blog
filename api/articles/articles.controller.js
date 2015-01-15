@@ -29,28 +29,13 @@ exports.update = function (req, res) {
     id = req.body._id;
     delete req.body._id;
   }
+  req.body.updated_at=new Date();
   Article.update({_id:id},req.body,function(err,article,raw){
     if(err){
       return handleError(res, err);
     }
     return res.json(200);
   });
-
-
-  //Article.findById(id, function (err, article) {
-  //  if (err) {
-  //    return handleError(res, err);
-  //  }
-  //  var updated = _.merge(article, req.body);
-  //  console.log(updated);
-  //  updated.save(function (err) {
-  //    if (err) {
-  //      return handleError(res, err);
-  //    }
-  //
-  //    return res.json(200, article);
-  //  });
-  //});
 };
 
 exports.show = function (req, res) {
@@ -63,7 +48,6 @@ exports.show = function (req, res) {
 };
 
 exports.generate = function (req, res) {
-
   var num = req.params.num;
   var obj = {title: '', top: '', views: ''};
   console.log(num);

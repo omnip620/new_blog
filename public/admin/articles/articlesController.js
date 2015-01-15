@@ -21,7 +21,9 @@ angular.module('admin').controller('ArticlesController', function ($scope, $http
     headers: {'Content-Type': 'application/json;charset=utf8'}
   }).success(function (data) {
     $scope.articles = data;
-    $scope.sort('-updated_at',false);
+    $scope.sort('-updated_at', false);
+    $scope.pageCount=Math.ceil($scope.articles.length / $scope.pageSize) - 1;
+    generatePageLinkItem();
   });
 
   $scope.deleteArticles = function () {
@@ -54,29 +56,49 @@ angular.module('admin').controller('ArticlesController', function ($scope, $http
         return item !== self.article._id;
       });
   };
-  $scope.sort = function (predicate,reverse) {
+  $scope.sort = function (predicate, reverse) {
     $scope.articles = orderBy($scope.articles, predicate, reverse);
   };
+
+  //Page
   $scope.currentPage = 0;
   $scope.pageSize = 10;
+  $scope.pageLinkItems = [];
+
   $scope.prevPage = function () {
     if ($scope.currentPage > 0) {
       $scope.currentPage--;
     }
+    generatePageLinkItem();
   };
   $scope.prevPageDisabled = function () {
     return $scope.currentPage === 0 ? "disabled" : "";
   };
-  $scope.pageCount = function () {
-    return Math.ceil($scope.articles.length / $scope.pageSize) - 1;
-  };
+
   $scope.nextPage = function () {
-    if ($scope.currentPage < $scope.pageCount()) {
+    if ($scope.currentPage < $scope.pageCount) {
       $scope.currentPage++;
     }
+    generatePageLinkItem();
   };
   $scope.nextPageDisabled = function () {
-    return $scope.currentPage === $scope.pageCount() ? "disabled" : "";
+    return $scope.currentPage === $scope.pageCount ? "disabled" : "";
+  };
+
+  $scope.clickPageLink = function () {
+    $scope.currentPage=this.item.value;
+    generatePageLinkItem();
+  };
+
+  function generatePageLinkItem() {
+    $scope.pageLinkItems=[];
+    for (var i = 0; i <= $scope.pageCount; i++) {
+      var item = {
+        value:i,
+        aClass:$scope.currentPage==i?'active':''
+      };
+      $scope.pageLinkItems.push(item);
+    }
   }
 });
 
