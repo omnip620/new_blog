@@ -2,102 +2,74 @@
  * Created by panew on 14-12-9.
  */
 angular.module('admin').controller('ArticlesController', function ($scope, $http, $filter) {
-  var orderBy = $filter('orderBy');
-  $scope.articles = {};
-  $scope.selectedArticles = [];
-  $scope.sortIco = true;
-  $scope.titles = [];
-  Papa.parse("/admin/articles/articleHeader.csv", {
-    download: true,
-    header: true,
-    complete: function (results) {
-      $scope.titles = results.data;
-    }
-  });
-
-  $http({
-    method: 'get',
-    url: '/api/articles',
-    headers: {'Content-Type': 'application/json;charset=utf8'}
-  }).success(function (data) {
-    $scope.articles = data;
-    $scope.sort('-updated_at', false);
-    $scope.pageCount=Math.ceil($scope.articles.length / $scope.pageSize) - 1;
-    generatePageLinkItem();
-  });
-
-  $scope.deleteArticles = function () {
+    var orderBy = $filter('orderBy');
+    $scope.articles = {};
+    $scope.selectedArticles = [];
+    $scope.sortIco = true;
+    $scope.titles = [];
+    Papa.parse("/admin/articles/articleHeader.csv", {
+      download: true,
+      header: true,
+      complete: function (results) {
+        $scope.titles = results.data;
+      }
+    });
     $http({
-      method: 'post',
-      url: '/api/articles/delete',
-      data: $scope.selectedArticles,
+      method: 'get',
+      url: '/api/articles',
       headers: {'Content-Type': 'application/json;charset=utf8'}
-    }).success(function (data, status) {
-      _.remove($scope.articles, function (item) {
-        var flag = false;
-        _.each($scope.selectedArticles, function (num) {
-          if (item._id == num) {
-            flag = true;
-          }
+    }).success(function (data) {
+      $scope.articles = data;
+      $scope.sort('-updated_at', false);
+      $scope.pageCount = Math.ceil($scope.articles.length / $scope.pageSize) - 1;
+    });
+
+    $scope.deleteArticles = function () {
+      $http({
+        method: 'post',
+        url: '/api/articles/delete',
+        data: $scope.selectedArticles,
+        headers: {'Content-Type': 'application/json;charset=utf8'}
+      }).success(function (data, status) {
+        _.remove($scope.articles, function (item) {
+          var flag = false;
+          _.each($scope.selectedArticles, function (num) {
+            if (item._id == num) {
+              flag = true;
+            }
+          });
+          return flag;
         });
-        return flag;
-      });
-      $scope.selectedArticles = [];//TODO : so force
-      console.log($scope.selectedArticles);
-    })
-  };
-  $scope.selectAll = function () {
-    this.all ? $scope.selectedArticles = _.pluck($scope.articles, '_id') : $scope.selectedArticles = [];
-  };
-  $scope.change = function () {
-    var self = this;
-    this.confirmed ? $scope.selectedArticles.push(this.article._id) :
-      $scope.selectedArticles = _.remove($scope.selectedArticles, function (item) {
-        return item !== self.article._id;
-      });
-  };
-  $scope.sort = function (predicate, reverse) {
-    $scope.articles = orderBy($scope.articles, predicate, reverse);
-  };
+        $scope.selectedArticles = [];//TODO : so force
+      })
+    };
+    $scope.selectAll = function () {
+      this.all ? $scope.selectedArticles = _.pluck($scope.articles, '_id') : $scope.selectedArticles = [];
+    };
+    $scope.change = function () {
+      var self = this;
+      this.confirmed ? $scope.selectedArticles.push(this.article._id) :
+        $scope.selectedArticles = _.remove($scope.selectedArticles, function (item) {
+          return item !== self.article._id;
+        });
+    };
+    $scope.sort = function (predicate, reverse) {
+      $scope.articles = orderBy($scope.articles, predicate, reverse);
+    };
+    //Page
+    $scope.currentPage = 0;
+    $scope.pageSize = 10;
 
-  //Page
-  $scope.currentPage = 0;
-  $scope.pageSize = 10;
-  $scope.pageLinkItems = [];
+  }
+);
 
-  $scope.prevPage = function () {
-    if ($scope.currentPage > 0) {
-      $scope.currentPage--;
+angular.module('admin').filter('pageNum', function () {
+  return function (item) {
+    if (typeof item === 'number') {
+      return item + 1;
     }
-    generatePageLinkItem();
-  };
-  $scope.prevPageDisabled = function () {
-    return $scope.currentPage === 0 ? "disabled" : "";
-  };
-
-  $scope.nextPage = function () {
-    if ($scope.currentPage < $scope.pageCount) {
-      $scope.currentPage++;
-    }
-    generatePageLinkItem();
-  };
-  $scope.nextPageDisabled = function () {
-    return $scope.currentPage === $scope.pageCount ? "disabled" : "";
-  };
-
-  $scope.clickPageLink = function () {
-    $scope.currentPage=this.item.value;
-    generatePageLinkItem();
-  };
-
-  function generatePageLinkItem() {
-    $scope.pageLinkItems=[];
-    for (var i = 0; i <= $scope.pageCount; i++) {
-      var item = {
-        value:i,
-        aClass:$scope.currentPage==i?'active':''
-      };
-      $scope.pageLinkItems.push(item);
+    else if (item) {
+      return '...';
     }
   }
 });

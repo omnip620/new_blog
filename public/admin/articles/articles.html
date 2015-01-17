@@ -23,11 +23,5 @@
       <td>{{article.updated_at | date:'M-d HH:mm:ss'}}</td>
     </tr>
   </table>
-  <nav>
-    <ul class="pagination">
-      <li class="{{prevPageDisabled()}}"><a href="javascript:;" ng-click="prevPage()">前一页</a></li>
-      <li ng-repeat="item in pageLinkItems" class="{{item.aClass}}"><a href="javascript:;" ng-click="clickPageLink()">{{item.value+1}}</a></li>
-      <li class="{{nextPageDisabled()}}"><a href="javascript:;" ng-click="nextPage()">后一页</a></li>
-    </ul>
-  </nav>
+  <paging current-page="currentPage" page-size="{{pageSize}}" page-count="{{pageCount}}" point="1" rest="3"></paging>
 </div>
