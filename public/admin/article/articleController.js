@@ -5,18 +5,18 @@ angular.module('admin').controller('ArticleController', function ($scope, $route
   $scope.article = {};
   $scope.errors = {};
   var id = $routeParams.id;
-  var saveDateUrl='/api/articles';
+  var saveDateUrl = '/api/articles';
 
   if (id !== 'add') {
     $http({
       method: 'get',
-      url: '/api/articles/'+id,
+      url: '/api/articles/' + id,
       data: $scope.article,
       headers: {'Content-Type': 'application/json'}
     }).success(function (data, status) {
-      $scope.article=data;
+      $scope.article = data;
     });
-    saveDateUrl='/api/articles/update';
+    saveDateUrl = '/api/articles/update';
   }
   $scope.processForm = function () {
     $http({
@@ -28,6 +28,12 @@ angular.module('admin').controller('ArticleController', function ($scope, $route
       $location.path("articles");
     })
   };
+  $scope.mdStyle = "opacity-0";
+  $scope.preview = function () {
+    var md = window.markdownit();
+    sessionStorage.setItem('tempArticle',JSON.stringify($scope.article));
+    $location.path("preview");
+  }
 });
 
 angular.module('admin').directive('tagsStyle', function () {

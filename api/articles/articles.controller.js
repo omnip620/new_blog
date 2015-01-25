@@ -59,12 +59,7 @@ exports.generate = function (req, res) {
       }
       return 'false';
     })();
-    obj.views = (function () {
-      var v = Math.round(Math.random() * 1000);
-      console.log(v);
-
-      return v;
-    })();
+    obj.views = Math.round(Math.random() * 1000);
     Article.create(obj, function (err, article) {
       if (err) {
         console.log(err);
@@ -73,6 +68,7 @@ exports.generate = function (req, res) {
   }
   return res.send(201);
 };
+
 
 exports.destroy = function (req, res) {
   var ids = req.body;

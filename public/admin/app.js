@@ -9,6 +9,9 @@ angular.module('admin', ['ngRoute'])
     }).when('/articles', {
       controller:'ArticlesController',
       templateUrl:'/admin/articles/articles.html'
+    }).when('/preview', {
+      controller:'PreviewController',
+      templateUrl:'/admin/article/preview.html'
     }).when('/article/:id', {
       controller:'ArticleController',
       templateUrl:'/admin/article/article.html'

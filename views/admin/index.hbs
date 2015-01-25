@@ -5,6 +5,7 @@
   <base href="/admin/">
   <link rel="stylesheet" href="/stylesheets/admin.css"/>
   <link rel="stylesheet" href="/stylesheets/font.css"/>
+  <link rel="stylesheet" href="/editor/codemirror.css"/>
 </head>
 <body>
 <!--<sidebar-element></sidebar-element>-->
@@ -21,11 +22,19 @@
 <script src="/javascripts/angular.min.js"></script>
 <script src="/javascripts/lodash.min.js"></script>
 <script src="/javascripts/angular-route.min.js"></script>
+<script src="/javascripts/markdown-it.js"></script>
+<script src="/editor/codemirror.js"></script>
+<script src="/editor/xml.js"></script>
+<script src="/editor/markdown.js"></script>
+<script src="/editor/ext.js"></script>
 
 <script src="/admin/app.js"></script>
 <script src="/admin/AdminController.js"></script>
 <script src="/admin/articles/articlesController.js"></script>
 <script src="/admin/article/articleController.js"></script>
+<script src="/admin/article/previewController.js"></script>
 <script src="/admin/util/pagingDirective.js"></script>
+<script src="/admin/util/editorDirective.js"></script>
+
 </body>
 </html>
