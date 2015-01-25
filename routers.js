@@ -10,6 +10,7 @@ var admin=require('./controllers/admin');
 
 router.get('/',index.show);
 router.get('/article',article.show);
+router.get('/qnuptoken',admin.qnuptoken);
 
 router.use('/api/articles',require('./api/articles'));
 //router.use('/api/admin',require('./api/admin'));

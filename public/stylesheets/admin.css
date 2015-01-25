@@ -6327,3 +6327,38 @@ ul {
   opacity: 0;
   filter: alpha(opacity=0);
 }
+.editor-toolbar {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  line-height: 3em;
+  padding: 2px 0 1px 0;
+  position: relative;
+}
+.editor-toolbar a {
+  color: #626262;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 2px;
+  line-height: 30px;
+}
+.editor-toolbar a:hover {
+  background: #fcfcfc;
+  border: 1px solid #ddd;
+  text-decoration: none;
+}
+.editor-toolbar a:focus {
+  text-decoration: none;
+}
+.editor-toolbar:before,
+.editor-toolbar:after {
+  height: 1px;
+  display: block;
+  content: ' ';
+}
+.editor-toolbar .icon-enlarge2 {
+  position: absolute;
+  right: 0;
+  top: 2px;
+}

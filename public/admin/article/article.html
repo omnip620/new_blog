@@ -11,6 +11,16 @@
       <label for="content" class="col-sm-2 control-label">内容</label>
 
       <div class="col-sm-10">
+        <div class="editor-toolbar">
+          <a class="icon-bold" href="javascript:;"></a>
+          <a class="icon-italic" href="javascript:;"></a>
+          <a class="icon-quotes-left" href="javascript:;"></a>
+          <a class="icon-list-numbered" href="javascript:;"></a>
+          <a class="icon-list" href="javascript:;"></a>
+          <a class="icon-link" href="javascript:;"></a>
+          <a class="icon-eye" href="javascript:;"></a>
+          <a class="icon-enlarge2" href="javascript:;"></a>
+        </div>
         <textarea editor rows="5" name="content" id="content" ng-model="article.content"></textarea>
       </div>
     </div>
@@ -41,12 +51,14 @@
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         <input type="submit" value="提交" class="btn btn-default pull-right"/>
+
+        <div id="container" class="pull-right m-r-10">
+          <a class="btn btn-default" id="pickfiles" href="#">
+            <sapn>选择文件</sapn>
+          </a>
+        </div>
         <input type="button" value="预览" class="btn btn-default pull-right m-r-10" ng-click="preview()"/>
       </div>
     </div>
   </form>
-</div>
-
-<div id="preview" ng-class="mdStyle" class="md-style">
-
 </div>

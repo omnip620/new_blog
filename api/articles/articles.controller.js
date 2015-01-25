@@ -4,7 +4,7 @@
 var Article = require('../../models/article');
 var async = require('async');
 var Promise = require('bluebird');
-var _=require('lodash')
+var _=require('lodash');
 exports.index = function (req, res) {
   Article.find({}, 'title top source tags views comments updated_at created_at ', function (err, articles) {
     if (err) {

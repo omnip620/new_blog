@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html ng-app="admin">
 <head>
-  <!--<script src="/javascripts/webcomponents.min.js"></script>-->
   <base href="/admin/">
   <link rel="stylesheet" href="/stylesheets/admin.css"/>
   <link rel="stylesheet" href="/stylesheets/font.css"/>
   <link rel="stylesheet" href="/editor/codemirror.css"/>
 </head>
 <body>
-<!--<sidebar-element></sidebar-element>-->
 <div class="sidebar">
   <ul>
     {{#each categeories}}
@@ -23,6 +21,10 @@
 <script src="/javascripts/lodash.min.js"></script>
 <script src="/javascripts/angular-route.min.js"></script>
 <script src="/javascripts/markdown-it.js"></script>
+<script src="/javascripts/plupload/plupload.full.min.js"></script>
+<script src="/javascripts/plupload/zh_CN.js"></script>
+<script src="/javascripts/qiniu.js"></script>
+
 <script src="/editor/codemirror.js"></script>
 <script src="/editor/xml.js"></script>
 <script src="/editor/markdown.js"></script>

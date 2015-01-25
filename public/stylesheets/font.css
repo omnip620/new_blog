@@ -18,6 +18,36 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.icon-image:before {
+  content: "\e90d";
+}
+.icon-images:before {
+  content: "\e90e";
+}
+.icon-quotes-left:before {
+  content: "\e977";
+}
+.icon-enlarge2:before {
+  content: "\e98b";
+}
+.icon-list-numbered:before {
+  content: "\e9b9";
+}
+.icon-list:before {
+  content: "\e9ba";
+}
+.icon-link:before {
+  content: "\e9cb";
+}
+.icon-eye:before {
+  content: "\e9ce";
+}
+.icon-bold:before {
+  content: "\ea62";
+}
+.icon-italic:before {
+  content: "\ea64";
+}
 .icon-arrow-down:before {
   content: "\e600";
 }
