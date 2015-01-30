@@ -12,14 +12,15 @@
 
       <div class="col-sm-10">
         <div class="editor-toolbar">
-          <a class="icon-bold" href="javascript:;"></a>
-          <a class="icon-italic" href="javascript:;"></a>
-          <a class="icon-quotes-left" href="javascript:;"></a>
-          <a class="icon-list-numbered" href="javascript:;"></a>
-          <a class="icon-list" href="javascript:;"></a>
-          <a class="icon-link" href="javascript:;"></a>
-          <a class="icon-eye" href="javascript:;"></a>
-          <a class="icon-enlarge2" href="javascript:;"></a>
+          <a class="icon-bold" title="加粗"></a>
+          <a class="icon-italic"></a>
+          <a class="icon-quotes-left"></a>
+          <a class="icon-list-numbered"></a>
+          <a class="icon-list"></a>
+          <a class="icon-images" data-target="#upimgs" data-toggle="modal" ng-click="applyUploader()"></a>
+          <a class="icon-link"></a>
+          <a class="icon-eye" ng-click="preview()" title="预览"></a>
+          <a class="icon-enlarge2"></a>
         </div>
         <textarea editor rows="5" name="content" id="content" ng-model="article.content"></textarea>
       </div>
@@ -52,13 +53,31 @@
       <div class="col-sm-offset-2 col-sm-10">
         <input type="submit" value="提交" class="btn btn-default pull-right"/>
 
-        <div id="container" class="pull-right m-r-10">
-          <a class="btn btn-default" id="pickfiles" href="#">
-            <sapn>选择文件</sapn>
-          </a>
-        </div>
-        <input type="button" value="预览" class="btn btn-default pull-right m-r-10" ng-click="preview()"/>
+
       </div>
     </div>
   </form>
+</div>
+
+<div class="modal fade" id="upimgs">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h4 class="modal-title">
+          上传图片
+        </h4>
+
+      </div>
+      <div class="modal-body">
+        <div id="container">
+          <a class="btn btn-default" id="pickfiles">
+            <sapn>选择文件</sapn>
+          </a>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
 </div>

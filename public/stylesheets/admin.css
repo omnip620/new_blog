@@ -6295,6 +6295,9 @@ ul {
   margin: 0;
   padding: 0;
 }
+.form-control {
+  border-radius: 2px;
+}
 .m-r-10 {
   margin-right: 10px;
 }
@@ -6328,10 +6331,8 @@ ul {
   filter: alpha(opacity=0);
 }
 .editor-toolbar {
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  line-height: 3em;
-  padding: 2px 0 1px 0;
+  border: 1px solid #ccc;
+  padding: 0 4px;
   position: relative;
 }
 .editor-toolbar a {
@@ -6342,10 +6343,13 @@ ul {
   text-align: center;
   border-radius: 2px;
   line-height: 30px;
+  margin: 4px 0;
+  border: 1px solid transparent;
+  cursor: pointer;
 }
 .editor-toolbar a:hover {
   background: #fcfcfc;
-  border: 1px solid #ddd;
+  border-color: #ddd;
   text-decoration: none;
 }
 .editor-toolbar a:focus {
@@ -6359,6 +6363,5 @@ ul {
 }
 .editor-toolbar .icon-enlarge2 {
   position: absolute;
-  right: 0;
-  top: 2px;
+  right: 4px;
 }

@@ -1,4 +1,5 @@
 var express = require('express');
+var compress=require('compression')
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
@@ -11,6 +12,7 @@ var config=require('./config');
 
 var app = express();
 
+app.use(compress());
 if (process.env.VCAP_SERVICES) {
   var mongodb_config = JSON.parse(process.env.VCAP_SERVICES).mongodb[0].credentials;
   config.db.host = mongodb_config.host;
