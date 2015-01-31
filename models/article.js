@@ -15,7 +15,8 @@ var ArticleSchema=new Schema({
   updated_at:{type:Date,default:Date.now},
   tags:{type:Array},
   views:{type:Number,default:0},
-  comments:{type:Number,default:0}
+  comments:{type:Number,default:0},
+  cat:{type:Number}
 });
 
 ArticleSchema.index({created_at:-1});

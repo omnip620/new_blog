@@ -12,7 +12,7 @@ var config = {
     pwd: '',
     database: 'blog'
   },
-  //管理侧边栏
+  //后台管理侧边栏
   sidebar: [
     {'文章': '/articles'},
     {'设置': '/settings'}
@@ -22,6 +22,11 @@ var config = {
     ACCESS_KEY:'bwrScr6Rz9JCF5tKZMohuAbCr3VDa3attPQja-Br',
     SECRET_KEY:'qA3Vv8-k-eD_U_klbbdptAfn0BLK_VujVb4Fsldd',
     Bucket_Name:'panblog'
+  },
+  cat:{
+    '1':'梦',
+    '2':'生活',
+    '3':'术业'
   }
 };
 module.exports = config;

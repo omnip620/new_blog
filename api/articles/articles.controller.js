@@ -5,6 +5,8 @@ var Article = require('../../models/article');
 var async = require('async');
 var Promise = require('bluebird');
 var _=require('lodash');
+var cat=require('../../config').cat;
+
 exports.index = function (req, res) {
   Article.find({}, 'title top source tags views comments updated_at created_at ', function (err, articles) {
     if (err) {
@@ -29,6 +31,7 @@ exports.update = function (req, res) {
     id = req.body._id;
     delete req.body._id;
   }
+  console.log(req.body)
   req.body.updated_at=new Date();
   Article.update({_id:id},req.body,function(err,article,raw){
     if(err){
@@ -68,8 +71,9 @@ exports.generate = function (req, res) {
   }
   return res.send(201);
 };
-
-
+exports.cats=function(req,res){
+  return res.json(200,cat);
+};
 exports.destroy = function (req, res) {
   var ids = req.body;
   var remove = function (id) {
