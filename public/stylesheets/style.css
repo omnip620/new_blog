@@ -464,8 +464,11 @@ a:hover {
   color: #0066cc;
 }
 .main-wrapper .main .article .article-cont {
-  padding-bottom: 16px;
+  padding-bottom: 55px;
   border-bottom: 1px solid #d7d7d7;
+}
+.main-wrapper .main .article .article-cont p {
+  text-indent: 2em;
 }
 @media all and (max-width: 1440px) {
   .main-wrapper .main {

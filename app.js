@@ -1,5 +1,5 @@
 var express = require('express');
-var compress=require('compression')
+var compress = require('compression')
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
@@ -7,12 +7,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exhbs = require('express-handlebars');
 var routers = require('./routers');
-var mongoose=require('mongoose');
-var config=require('./config');
+var mongoose = require('mongoose');
+var config = require('./config');
+var moment = require('moment');
 
 var app = express();
 
-app.use(compress());
+
 if (process.env.VCAP_SERVICES) {
   var mongodb_config = JSON.parse(process.env.VCAP_SERVICES).mongodb[0].credentials;
   config.db.host = mongodb_config.host;
@@ -21,9 +22,9 @@ if (process.env.VCAP_SERVICES) {
   config.db.pwd = mongodb_config.password;
   config.db.database = mongodb_config.name;
 }
-var dburi='mongodb://'+config.db.user+':'+config.db.pwd+'@'+config.db.host+':'+config.db.port+'/'+config.db.database;
-mongoose.connect(dburi,function(err){
-  if(err){
+var dburi = 'mongodb://' + config.db.user + ':' + config.db.pwd + '@' + config.db.host + ':' + config.db.port + '/' + config.db.database;
+mongoose.connect(dburi, function (err) {
+  if (err) {
     console.error('connect to %s error: ', dburi, err.message);
     process.exit(1);
   }
@@ -44,13 +45,21 @@ app.engine('hbs', exhbs({
         block = blocks[name] || (blocks[name] = []);
 
       block.push(options.fn(this));
+    },
+    formatDate: function (item) {
+      if (moment().isSame(item, 'day')) {
+        return moment(item).format('hh:mm');
+      }
+      return moment(item).format('MM-DD hh:mm');
     }
   }
 }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-
+app.use(compress({
+  level:9
+}));
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -61,9 +70,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routers);
 
 ///admin router
-app.use(function(req,res){
-  if(req.path.indexOf('/admin')>=0){
-    res.render('admin/index', {layout: false,categeories:[{name:"设置",url:"/admin"},{name:"文章",url:"/admin/articles"}]});
+app.use(function (req, res) {
+  if (req.path.indexOf('/admin') >= 0) {
+    res.render('admin/index', {
+      layout: false,
+      categeories: [{name: "设置", url: "/admin"}, {name: "文章", url: "/admin/articles"}]
+    });
   }
 });
 

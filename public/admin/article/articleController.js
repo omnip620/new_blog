@@ -23,7 +23,6 @@ angular.module('admin').controller('ArticleController', function ($scope, $route
       data: $scope.article,
       headers: {'Content-Type': 'application/json'}
     }).success(function (data, status) {
-      console.log(data);
       $scope.article = data;
     });
     baseUrl+='update';
@@ -42,7 +41,6 @@ angular.module('admin').controller('ArticleController', function ($scope, $route
     sessionStorage.setItem('tempArticle', JSON.stringify($scope.article));
     $location.path("preview");
   };
-
   $scope.applyUploader = function () {
     $('#upimgs').on('shown.bs.modal', function () {
       var uploader = Qiniu.uploader({

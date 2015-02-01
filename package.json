@@ -19,6 +19,7 @@
     "express-handlebars": "^1.1.0",
     "lodash": "^2.4.1",
     "markdown-it": "^3.0.4",
+    "moment": "^2.9.0",
     "mongoose": "^3.8.20",
     "morgan": "~1.0.0",
     "path": "~0.4.9",

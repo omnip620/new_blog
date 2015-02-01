@@ -24,9 +24,8 @@ var config = {
     Bucket_Name:'panblog'
   },
   cat:{
-    '1':'梦',
-    '2':'生活',
-    '3':'术业'
+    '1':'生活',
+    '2':'术业'
   }
 };
 module.exports = config;
