@@ -58,8 +58,10 @@ exports.generate = function (req, res) {
     obj.title = Math.random().toString(16).substring(2);
     obj.top = (function () {
       if (Math.random() * 10 > 5) {
+        obj.cat=1;
         return 'true';
       }
+      obj.cat=2;
       return 'false';
     })();
     obj.views = Math.round(Math.random() * 1000);
