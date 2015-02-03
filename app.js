@@ -48,9 +48,9 @@ app.engine('hbs', exhbs({
     },
     formatDate: function (item) {
       if (moment().isSame(item, 'day')) {
-        return moment(item).format('hh:mm');
+        return moment(item).format('HH:mm');
       }
-      return moment(item).format('MM-DD hh:mm');
+      return moment(item).format('MM-DD HH:mm');
     }
   }
 }));
