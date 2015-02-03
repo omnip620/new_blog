@@ -9,8 +9,9 @@ var admin=require('./controllers/admin');
 var errors=require('./controllers/errors');
 
 
-router.get('/',index.show);
+
 router.get('/page',index.page);
+router.get('/',index.show);
 router.get('/article/:id',article.show);
 router.get('/qnuptoken',admin.qnuptoken);
 

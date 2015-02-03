@@ -8,9 +8,13 @@ var _ = require('lodash');
 var moment = require('moment');
 var md = require('markdown-it')({html: true, linkify: true, typographer: true});
 
-function page(num, callback) {
-  Article.find({}, '_id title top source tags views comments updated_at created_at content', {
-    'sort': '-updated_at',
+function page(cat, num, callback) {
+  var query = {};
+  if(cat){
+    query.cat=cat;
+  }
+  Article.find(query, '_id cat title top source tags views comments updated_at created_at content', {
+    sort: '-updated_at',
     skip: (num - 1) * 10,
     limit: 10
   }, function (err, articles) {
@@ -27,17 +31,20 @@ function page(num, callback) {
 }
 
 exports.show = function (req, res) {
-  page(1, function (err, articles) {
+  var cat = req.query.cat;
+  page(cat, 1, function (err, articles) {
     if (err) {
       return res.redirect('/404')
     }
     return res.render('index', {articles: articles});
   })
+
 };
 
 exports.page = function (req, res) {
   var pageNum = parseInt(req.query.num, 10);
-  page(pageNum, function (err, articles) {
+  var cat = parseInt(req.query.cat, 10);
+  page(cat, pageNum, function (err, articles) {
     if (err) {
       return res.json('404', err)
     }
