@@ -15,7 +15,7 @@ router.get('/',index.show);
 router.get('/article/:id',article.show);
 router.get('/qnuptoken',admin.qnuptoken);
 
-router.use('/api/articles',require('./api/articles'));
+router.use('/api',require('./api/admin'));
 router.get('/404',errors[404]);
 //router.use('/api/admin',require('./api/admin'));
 

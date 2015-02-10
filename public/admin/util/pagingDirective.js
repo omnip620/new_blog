@@ -3,7 +3,6 @@
  */
 angular.module('admin').directive('paging', function () {
   var scope;
-
   function setScope(s) {
     scope = s;
     scope.currentPage = parseInt(scope.currentPage) || 0;

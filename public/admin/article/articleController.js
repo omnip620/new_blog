@@ -6,26 +6,26 @@ angular.module('admin').controller('ArticleController', function ($scope, $route
   $scope.article = {};
   $scope.errors = {};
   $scope.cats = {};
+  $scope.tagsControl = {};
   //获得文章分类
   $http({
     method: 'get',
     url: baseUrl + 'cat',
     headers: {'Content-Type': 'application/json'}
   }).success(function (data) {
-    $scope.cats= _.pairs(data);
-    console.log($scope.cats);
+    $scope.cats = _.pairs(data);
   });
   var id = $routeParams.id;
+  $scope.articleId = id;
   if (id !== 'add') {
     $http({
       method: 'get',
       url: baseUrl + id,
-      data: $scope.article,
       headers: {'Content-Type': 'application/json'}
     }).success(function (data, status) {
       $scope.article = data;
     });
-    baseUrl+='update';
+    baseUrl += 'update';
   }
   $scope.processForm = function () {
     $http({
@@ -80,6 +80,31 @@ angular.module('admin').controller('ArticleController', function ($scope, $route
       })
     })
   };
+
+  var substringMatcher = function (strs) {
+    return function findMatches(q, cb) {
+      var matches, substringRegex;
+
+      // an array that will be populated with substring matches
+      matches = [];
+
+      // regex used to determine if a string contains the substring `q`
+      substrRegex = new RegExp(q, 'i');
+
+      // iterate through the pool of strings and for any string that
+      // contains the substring `q`, add it to the `matches` array
+      $.each(strs, function (i, str) {
+        if (substrRegex.test(str)) {
+          // the typeahead jQuery plugin expects suggestions to a
+          // JavaScript object, refer to typeahead docs for more info
+          matches.push({value: str});
+        }
+      });
+
+      cb(matches);
+    };
+  };
+
 });
 
 angular.module('admin').directive('tagsStyle', function () {
@@ -88,7 +113,7 @@ angular.module('admin').directive('tagsStyle', function () {
     link: function (scope, element, attrs, ctrl) {
       ctrl.$parsers.push(function (data) {
         if (data) {
-          data = data.split('|');
+          data = data.replace(/，/g, ',').split(',');
         }
         return data;
       });
@@ -101,3 +126,155 @@ angular.module('admin').directive('tagsStyle', function () {
     }
   }
 });
+
+angular.module('admin').directive('tags', function ($http) {
+    var scope;
+
+    function getCursortPosition(ctrl) {//获取光标位置函数
+      var CaretPos = 0;	// IE Support
+      if (document.selection) {
+        ctrl.focus();
+        var Sel = document.selection.createRange();
+        Sel.moveStart('character', -ctrl.value.length);
+        CaretPos = Sel.text.length;
+      }
+      // Firefox support
+      else if (ctrl.selectionStart || ctrl.selectionStart == '0')
+        CaretPos = ctrl.selectionStart;
+      return (CaretPos);
+    }
+
+    function focusTrigger(el) {
+      var element = el[0].firstChild;
+      while (element && element.nodeType != 1) {
+        element = element.nextSibling;
+      }
+      $(element).click(function () {
+        $(this).children('input[type="text"]').focus()
+      });
+    }
+
+    function save() {
+      $http({
+        method: 'post',
+        url: '/api/tags/save',
+        data: {
+          id: scope.articleId,
+          tags: scope.items.map(function (item) {
+            return item._id;
+          })
+        }
+      }).success(function (data) {
+        console.log(data);
+      })
+    }
+
+    function remove(id) {
+      _.remove(scope.items, function (o) {
+        if (o._id == id)
+          return true
+      });
+      console.log(scope.items);
+    }
+
+    function buildMethod() {
+      scope.remove = function () {
+        var item = this.item;
+        remove(item._id);
+      };
+
+      scope.save = function () {
+        save();
+      };
+
+      scope.inputKeydown = function (event) {
+        var self = event.target;
+        var e = event || window.event || arguments.callee.caller.arguments[0];
+        if (e && e.keyCode == 8 && getCursortPosition(self) === 0) {
+          var prev = self.previousSibling;
+          while (prev && prev.nodeType != 1) {
+            prev = prev.previousSibling;
+          }
+          remove(prev.getAttribute("data-value"));
+          prev.parentNode.removeChild(prev);
+        }
+        else if (e && e.keyCode == 13) {
+          e.preventDefault();
+        }
+      };
+      var t;
+      scope.inputKeyup = function (event) {
+        var e = event || window.event || arguments.callee.caller.arguments[0];
+        var value = event.target.value;
+        if (!!e && e.keyCode >= 48 && e.keyCode <= 90 || e.keyCode == 32 || e.keyCode == 13 || e.keyCode == 8) {
+          if (!value) {
+            scope.showDropdown = false;
+            return;
+          }
+          if (!!t) {
+            clearTimeout(t)
+          }
+          t = setTimeout(function () {
+            $http({
+              method: 'get',
+              url: '/api/tags/get',
+              params: {word: value},
+              headers: {'Content-Type': 'application/json'}
+            }).success(function (data) {
+              scope.tags = data;
+              scope.showDropdown = true;
+              console.log(data)
+            })
+          }, 500);
+        }
+      };
+      scope.dropdownClick = function () {
+        var tag = this.tag;
+        var isHas = false;
+        scope.items.forEach(function (item) {
+          if (item._id == tag._id) {
+            isHas = true;
+          }
+        });
+        if (!isHas) {
+          scope.items.push({_id: tag._id, name: tag.name})
+        }
+      }
+    }
+
+    function build(s, el) {
+      scope = s;
+      scope.internalControl = s.control || {};
+      scope.internalControl.saveTags = function () {
+        save();
+      };
+      scope.showDropdown = false;
+      $http({
+        method: 'get',
+        url: '/api/tags/getatag/',
+        params: {id: scope.articleId}
+      }).success(function (result) {
+        scope.items = result;
+        focusTrigger(el);
+        buildMethod();
+      })
+    }
+
+    return {
+      restrict: 'EA',
+      template: [' <div class="form-control tags-input">',
+        '          <span ng-repeat="item in items" class="label label-default" data-value="{{item._id}}">{{item.name}}<span data-role="remove" ng-click="remove()"></span></span>',
+        '          <input type="text" ng-keyup="inputKeyup($event)" ng-keydown="inputKeydown($event)"/>',
+        '          <span class="tag-dropdown" ng-show="showDropdown"><ul><li ng-repeat="tag in tags" value="{{tag._id}}" ng-click="dropdownClick()">{{tag.name}}</li></ul></span>',
+        '        </div>'].join(""),
+      scope: {
+        articleId: '@',
+        control: '='
+      },
+      link: function (scope, element, attrs, ctrl) {
+        build(scope, element);
+      }
+    }
+  }
+)
+;

@@ -31,9 +31,8 @@ exports.update = function (req, res) {
     id = req.body._id;
     delete req.body._id;
   }
-  console.log(req.body)
   req.body.updated_at=new Date();
-  Article.update({_id:id},req.body,function(err,article,raw){
+  Article.update({_id:id},req.body,function(err,article){
     if(err){
       return handleError(res, err);
     }

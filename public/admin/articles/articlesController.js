@@ -40,7 +40,7 @@ angular.module('admin').controller('ArticlesController', function ($scope, $http
           });
           return flag;
         });
-        $scope.selectedArticles = [];//TODO : so force
+        $scope.selectedArticles = [];
       })
     };
     $scope.selectAll = function () {
