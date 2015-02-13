@@ -5,27 +5,28 @@ var Tag = require('../../models/tag');
 var TagMap = require('../../models/tagmap');
 var Promise = require('bluebird');
 var _ = require('lodash');
-var mongoose = require('mongoose');
 
 exports.index = function (req, res) {
-  Tag.find({}, function (err, tags) {
-    if (err) {
-      return handleError(res, err);
-    }
-    return res.json(200, tags);
-  });
-  //Tag.find({}).exec().then(function (tags) {
-  //  console.log(tags);
-  //  var ids = tags.map(function (t) {
-  //    return t._id;
-  //  });
-  //  return TagMap.find({tag_id: {$in: ids}}).exec();
-  //}).then(function (tm) {
-  //  console.log(tm);
-  //  return res.json(200);
-  //}).then(null, function (err) {
-  //  return handleError(res, err);
-  //})
+  var tags = null;
+  Tag.find({}).exec()
+    .then(function (result) {
+      tags = result;
+      return TagMap.aggregate([{$group: {"_id": "$tag_id", count: {$sum: 1}}}]).exec();
+    })
+    .then(function (tms) {
+      tags.forEach(function (tag) {
+        tag._doc.count = tag._doc.count || '';
+        tms.forEach(function (tm) {
+          if (tag._id == tm._id) {
+            tag._doc.count = tm.count;
+          }
+        })
+      });
+      return res.json(200, tags);
+    })
+    .then(null, function (err) {
+      console.log(err)
+    })
 };
 
 exports.get = function (req, res) {
@@ -42,15 +43,13 @@ exports.getatag = function (req, res) {
   var id = req.query.id;
   TagMap.find({article_id: id}).exec()
     .then(function (result) {
+      if (!result.length) {
+        return res.json(200, []);
+      }
       var ids = result.map(function (item) {
         return item.tag_id;
       });
-      return new Promise(function (resolve, reject) {
-        if (ids.length) {
-          return resolve(ids);
-        }
-        return reject('article has not tags id');
-      })
+      return new Promise.resolve(ids);
     })
     .then(function (ids) {
       return Tag.find({_id: {$in: ids}}).exec();
@@ -64,32 +63,21 @@ exports.getatag = function (req, res) {
 };
 
 exports.save = function (req, res) {
-  var items = req.body, query = [];
-  items.tags.forEach(function (item) {
-    query.push({article_id: items.id, tag_id: item});
-  });
-  TagMap.find({article_id: items.id}).exec()
+  var items = req.body;
+  TagMap.remove({article_id: items.id}).exec()
     .then(function () {
-      return TagMap.remove({article_id: items.id}).exec();
-    }).then(function () {
-      return new Promise(function (resolve, reject) {
-        if (!query.length) {
-          return resolve()
-        }
-        TagMap.collection.insert(query, function (err, tags) {
-          if (err) {
-            return reject(err);
-          }
-          return resolve(tags)
-        })
+      if (!items.tags.length) {
+        return res.json(200, 'eleted');
+      }
+      items.tags = items.tags.map(function (item) {
+        return {article_id: items.id, tag_id: item}
       });
-      //var promise = new mongoose.Promise;
-      //TagMap.collection.insert(query, function (err, tags) {
-      //  if (err) {
-      //    return promise.reject(err);
-      //  }
-      //  return promise.resolve(tags);
-      //})
+      TagMap.collection.insert(items.tags, function (err, tags) {
+        if (err) {
+          return Promise.reject(err);
+        }
+        return Promise.resolve(tags)
+      })
     }).then(function (tags) {
       return res.json(200, tags);
     }).then(null, function (err) {
