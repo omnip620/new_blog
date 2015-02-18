@@ -3,6 +3,7 @@
  */
 angular.module('admin').controller('TagsController', function ($scope, $http, $filter) {
   var baseUrl = '/api/tags/';
+  var orderBy = $filter('orderBy');
   $scope.tags = {};
   $scope.titles = {};
   $scope.newTag = '';
@@ -23,6 +24,7 @@ angular.module('admin').controller('TagsController', function ($scope, $http, $f
     headers: {'Content-Type': 'application/json;charset=utf8'}
   }).success(function (data) {
     redata(data);
+    $scope.sort('-count', false);
     $scope.pageCount = Math.ceil($scope.tags.length / $scope.pageSize) - 1;
   });
   $scope.addTag = function () {
@@ -61,7 +63,9 @@ angular.module('admin').controller('TagsController', function ($scope, $http, $f
       $scope.selectedTags = [];
     })
   };
-
+  $scope.sort = function (predicate, reverse) {
+    $scope.tags = orderBy($scope.tags, predicate, reverse);
+  };
   $scope.selectAll = function () {
     this.all ? $scope.selectedTags = _.pluck($scope.tags, '_id') : $scope.selectedTags = [];
   };

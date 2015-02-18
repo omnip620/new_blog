@@ -13,6 +13,8 @@ var errors=require('./controllers/errors');
 router.get('/page',index.page);
 router.get('/',index.show);
 router.get('/article/:id',article.show);
+router.get('/tags/:id',index.tags);
+router.get('/archive',index.archive);
 router.get('/qnuptoken',admin.qnuptoken);
 
 router.use('/api',require('./api/admin'));

@@ -17,7 +17,7 @@
     <a href="/">梦</a>
     <a href="/?cat=1">生活</a>
     <a href="/?cat=2">术业</a>
-    <a href="javascript:;">归档</a>
+    <a href="/archive">归档</a>
     <a href="javascript:;">我</a>
   </nav>
   <section class="me">
@@ -79,15 +79,9 @@
       <a href="javascript:;" title="更多">...</a>
     </header>
     <div class="tags">
-      <a href="javascript:;">农村</a>
-      <a href="javascript:;">nodejs</a>
-      <a href="javascript:;">家乡</a>
-      <a href="javascript:;">移动端</a>
-      <a href="javascript:;">后端</a>
-      <a href="javascript:;">全栈</a>
-      <a href="javascript:;">性能</a>
-      <a href="javascript:;">内存</a>
-      <a href="javascript:;">响应式</a>
+      {{#each tagList}}
+        <a href="/tags/{{_id}}">{{name}}</a>
+      {{/each}}
     </div>
   </section>
 </aside>

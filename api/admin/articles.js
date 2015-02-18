@@ -10,50 +10,26 @@ var _ = require('lodash');
 var cat = require('../../config').cat;
 
 exports.index = function (req, res) {
-  var articles = null;
   Article.find({}, 'title top source views comments updated_at created_at ').exec()
-    .then(function (results) {
-      articles = results;
-    })
-    .then(function () {
-      return TagMap.find({}).exec();
-    })
-    .then(function (tagmap) {
-      var promiseFind = function (item) {
+    .then(function (articles) {
+      return Promise.map(articles, function (article) {
         return new Promise(function (resolve, reject) {
-          Tag.find({_id: item.tag_id}, function (err, result) {
+          article.getTags(function (err, tags) {
             if (err) {
               reject(err);
-            } else {
-              var o = {
-                article_id: item.article_id,
-                tag_name: result[0].name
-              }
-              resolve(o);
             }
+            article._doc.tags = tags;
+            resolve(article);
           });
         });
-      }
-      return Promise.map(tagmap, function (fileName) {
-        return promiseFind(fileName);
       })
     })
-    .then(function (parsedJSONs) {
-      parsedJSONs.forEach(function (o) {
-        articles.forEach(function (article) {
-          article._doc.tags = article._doc.tags || [];
-          if (article._id == o.article_id) {
-            article._doc.tags.push(o.tag_name)
-          }
-        });
-      });
+    .then(function (articles) {
       return res.json(200, articles);
     })
     .then(null, function (err) {
-      console.log(err)
       return handleError(res, err);
     })
-
 };
 
 exports.create = function (req, res) {
@@ -85,6 +61,7 @@ exports.show = function (req, res) {
     if (err) {
       return handleError(res, err);
     }
+
     return res.json(200, article);
   });
 };
@@ -117,28 +94,14 @@ exports.cats = function (req, res) {
 };
 exports.destroy = function (req, res) {
   var ids = req.body;
-  var remove = function (id) {
-    return new Promise(function (resolve, reject) {
-      Article.remove({_id: id}, function (err) {
-        if (err) {
-          reject(err);
-        } else {
-          resolve();
-        }
-      });
-    });
-  };
-  Promise
-    .map(ids, function (id) {
-      return remove(id);
-    })
-    .then(function (results) {
-      console.log(results);
+  Article.remove({_id: {$in: ids}}).exec()
+    .then(function () {
       return res.send(204);
     })
-    .catch(function (err) {
-      return res.send(500, err);
-    });
+    .then(null, function (err) {
+      return handleError(res, err)
+    })
+
 };
 function handleError(res, err) {
   return res.send(500, err);

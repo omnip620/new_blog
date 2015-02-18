@@ -16,7 +16,38 @@ var ArticleSchema = new Schema({
   views: {type: Number, default: 0},
   comments: {type: Number, default: 0},
   cat: {type: Number}
+}, {
+  toJSON: {virtuals: true}
 });
+
+ArticleSchema.methods.getTags = function (cb) {
+
+  D.tagmap.find({article_id: this._id}).exec()
+    .then(function (result) {
+      return result.length ? D.tag.find({
+        _id: {
+          $in: result.map(function (item) {
+            return item.tag_id;
+          })
+        }
+      }).exec() : []
+    })
+    .then(function (tags) {
+      cb(null, tags.length ? tags.map(function (tag) {
+        return tag.name;
+      }) : []);
+    })
+    .then(null, function (e) {
+
+      cb(e);
+    })
+};
+
+ArticleSchema.pre('remove', function (next) {
+  console.log(this)
+  next();
+})
+
 
 ArticleSchema.index({created_at: -1});
 

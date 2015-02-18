@@ -148,13 +148,15 @@
       var template = Handlebars.templates['index.hbs'];
       var num = 2;
       var isEnd = false;
-      var cat=location.search.substr(1).split('=')[1];
+      var cat = location.search.substr(1).split('=')[1];
+      var lp = location.pathname;
+      var tag = lp.indexOf('tags') !== -1 ? lp.substr(lp.indexOf('tags')).split('/')[1] : '';
       window.onscroll = function () {
         var scrollTop = $(this).scrollTop();
         var scrollHeight = $(document).height();
         var windowHeight = $(this).height();
         if (!isEnd && scrollTop + windowHeight >= scrollHeight) {
-          $.get('/page', {num: num,cat:cat}, function (data, status) {
+          $.get('/page', {num: num, cat: cat, tag: tag}, function (data, status) {
             if (data.length == 0) {
               isEnd = true;
               $("#lazydata").append('<p style="text-align: center;margin-bottom: 55px">没有数据了</p>');

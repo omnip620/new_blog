@@ -6,6 +6,7 @@ var TagMap = require('../../models/tagmap');
 var Promise = require('bluebird');
 var _ = require('lodash');
 
+
 exports.index = function (req, res) {
   var tags = null;
   Tag.find({}).exec()
@@ -15,7 +16,7 @@ exports.index = function (req, res) {
     })
     .then(function (tms) {
       tags.forEach(function (tag) {
-        tag._doc.count = tag._doc.count || '';
+        tag._doc.count = tag._doc.count || 0;
         tms.forEach(function (tm) {
           if (tag._id == tm._id) {
             tag._doc.count = tm.count;
@@ -67,7 +68,7 @@ exports.save = function (req, res) {
   TagMap.remove({article_id: items.id}).exec()
     .then(function () {
       if (!items.tags.length) {
-        return res.json(200, 'eleted');
+        return res.json(200, 'deleted');
       }
       items.tags = items.tags.map(function (item) {
         return {article_id: items.id, tag_id: item}
@@ -116,27 +117,17 @@ exports.update = function (req, res) {
 
 exports.destroy = function (req, res) {
   var ids = req.body;
-  var remove = function (id) {
-    return new Promise(function (resolve, reject) {
-      Tag.remove({_id: id}, function (err) {
-        if (err) {
-          reject(err);
-        } else {
-          resolve();
-        }
-      });
-    });
-  };
-  Promise
-    .map(ids, function (id) {
-      return remove(id);
+  Tag.remove({_id: {$in: ids}}).exec()
+    .then(function () {
+      return TagMap.remove({tag_id: {$in: ids}}).exec()
     })
-    .then(function (results) {
+    .then(function () {
       return res.send(204);
     })
-    .catch(function (err) {
+    .then(null, function (e) {
       return res.send(500, err);
     });
+
 };
 
 function handleError(res, err) {

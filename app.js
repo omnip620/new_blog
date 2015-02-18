@@ -30,10 +30,15 @@ mongoose.connect(dburi, function (err) {
   }
 });
 
+global.D = {};
+D.tagmap = require('./models/tagmap');
+D.tag = require('./models/tag');
 
 // view engine setup
 app.engine('hbs', exhbs({
-  extname: 'hbs', defaultLayout: 'layout', helpers: {
+  extname: 'hbs',
+  defaultLayout: 'layout',
+  helpers: {
     block: function (name) {
       var blocks = this._blocks;
       content = blocks && blocks[name];
@@ -51,6 +56,9 @@ app.engine('hbs', exhbs({
         return moment(item).format('HH:mm');
       }
       return moment(item).format('MM-DD HH:mm');
+    },
+    getDay: function (item) {
+      return moment(item).format('DD');
     }
   }
 }));
@@ -58,7 +66,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 app.use(compress({
-  level:9
+  level: 9
 }));
 app.use(favicon());
 app.use(logger('dev'));
@@ -67,23 +75,31 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routers);
 
 ///admin router
-app.use(function (req, res) {
+app.use('/admin', function (req, res, next) {
   var cats = [
     {name: "设置", url: "/admin"},
     {name: "文章", url: "/admin/articles"},
     {name: "标签", url: "/admin/tags"}
   ];
-  if (req.path.indexOf('/admin') >= 0) {
-    res.render('admin/index', {
-      layout: false,
-      categeories:cats
-    });
-  }
+  return res.render('admin/index', {
+    layout: false,
+    categeories: cats
+  });
 });
 
+app.use(function (req, res, next) {
+  D.tag.find({}, function (err, tags) {
+    if (err) {
+      return res.redirect('/404')
+    }
+    res.locals.tagList = tags;
+    next();
+  })
+});
+
+app.use('/', routers);
 
 /// catch 404 and forward to error handler
 app.use(function (req, res, next) {

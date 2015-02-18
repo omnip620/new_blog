@@ -1113,7 +1113,9 @@ img {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
-  transition: all 0.2s ease-in-out;
+  -webkit-transition: all;
+  -o-transition: all;
+  transition: all;
   display: inline-block;
   max-width: 100%;
   height: auto;
@@ -2693,7 +2695,9 @@ output {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -webkit-transition: border-color ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s;
 }
 .form-control:focus {
   border-color: #66afe9;
@@ -3536,7 +3540,9 @@ input[type="button"].btn-block {
 }
 .fade {
   opacity: 0;
-  transition: opacity 0.15s linear;
+  -webkit-transition: opacity;
+  -o-transition: opacity;
+  transition: opacity;
 }
 .fade.in {
   opacity: 1;
@@ -3559,8 +3565,11 @@ tbody.collapse.in {
   position: relative;
   height: 0;
   overflow: hidden;
-  transition-property: height, visibility;
+  -webkit-transition-property: height;
+  transition-property: height;
+  -webkit-transition-duration: 0.35s;
   transition-duration: 0.35s;
+  -webkit-transition-timing-function: ease;
   transition-timing-function: ease;
 }
 .caret {
@@ -4922,7 +4931,9 @@ a.badge:focus {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
-  transition: border 0.2s ease-in-out;
+  -webkit-transition: border;
+  -o-transition: border;
+  transition: border;
 }
 .thumbnail > img,
 .thumbnail a > img {
@@ -5031,7 +5042,9 @@ a.thumbnail.active {
   text-align: center;
   background-color: #3782c4;
   box-shadow: inset 0 -1px 0 rgba(0,0,0,0.15);
-  transition: width 0.6s ease;
+  -webkit-transition: width;
+  -o-transition: width;
+  transition: width;
 }
 .progress-striped .progress-bar,
 .progress-bar-striped {
@@ -5740,7 +5753,9 @@ button.close {
 }
 .modal.fade .modal-dialog {
   transform: translate(0, -25%);
-  transition: transform 0.3s ease-out;
+  -webkit-transition: transform;
+  -o-transition: transform;
+  transition: transform;
 }
 .modal.in .modal-dialog {
   transform: translate(0, 0);
@@ -6070,7 +6085,9 @@ button.close {
 .carousel-inner > .item {
   display: none;
   position: relative;
-  transition: 0.6s ease-in-out left;
+  -webkit-transition: 0.6s;
+  -o-transition: 0.6s;
+  transition: 0.6s;
 }
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
@@ -6081,7 +6098,9 @@ button.close {
     -webkit-transition: -webkit-transform 0.6s ease-in-out;
     -moz-transition: -moz-transform 0.6s ease-in-out;
     -o-transition: -o-transform 0.6s ease-in-out;
-    transition: transform 0.6s ease-in-out;
+    -webkit-transition: transform;
+    -o-transition: transform;
+    transition: transform;
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     backface-visibility: hidden;
