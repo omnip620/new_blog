@@ -33,29 +33,20 @@
 <aside class="right-nav">
   <section>
     <header>
-      最多点击
-      <a href="javascript:;" title="更多">...</a>
+      最多浏览
     </header>
     <ul>
-      <li>
-        <a href="javascript:;">习近平访问撒哈拉</a>
-      </li>
-      <li>
-        <a href="javascript:;">习近平访问方式的飞洒的撒哈拉</a>
-      </li>
-      <li>
-        <a href="javascript:;">习近平访佛挡杀佛问撒哈拉</a>
-      </li>
-      <li>
-        <a href="javascript:;">习近平发的访问撒哈拉</a>
-      </li>
+      {{#each mostViews}}
+        <li>
+          <a href="/article/{{_id}}">{{title}}</a>
+        </li>
+      {{/each}}
     </ul>
   </section>
 
   <section>
     <header>
       最多回复
-      <a href="javascript:;" title="更多">...</a>
     </header>
     <ul>
       <li>
@@ -76,7 +67,6 @@
   <section>
     <header>
       标签
-      <a href="javascript:;" title="更多">...</a>
     </header>
     <div class="tags">
       {{#each tagList}}

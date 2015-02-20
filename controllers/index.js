@@ -27,7 +27,6 @@ function formatArticles(articles, callback) {
       }
     })
   }).then(function () {
-
     callback(null, articles)
   })
 }
@@ -114,15 +113,13 @@ exports.archive = function (req, res) {
         });
       groupedByMonth = _.map(groupedByMonth, function (item, i) {
         return {
-          date:i,
-          item:item
+          date: i,
+          item: item
         }
-      })
-      console.log(groupedByMonth)
-
+      });
       return res.render('archive', {articles: groupedByMonth});
     })
     .then(null, function () {
       return res.redirect('/404')
     })
-}
+};

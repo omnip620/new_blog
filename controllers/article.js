@@ -9,6 +9,7 @@ exports.show = function (req, res) {
     if (err) {
       return res.redirect('/404')
     }
+    article.update({$inc: {views: 1}}, {w: 1}).exec();
     if (article.content) {
       article.content = md.render(article.content)
     }

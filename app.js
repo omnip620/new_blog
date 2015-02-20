@@ -1,5 +1,5 @@
 var express = require('express');
-var compress = require('compression')
+var compress = require('compression');
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
@@ -10,6 +10,7 @@ var routers = require('./routers');
 var mongoose = require('mongoose');
 var config = require('./config');
 var moment = require('moment');
+var Article = require('./models/article');
 
 var app = express();
 
@@ -89,15 +90,23 @@ app.use('/admin', function (req, res, next) {
   });
 });
 
+//right sidebar data bind
+//tags bind
 app.use(function (req, res, next) {
-  D.tag.find({}, function (err, tags) {
-    if (err) {
+  Article.find({}, 'title views', {sort: '-views', limit: 5}).exec()
+    .then(function (result) {
+      res.locals.mostViews = result;
+      return D.tag.find({}).exec();
+    })
+    .then(function (result) {
+      res.locals.tagList = result;
+      next();
+    })
+    .then(null, function (err) {
       return res.redirect('/404')
-    }
-    res.locals.tagList = tags;
-    next();
-  })
+    })
 });
+//top views bind
 
 app.use('/', routers);
 

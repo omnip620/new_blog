@@ -21,7 +21,6 @@ var ArticleSchema = new Schema({
 });
 
 ArticleSchema.methods.getTags = function (cb) {
-
   D.tagmap.find({article_id: this._id}).exec()
     .then(function (result) {
       return result.length ? D.tag.find({
@@ -38,10 +37,10 @@ ArticleSchema.methods.getTags = function (cb) {
       }) : []);
     })
     .then(null, function (e) {
-
       cb(e);
     })
 };
+
 
 ArticleSchema.pre('remove', function (next) {
   console.log(this)
