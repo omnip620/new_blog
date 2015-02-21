@@ -91,22 +91,24 @@ app.use('/admin', function (req, res, next) {
 });
 
 //right sidebar data bind
-//tags bind
 app.use(function (req, res, next) {
   Article.find({}, 'title views', {sort: '-views', limit: 5}).exec()
     .then(function (result) {
-      res.locals.mostViews = result;
+      res.locals.topViews = result;
       return D.tag.find({}).exec();
     })
     .then(function (result) {
       res.locals.tagList = result;
+      return Article.find({}, 'title comments', {sort: '-comments', limit: 5}).exec();
+    })
+    .then(function (result) {
+      res.locals.topComments = result;
       next();
     })
     .then(null, function (err) {
       return res.redirect('/404')
     })
 });
-//top views bind
 
 app.use('/', routers);
 

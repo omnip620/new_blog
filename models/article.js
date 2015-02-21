@@ -45,7 +45,7 @@ ArticleSchema.methods.getTags = function (cb) {
 ArticleSchema.pre('remove', function (next) {
   console.log(this)
   next();
-})
+});
 
 
 ArticleSchema.index({created_at: -1});

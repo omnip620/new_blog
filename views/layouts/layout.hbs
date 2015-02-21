@@ -36,7 +36,7 @@
       最多浏览
     </header>
     <ul>
-      {{#each mostViews}}
+      {{#each topViews}}
         <li>
           <a href="/article/{{_id}}">{{title}}</a>
         </li>
@@ -46,21 +46,14 @@
 
   <section>
     <header>
-      最多回复
+      最多评论
     </header>
     <ul>
-      <li>
-        <a href="javascript:;">习近平访问撒哈拉</a>
-      </li>
-      <li>
-        <a href="javascript:;">习近平访问方式的飞洒的撒哈拉</a>
-      </li>
-      <li>
-        <a href="javascript:;">习近平访佛挡杀佛问撒哈拉</a>
-      </li>
-      <li>
-        <a href="javascript:;">习近平发的访问撒哈拉</a>
-      </li>
+      {{#each topComments}}
+        <li>
+          <a href="/article/{{_id}}">{{title}}</a>
+        </li>
+      {{/each}}
     </ul>
   </section>
 
