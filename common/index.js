@@ -7,6 +7,6 @@ var sc=require('./synccomments.js');
 
 var router = express.Router();
 
-router.get('/sc',sc.index);
+router.post('/sc',sc.index);
 
 module.exports = router;
