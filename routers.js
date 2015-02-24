@@ -10,6 +10,7 @@ var errors=require('./controllers/errors');
 
 
 
+
 router.get('/page',index.page);
 router.get('/',index.show);
 router.get('/article/:id',article.show);
@@ -18,7 +19,8 @@ router.get('/archive',index.archive);
 router.get('/qnuptoken',admin.qnuptoken);
 
 router.use('/api',require('./api/admin'));
+router.use('/common',require('./common'));
+
 router.get('/404',errors[404]);
-//router.use('/api/admin',require('./api/admin'));
 
 module.exports = router;
