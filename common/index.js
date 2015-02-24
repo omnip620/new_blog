@@ -5,4 +5,4 @@ var express = require('express');
 
 var router = express.Router();
 
-router.get('/sc',require('./synccomments').index);
+router.get('/sc',require('./synccomments.js').index);
