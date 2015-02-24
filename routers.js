@@ -19,7 +19,7 @@ router.get('/archive',index.archive);
 router.get('/qnuptoken',admin.qnuptoken);
 
 router.use('/api',require('./api/admin'));
-//router.use('/common',require('./common'));
+router.use('/common',require('./common'));
 
 router.get('/404',errors[404]);
 
