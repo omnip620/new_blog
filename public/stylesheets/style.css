@@ -405,7 +405,7 @@ a:hover {
 .main-wrapper .main .info ul li {
   display: inline;
   margin-right: 14px;
-  font: 300 13px/18px 'Tahoma';
+  font: 300 13px/18px 'Microsoft YaHei';
 }
 .main-wrapper .main .articles {
   margin-bottom: 12px;
@@ -432,7 +432,7 @@ a:hover {
 }
 .main-wrapper .main .articles .content .summary {
   margin-top: 10px;
-  font: 16px/24px 'Tahoma';
+  font: 16px/24px 'Microsoft YaHei';
 }
 .main-wrapper .main .articles .content .summary a:hover {
   color: #222;
