@@ -27,9 +27,10 @@ exports.index = function (req, res) {
           else {
             console.log(articles[0]._doc.comment_ids,item.meta);
             articles[0].comment_ids = _.difference(articles[0]._doc.comment_ids, item.meta);
-            articles[0].save();
-            console.log(articles);
-          }
+            articles[0].save(function(err, product, numberAffected){
+                console.log(product, numberAffected)
+            });
+        }
         })
       }
       else if (item.action === 'create' && item.meta.status === 'approved') {
