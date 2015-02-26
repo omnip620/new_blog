@@ -21,14 +21,13 @@ exports.index = function (req, res) {
       item = item[0];
       if (item.action === "delete") {
         Article.find({comment_ids: {$in: item.meta}}, function (err, articles) {
-          console.log('11',articles);
           if (err) {
             console.log('err', err);
           }
           else {
             articles[0]._doc.comment_ids = _.difference(articles[0]._doc.comment_ids, item.meta);
             articles[0].save();
-            console.log('22',articles);
+            console.log(articles);
           }
         })
       }
