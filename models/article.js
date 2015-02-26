@@ -14,7 +14,8 @@ var ArticleSchema = new Schema({
   created_at: {type: Date, default: Date.now},
   updated_at: {type: Date, default: Date.now},
   views: {type: Number, default: 0},
-  comments: {type: Number, default: 0},
+  //comments: {type: Number, default: 0},
+  comment_ids: {type: Array, default: []},
   cat: {type: Number}
 }, {
   toJSON: {virtuals: true}
@@ -41,6 +42,9 @@ ArticleSchema.methods.getTags = function (cb) {
     })
 };
 
+ArticleSchema.virtual('comments').get(function () {
+  return this.comment_ids.length;
+});
 
 ArticleSchema.pre('remove', function (next) {
   console.log(this)

@@ -264,7 +264,8 @@ code {
   border-radius: 4px;
 }
 .list-none,
-.right-nav > section ul {
+.right-nav > section ul,
+.main-wrapper .main .archives .item .archives-list {
   list-style: none;
 }
 /*blockquote*/
