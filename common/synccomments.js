@@ -16,7 +16,8 @@ exports.index = function (req, res) {
     res.on('data', function (results) {
       data = results;
       console.log("Got data: " + data);
-      item = data.response[0];
+      item = data.response;
+      item=item[0];
       if (item.action === "delete") {
         Article.find({comment_ids: {$in: item.meta}}, function (err, result) {
           if (err) {
