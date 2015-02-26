@@ -29,7 +29,7 @@ exports.index = function (req, res) {
         })
       }
       else if (item.action === 'create' && item.meta.status === 'approved') {
-        Article.findById(item.meta.thread_key).lean().exec()
+        Article.findById(item.meta.thread_key).exec()
           .then(function (article) {
             console.log(article)
             console.log(typeof article.comment_ids)
