@@ -25,8 +25,8 @@ exports.index = function (req, res) {
             console.log('err', err);
           }
           else {
-            articles[0]._doc.comment_ids = _.difference(articles[0]._doc.comment_ids, item.meta);
             console.log(articles[0]._doc.comment_ids,item.meta);
+            articles[0]._doc.comment_ids = _.difference(articles[0]._doc.comment_ids, item.meta);
             articles[0].save();
             console.log(articles);
           }
