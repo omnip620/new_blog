@@ -14,7 +14,7 @@ exports.index = function (req, res) {
   http.get(url, function (res) {
     console.log("Got response: " + res.statusCode);
     res.on('data', function (results) {
-      data = results;
+      data =JSON.parse(results);
       console.log("Got data: " + data);
       item = data.response;
       item=item[0];
