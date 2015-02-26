@@ -31,6 +31,7 @@ exports.index = function (req, res) {
       else if (item.action === 'create' && item.meta.status === 'approved') {
         Article.find({_id: item.meta.thread_key}).exec()
           .then(function (article) {
+            console.log(article)
             article.comment_ids.push(item.meta.post_id);
             article.save();
           })
