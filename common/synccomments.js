@@ -32,7 +32,8 @@ exports.index = function (req, res) {
         Article.find({_id: item.meta.thread_key}).exec()
           .then(function (article) {
             console.log(article)
-            article._doc.comment_ids.push(item.meta.post_id);
+            console.log(typeof article.comment_ids)
+            article.comment_ids.push(item.meta.post_id);
             article.save();
           })
           .then(null, function (err) {
