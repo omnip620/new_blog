@@ -17,8 +17,8 @@ var ArticleSchema = new Schema({
   comment_ids: {type: Array, default: []},
   cat: {type: Number}
 }, {
-  toJSON: {virtuals: true},
-  toObject: {virtuals: true}
+  toObject: { virtuals: true },
+  toJSON: { virtuals: true }
 });
 
 ArticleSchema.methods.getTags = function (cb) {
