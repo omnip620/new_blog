@@ -117,10 +117,11 @@ exports.archive = function (req, res) {
           item: item
         }
       });
-      console.log(groupedByMonth)
+  
       return res.render('archive', {articles: groupedByMonth});
     })
-    .then(null, function () {
+    .then(null, function (err) {
+        console.log(err)
       return res.redirect('/404')
     })
 };
