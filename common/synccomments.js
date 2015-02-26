@@ -15,6 +15,7 @@ exports.index = function (req, res) {
     console.log("Got response: " + res.statusCode);
     res.on('data', function (results) {
       data = results;
+      console.log("Got data: " + data);
       item = data.response[0];
       if (item.action === "delete") {
         Article.find({comment_ids: {$in: item.meta}}, function (err, result) {
@@ -36,7 +37,7 @@ exports.index = function (req, res) {
             console.log(err);
           })
       }
-      console.log("Got data: " + results);
+
     });
   }).on('error', function (e) {
     console.log("Got error: " + e.message);
