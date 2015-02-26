@@ -14,11 +14,11 @@ var ArticleSchema = new Schema({
   created_at: {type: Date, default: Date.now},
   updated_at: {type: Date, default: Date.now},
   views: {type: Number, default: 0},
-  //comments: {type: Number, default: 0},
   comment_ids: {type: Array, default: []},
   cat: {type: Number}
 }, {
-  toJSON: {virtuals: true}
+  toJSON: {virtuals: true},
+  toObject: {virtuals: true}
 });
 
 ArticleSchema.methods.getTags = function (cb) {

@@ -60,6 +60,10 @@ app.engine('hbs', exhbs({
     },
     getDay: function (item) {
       return moment(item).format('DD');
+    },
+    toString: function (data) {
+      console.log(data)
+      return data.toString();
     }
   }
 }));
