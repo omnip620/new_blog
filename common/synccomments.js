@@ -21,6 +21,7 @@ exports.index = function (req, res) {
       item = item[0];
       if (item.action === "delete") {
         Article.find({comment_ids: {$in: item.meta}}, function (err, articles) {
+          console.log('11',articles);
           if (err) {
             console.log('err', err);
           }
@@ -29,7 +30,7 @@ exports.index = function (req, res) {
               article._doc.comment_ids = _.difference(article._doc.comment_ids, item.meta)
             })
 
-            console.log(articles);
+            console.log('22',articles);
           }
         })
       }
