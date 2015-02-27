@@ -34,7 +34,6 @@
 {{#contentFor 'pagescripts'}}
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">
-
     var duoshuoQuery = {short_name: "panblog"};
     (function () {
       var ds = document.createElement('script');
@@ -45,16 +44,6 @@
       (document.getElementsByTagName('head')[0]
       || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
-    $('body').on('click', '.ds-post-button', function () {
-      var $self = $(this);
-      if ($('.ds-hidden-text').text()) {
-        console.log($('#articleID').val())
-      }
-    });
-    $('body').on('click', '.ds-post-delete', function () {
-      var $self = $(this);
-      console.log(1111)
-    })
   </script>
   <!-- 多说公共JS代码 end -->
 {{/contentFor}}

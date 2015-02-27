@@ -101,7 +101,6 @@ exports.destroy = function (req, res) {
     .then(null, function (err) {
       return handleError(res, err)
     })
-
 };
 function handleError(res, err) {
   return res.send(500, err);
