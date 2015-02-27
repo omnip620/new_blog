@@ -10,7 +10,7 @@ var _ = require('lodash');
 var cat = require('../../config').cat;
 
 exports.index = function (req, res) {
-  Article.find({}, 'title source top created_at updated_at views cat').exec()
+  Article.find({}, 'title source top created_at updated_at views cat comment_ids').exec()
     .then(function (articles) {
       return Promise.map(articles, function (article) {
         return new Promise(function (resolve, reject) {
