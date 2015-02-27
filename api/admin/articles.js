@@ -12,7 +12,6 @@ var cat = require('../../config').cat;
 exports.index = function (req, res) {
   Article.find({}, 'title source top created_at updated_at views cat').exec()
     .then(function (articles) {
-      //console.log(articles);
       return Promise.map(articles, function (article) {
         return new Promise(function (resolve, reject) {
           article.getTags(function (err, tags) {
@@ -26,7 +25,6 @@ exports.index = function (req, res) {
       })
     })
     .then(function (articles) {
-
       return res.json(200, articles);
     })
     .then(null, function (err) {
