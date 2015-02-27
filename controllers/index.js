@@ -105,7 +105,7 @@ exports.tags = function (req, res) {
 };
 
 exports.archive = function (req, res) {
-  Article.find({}, 'title updated_at created_at', {sort: '-updated_at'}).exec()
+  Article.find({}, 'title updated_at created_at comment_ids', {sort: '-updated_at'}).exec()
     .then(function (articles) {
       var groupedByMonth =
         _.groupBy(articles, function (item) {
