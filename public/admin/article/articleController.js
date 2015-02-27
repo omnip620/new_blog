@@ -80,31 +80,6 @@ angular.module('admin').controller('ArticleController', function ($scope, $route
       })
     })
   };
-
-  var substringMatcher = function (strs) {
-    return function findMatches(q, cb) {
-      var matches, substringRegex;
-
-      // an array that will be populated with substring matches
-      matches = [];
-
-      // regex used to determine if a string contains the substring `q`
-      substrRegex = new RegExp(q, 'i');
-
-      // iterate through the pool of strings and for any string that
-      // contains the substring `q`, add it to the `matches` array
-      $.each(strs, function (i, str) {
-        if (substrRegex.test(str)) {
-          // the typeahead jQuery plugin expects suggestions to a
-          // JavaScript object, refer to typeahead docs for more info
-          matches.push({value: str});
-        }
-      });
-
-      cb(matches);
-    };
-  };
-
 });
 
 angular.module('admin').directive('tagsStyle', function () {
@@ -174,7 +149,6 @@ angular.module('admin').directive('tags', function ($http) {
         if (o._id == id)
           return true
       });
-      console.log(scope.items);
     }
 
     function buildMethod() {
@@ -221,9 +195,10 @@ angular.module('admin').directive('tags', function ($http) {
               params: {word: value},
               headers: {'Content-Type': 'application/json'}
             }).success(function (data) {
-              scope.tags = data;
-              scope.showDropdown = true;
-              console.log(data)
+              if (data.length) {
+                scope.tags = data;
+                scope.showDropdown = true;
+              }
             })
           }, 500);
         }
