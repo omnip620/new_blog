@@ -42,7 +42,6 @@ ArticleSchema.methods.getTags = function (cb) {
 };
 
 ArticleSchema.virtual('comments').get(function () {
-    console.log(this )
   return this.comment_ids ? this.comment_ids.length : 0;
 });
 
