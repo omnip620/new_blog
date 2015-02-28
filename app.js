@@ -107,7 +107,7 @@ app.use(function (req, res, next) {
     })
     .then(function (result) {
       res.locals.tagList = result;
-      return Article.find({}, 'title', {limit: 5}).exec();
+      return Article.find({}, 'title comment_ids', {limit: 5,sort:'comment_ids'}).exec();
     })
     .then(function (result) {
       console.log(result)
