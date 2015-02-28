@@ -44,7 +44,6 @@ app.engine('hbs', exhbs({
     block: function (name) {
       var blocks = this._blocks;
       content = blocks && blocks[name];
-
       return content ? content.join('\n') : null;
     },
     contentFor: function (name, options) {
@@ -85,18 +84,6 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
-///admin router
-//app.use('/admin', function (req, res) {
-//  var cats = [
-//    {name: "设置", url: "/admin"},
-//    {name: "文章", url: "/admin/articles"},
-//    {name: "标签", url: "/admin/tags"}
-//  ];
-//  return res.render('admin/index', {
-//    layout: false,
-//    categeories: cats
-//  });
-//});
 
 //right sidebar data bind
 app.use(function (req, res, next) {

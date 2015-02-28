@@ -52,7 +52,7 @@ angular.module('admin').controller('ArticleController', function ($scope, $route
         flash_swf_url: '/javascripts/plupload/Moxie.swf',
         dragdrop: true,
         chunk_size: '4mb',
-        uptoken_url: '/qnuptoken',
+        uptoken_url: '/common/qnuptoken',
         auto_start: true,
         domain: '7u2pew.com1.z0.glb.clouddn.com',
         init: {
@@ -138,8 +138,6 @@ angular.module('admin').directive('tags', function ($http) {
             return item._id;
           })
         }
-      }).success(function (data) {
-        console.log(data);
       })
     }
 

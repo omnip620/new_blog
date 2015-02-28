@@ -19,8 +19,6 @@ router.get('/login',index.login);
 router.post('/login',index.loginto);
 router.get('/admin/*',auth.userRequired,index.admin);
 
-router.get('/qnuptoken',admin.qnuptoken);
-
 router.all('/api/*', auth.userRequired);
 router.use('/api',require('./api/admin'));
 router.use('/common',require('./common'));

@@ -2,11 +2,12 @@
  * Created by panew on 15-2-24.
  */
 var express = require('express');
-var sc=require('./synccomments.js');
+var othersource=require('./othersource.js');
 
 
 var router = express.Router();
 
-router.post('/sc',sc.index);
+router.post('/sc',othersource.synccomments);
+router.get('/qnuptoken',othersource.qnuptoken);
 
 module.exports = router;

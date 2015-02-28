@@ -263,6 +263,10 @@ code {
   background-color: #f9f2f4;
   border-radius: 4px;
 }
+::selection {
+  background: #222;
+  color: #fff;
+}
 .list-none,
 .right-nav > section ul,
 .main-wrapper .main .archives .item .archives-list {
