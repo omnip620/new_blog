@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>登录</title>
+
+  <style type="text/css">
+    .form-wrap{
+      width: 500px;
+      margin: 0 auto;
+      text-align: center;
+      margin-top: 130px;
+    }
+    .form-group {
+      height: 36px;
+    }
+    .login-label {
+      float: left;
+      width: 100px;
+    }
+    .login-input{
+      float: left;
+    }
+  </style>
+
+</head>
+<body>
+<form action="/login" method="post" class="form-wrap">
+  <div class="form-group">
+    <label for="username" class="login-label">
+      登录名：
+    </label>
+    <div class="login-input">
+      <input type="text" id="username" name="username"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="pwd" class="login-label">
+      密码：
+    </label>
+
+    <div class="login-input">
+      <input type="password" id="pwd" name="pwd"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div >
+      <input type="submit" value="登录"/>
+    </div>
+  </div>
+</form>
+</body>
+</html>

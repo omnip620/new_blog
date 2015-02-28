@@ -10,6 +10,7 @@ var routers = require('./routers');
 var mongoose = require('mongoose');
 var config = require('./config');
 var moment = require('moment');
+var session = require('express-session');
 var Article = require('./models/article');
 
 var app = express();
@@ -70,19 +71,23 @@ app.engine('hbs', exhbs({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-app.use(compress({
-  level: 9
-}));
+
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-
+app.use(compress({
+  level: 9
+}));
+app.use(session({
+  secret: 'panblog',
+  resave: true,
+  saveUninitialized: true
+}));
 ///admin router
-app.use('/admin', function (req, res, next) {
+app.use('/admin', function (req, res) {
   var cats = [
     {name: "设置", url: "/admin"},
     {name: "文章", url: "/admin/articles"},
@@ -103,9 +108,10 @@ app.use(function (req, res, next) {
     })
     .then(function (result) {
       res.locals.tagList = result;
-      return Article.find({}, 'title comments', {sort: '-comments', limit: 5}).exec();
+      return Article.find({}, 'title comment_ids', {limit: 5}).exec();
     })
     .then(function (result) {
+      console.log(result);
       res.locals.topComments = result;
       next();
     })

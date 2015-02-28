@@ -10,6 +10,7 @@ var _ = require('lodash');
 var moment = require('moment');
 var md = require('markdown-it')({html: true, linkify: true, typographer: true});
 var Promise = require('bluebird');
+var bcrypt = require('bcrypt');
 
 
 function formatArticles(articles, callback) {
@@ -65,6 +66,7 @@ function page(query, num, callback) {
 
 
 exports.show = function (req, res) {
+
   var query = {};
   if (req.query.cat) {
     query.cat = req.query.cat;
@@ -122,4 +124,17 @@ exports.archive = function (req, res) {
     .then(null, function () {
       return res.redirect('/404')
     })
+};
+
+exports.login = function (req, res) {
+  return res.render('login', {layout: false});
+};
+
+exports.loginto = function (req, res) {
+  var username = req.body.username, pwd = req.body.pwd,
+    encryp = '$2a$10$T3yQKKGF/RW2OQ1rtAl9w.BD9ggsaMZ8q6kNcOZ0FaPYt6gw8dlHa';
+  if (bcrypt.compareSync(username + pwd, encryp)) {
+    req.session.user = username;
+    res.redirect('/admin/');
+  }
 };

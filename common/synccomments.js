@@ -6,7 +6,6 @@ var http = require('http');
 var Article = require('./../models/article');
 var _ = require('lodash');
 exports.index = function (req, res) {
-
   var secret = '532e232e6c639993343c09668e45b621',
     short_name = 'panblog',
     url = 'http://api.duoshuo.com/log/list.json?short_name=' + short_name + '&secret=' + secret + '&limit=3&order=desc',
@@ -45,6 +44,5 @@ exports.index = function (req, res) {
   }).on('error', function (e) {
     console.log("Got error: " + e.message);
   });
-
   return res.json(200);
 };
