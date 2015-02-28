@@ -110,7 +110,6 @@ app.use(function (req, res, next) {
       return Article.find({}, 'title comment_ids', {limit: 5,sort:'-comment_ids'}).exec();
     })
     .then(function (result) {
-      console.log(result)
       res.locals.topComments = result;
       next();
     })
