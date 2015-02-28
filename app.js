@@ -62,9 +62,8 @@ app.engine('hbs', exhbs({
     getDay: function (item) {
       return moment(item).format('DD');
     },
-    toString: function (data) {
-      console.log(data)
-      return data.toString();
+    titlesplice: function (title) {
+      return title.length > 16 ? title.substring(0.16) : title;
     }
   }
 }));
@@ -111,7 +110,6 @@ app.use(function (req, res, next) {
       return Article.find({}, 'title comment_ids', {limit: 5}).exec();
     })
     .then(function (result) {
-
       res.locals.topComments = result;
       next();
     })
