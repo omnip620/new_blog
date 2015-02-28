@@ -2,18 +2,25 @@
 <html>
 <head lang="en">
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
   <link rel="stylesheet" href="/stylesheets/style.css"/>
+  <link rel="stylesheet" href="/stylesheets/font.css"/>
+  <link rel="stylesheet" href="/stylesheets/mobile.css"/>
 </head>
-<body>
-<aside class="sidebar">
+<body class="">
+<div class="nav-button">
+  <a id="sidebar-slide" href="javascript:;"><i class="icon-circle-right"></i></a>
+</div>
+<aside class="sidebar" >
   <img src="/img/avatar2.jpg" alt="" class="avatar"/>
   <blockquote class="proverbs">
     <p>士虽有学，而行为本焉。</p>
     <footer><cite title="Source Title">墨子·修身</cite></footer>
   </blockquote>
 
-  <nav>
+  <nav >
     <a href="/">梦</a>
     <a href="/?cat=1">生活</a>
     <a href="/?cat=2">术业</a>
@@ -25,7 +32,8 @@
     <a href="javascript:;">留言</a>
   </section>
 </aside>
-<div class="main-wrapper">
+<div class="se-main">
+<div id="main-wrapper" class="main-wrapper">
   <div class="main">
     {{{ body }}}
   </div>
@@ -68,10 +76,12 @@
     </div>
   </section>
 </aside>
-
+</div>
 </body>
 <script src="/javascripts/jquery.min.js"></script>
 <script src="/javascripts/handlebars.runtime.min.js"></script>
+<script src="/javascripts/classie.js"></script>
+<script src="/javascripts/sidebarEffects.js"></script>
 <script src="/javascripts/app.js"></script>
 <script src="/javascripts/moment.js"></script>
 
