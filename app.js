@@ -11,7 +11,7 @@ var mongoose = require('mongoose');
 var config = require('./config');
 var moment = require('moment');
 var session = require('express-session');
-
+var Article = require('./models/article');
 
 var app = express();
 
@@ -101,7 +101,6 @@ app.use('/admin', function (req, res) {
 
 //right sidebar data bind
 app.use(function (req, res, next) {
-  var Article = require('./models/article');
   Article.find({}, 'title views', {sort: '-views', limit: 5}).exec()
     .then(function (result) {
       res.locals.topViews = result;
@@ -112,7 +111,7 @@ app.use(function (req, res, next) {
       return Article.find({}, 'title comment_ids', {limit: 5}).exec();
     })
     .then(function (result) {
-      console.log(result);
+
       res.locals.topComments = result;
       next();
     })
