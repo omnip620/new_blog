@@ -86,17 +86,17 @@ app.use(session({
   saveUninitialized: true
 }));
 ///admin router
-app.use('/admin', function (req, res) {
-  var cats = [
-    {name: "设置", url: "/admin"},
-    {name: "文章", url: "/admin/articles"},
-    {name: "标签", url: "/admin/tags"}
-  ];
-  return res.render('admin/index', {
-    layout: false,
-    categeories: cats
-  });
-});
+//app.use('/admin', function (req, res) {
+//  var cats = [
+//    {name: "设置", url: "/admin"},
+//    {name: "文章", url: "/admin/articles"},
+//    {name: "标签", url: "/admin/tags"}
+//  ];
+//  return res.render('admin/index', {
+//    layout: false,
+//    categeories: cats
+//  });
+//});
 
 //right sidebar data bind
 app.use(function (req, res, next) {

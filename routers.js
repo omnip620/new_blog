@@ -17,6 +17,8 @@ router.get('/tags/:id',index.tags);
 router.get('/archive',index.archive);
 router.get('/login',index.login);
 router.post('/login',index.loginto);
+router.get('/admin/*',auth.userRequired,index.admin);
+
 router.get('/qnuptoken',admin.qnuptoken);
 
 router.all('/api/*', auth.userRequired);
