@@ -78,9 +78,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(compress({
-  level: 9
-}));
+app.use(compress());
 app.use(session({
   secret: 'panblog',
   resave: true,
