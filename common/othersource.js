@@ -14,11 +14,9 @@ exports.synccomments = function (req, res) {
     short_name = 'panblog',
     url = 'http://api.duoshuo.com/log/list.json?short_name=' + short_name + '&secret=' + secret + '&limit=3&order=desc',
     data = '', item = '';
-  http.get(url, function (res) {
-    console.log("Got response: " + res.statusCode);
-    res.on('data', function (results) {
+  http.get(url, function (result) {
+    result.on('data', function (results) {
       data = JSON.parse(results);
-      console.log("Got data: " + data);
       item = data.response[0];
       if (item.action === "delete") {
         Article.find({comment_ids: {$in: item.meta}}, function (err, articles) {
