@@ -71,14 +71,13 @@ app.engine('hbs', exhbs({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-
+app.use(compress());
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(compress());
 app.use(session({
   secret: 'panblog',
   resave: true,
