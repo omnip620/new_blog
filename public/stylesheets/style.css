@@ -420,6 +420,7 @@ a:hover {
   -webkit-transition: transform 0.15s;
   -o-transition: transform 0.15s;
   transition: transform 0.15s;
+  width: 100%;
   float: left;
   padding-left: 260px;
   padding-right: 360px;
