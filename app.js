@@ -1,3 +1,4 @@
+require('newrelic');
 var express = require('express');
 var compress = require('compression');
 var path = require('path');
@@ -12,6 +13,7 @@ var config = require('./config');
 var moment = require('moment');
 var session = require('express-session');
 var Article = require('./models/article');
+
 
 var app = express();
 

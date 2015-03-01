@@ -23,6 +23,7 @@
     "moment": "^2.9.0",
     "mongoose": "^3.8.20",
     "morgan": "~1.0.0",
+    "newrelic": "^1.17.0",
     "path": "~0.4.9",
     "qiniu": "^6.1.6",
     "remarkable": "^1.4.2",

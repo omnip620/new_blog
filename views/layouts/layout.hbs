@@ -40,51 +40,49 @@
     <a href="javascript:;">留言</a>
   </section>
 </aside>
-<div class="se-main">
-  <div id="main-wrapper" class="main-wrapper">
-    <div class="main">
-      {{{ body }}}
-    </div>
+<div id="main-wrapper" class="main-wrapper">
+  <div class="main">
+    {{{ body }}}
   </div>
-  <aside class="right-nav">
-    <section>
-      <header>
-        最多浏览
-      </header>
-      <ul>
-        {{#each topViews}}
-          <li>
-            <a href="/article/{{_id}}">{{titlesplice title}}</a>
-          </li>
-        {{/each}}
-      </ul>
-    </section>
-
-    <section>
-      <header>
-        最多评论
-      </header>
-      <ul>
-        {{#each topComments}}
-          <li>
-            <a href="/article/{{_id}}">{{titlesplice title}}</a>
-          </li>
-        {{/each}}
-      </ul>
-    </section>
-
-    <section>
-      <header>
-        标签
-      </header>
-      <div class="tags">
-        {{#each tagList}}
-          <a href="/tags/{{_id}}">{{name}}</a>
-        {{/each}}
-      </div>
-    </section>
-  </aside>
 </div>
+<aside class="right-nav">
+  <section>
+    <header>
+      最多浏览
+    </header>
+    <ul>
+      {{#each topViews}}
+        <li>
+          <a href="/article/{{_id}}">{{titlesplice title}}</a>
+        </li>
+      {{/each}}
+    </ul>
+  </section>
+
+  <section>
+    <header>
+      最多评论
+    </header>
+    <ul>
+      {{#each topComments}}
+        <li>
+          <a href="/article/{{_id}}">{{titlesplice title}}</a>
+        </li>
+      {{/each}}
+    </ul>
+  </section>
+
+  <section>
+    <header>
+      标签
+    </header>
+    <div class="tags">
+      {{#each tagList}}
+        <a href="/tags/{{_id}}">{{name}}</a>
+      {{/each}}
+    </div>
+  </section>
+</aside>
 </body>
 
 <!-- inject:js -->
