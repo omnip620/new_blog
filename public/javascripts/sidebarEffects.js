@@ -12,10 +12,9 @@
  * http://www.codrops.com
  */
 var SidebarMenuEffects = (function () {
-
   function hasParentClass(e, classname) {
     if (e === document) return false;
-    if (classie.has(e, classname)) {
+    if ($(e).hasClass(classname)) {
       return true;
     }
     return e.parentNode && hasParentClass(e.parentNode, classname);
