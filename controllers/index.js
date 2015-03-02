@@ -66,7 +66,6 @@ function page(query, num, callback) {
 
 
 exports.show = function (req, res) {
-
   var query = {};
   if (req.query.cat) {
     query.cat = req.query.cat;
