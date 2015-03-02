@@ -5,3 +5,4 @@
 + Refactor backend angular app
 + Imrove Me、Friedns Link、Feedback
 + Loding effect
++ Cache static files
