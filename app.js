@@ -86,6 +86,7 @@ app.use(session({
 
 //right sidebar data bind
 app.use(function (req, res, next) {
+  console.log(app.get('env'));
   Article.find({}, 'title views', {sort: '-views', limit: 5}).exec()
     .then(function (result) {
       res.locals.topViews = result;
