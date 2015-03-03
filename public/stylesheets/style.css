@@ -265,7 +265,7 @@ code {
   border-radius: 4px;
 }
 ::selection {
-  background: #222;
+  background: #333;
   color: #fff;
 }
 .list-none,
@@ -492,6 +492,10 @@ a:hover {
 }
 .main-wrapper .main .article .info a:hover {
   color: #06c;
+}
+.main-wrapper .main .article .article-cont {
+  font: 16px/26px 'Microsoft YaHei', 'Tahoma';
+  letter-spacing: 1px;
 }
 .main-wrapper .main .archives .item {
   margin-bottom: 45px;
