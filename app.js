@@ -13,10 +13,9 @@ var config = require('./config');
 var moment = require('moment');
 var session = require('express-session');
 var Article = require('./models/article');
-
-
+var Tag = require('./models/tag');
+//var registerModels = require('./common/register_model')
 var app = express();
-
 
 if (process.env.VCAP_SERVICES) {
   var mongodb_config = JSON.parse(process.env.VCAP_SERVICES).mongodb[0].credentials;
@@ -34,33 +33,31 @@ mongoose.connect(dburi, function (err) {
   }
 });
 
-global.D = {};
-D.tagmap = require('./models/tagmap');
-D.tag = require('./models/tag');
+//registerModels(app);
 
 // view engine setup
 app.engine('hbs', exhbs({
-  extname: 'hbs',
+  extname      : 'hbs',
   defaultLayout: 'layout',
-  helpers: {
-    block: function (name) {
+  helpers      : {
+    block      : function (name) {
       var blocks = this._blocks;
       content = blocks && blocks[name];
       return content ? content.join('\n') : null;
     },
-    contentFor: function (name, options) {
+    contentFor : function (name, options) {
       var blocks = this._blocks || (this._blocks = {}),
-        block = blocks[name] || (blocks[name] = []);
+          block = blocks[name] || (blocks[name] = []);
 
       block.push(options.fn(this));
     },
-    formatDate: function (item) {
+    formatDate : function (item) {
       if (moment().isSame(item, 'day')) {
         return moment(item).format('HH:mm');
       }
       return moment(item).format('MM-DD HH:mm');
     },
-    getDay: function (item) {
+    getDay     : function (item) {
       return moment(item).format('DD');
     },
     titlesplice: function (title) {
@@ -77,10 +74,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public'),{ maxAge: 31536000 }));
+app.use(express.static(path.join(__dirname, 'public'), {maxAge: 31536000}));
 app.use(session({
-  secret: 'panblog',
-  resave: true,
+  secret           : 'panblog',
+  resave           : true,
   saveUninitialized: true
 }));
 
@@ -89,7 +86,7 @@ app.use(function (req, res, next) {
   Article.find({}, 'title views', {sort: '-views', limit: 5}).exec()
     .then(function (result) {
       res.locals.topViews = result;
-      return D.tag.find({}).exec();
+      return Tag.find({}).exec();
     })
     .then(function (result) {
       res.locals.tagList = result;
@@ -122,7 +119,7 @@ if (app.get('env') === 'development') {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
-      error: err
+      error  : err
     });
   });
 }
@@ -133,7 +130,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
-    error: {}
+    error  : {}
   });
 });
 

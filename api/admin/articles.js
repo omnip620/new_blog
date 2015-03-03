@@ -10,11 +10,12 @@ var _ = require('lodash');
 var cat = require('../../config').cat;
 
 exports.index = function (req, res) {
+  var D = {tagmap: TagMap, tag: Tag};
   Article.find({}, 'title source top created_at updated_at views cat comment_ids').exec()
     .then(function (articles) {
       return Promise.map(articles, function (article) {
         return new Promise(function (resolve, reject) {
-          article.getTags(function (err, tags) {
+          article.getTags(D,function (err, tags) {
             if (err) {
               reject(err);
             }

@@ -14,9 +14,10 @@ var bcrypt = require('bcrypt');
 
 
 function formatArticles(articles, callback) {
+  var D = {tagmap: TagMap, tag: Tag};
   Promise.map(articles, function (article) {
     return new Promise(function (resolve, reject) {
-      article.getTags(function (err, tags) {
+      article.getTags(D,function (err, tags) {
         if (err) {
           reject(err);
         }
@@ -41,8 +42,8 @@ function page(query, num, callback) {
           return item.article_id;
         });
         return Article.find({_id: {$in: articleIds}}, '', {
-            sort: '-updated_at',
-            skip: (num - 1) * 10,
+            sort : '-updated_at',
+            skip : (num - 1) * 10,
             limit: 10
           }
         ).exec()
@@ -53,8 +54,8 @@ function page(query, num, callback) {
     return;
   }
   Article.find(query, '', {
-    sort: '-updated_at',
-    skip: (num - 1) * 10,
+    sort : '-updated_at',
+    skip : (num - 1) * 10,
     limit: 10
   }, function (err, articles) {
     if (err) {
@@ -109,9 +110,9 @@ exports.archive = function (req, res) {
   Article.find({}, 'title updated_at created_at comment_ids', {sort: '-updated_at'}).exec()
     .then(function (articles) {
       var groupedByMonth =
-        _.groupBy(articles, function (item) {
-          return JSON.stringify(item._doc.updated_at).substring(1, 8)
-        });
+            _.groupBy(articles, function (item) {
+              return JSON.stringify(item._doc.updated_at).substring(1, 8)
+            });
       groupedByMonth = _.map(groupedByMonth, function (item, i) {
         return {
           date: i,
@@ -131,11 +132,18 @@ exports.login = function (req, res) {
 
 exports.loginto = function (req, res) {
   var username = req.body.username, pwd = req.body.pwd,
-    encryp = '$2a$10$T3yQKKGF/RW2OQ1rtAl9w.BD9ggsaMZ8q6kNcOZ0FaPYt6gw8dlHa';
+      encryp = '$2a$10$T3yQKKGF/RW2OQ1rtAl9w.BD9ggsaMZ8q6kNcOZ0FaPYt6gw8dlHa';
   if (bcrypt.compareSync(username + pwd, encryp)) {
     req.session.user = username;
     res.redirect('/admin/');
   }
+};
+
+exports.friendlinks = function (req, res) {
+  return res.render('friendlinks');
+};
+exports.about = function (req, res) {
+  return res.render('about', {layout: false});
 };
 
 exports.admin = function (req, res) {
@@ -145,7 +153,7 @@ exports.admin = function (req, res) {
     {name: "标签", url: "/admin/tags/"}
   ];
   return res.render('admin/index', {
-    layout: false,
+    layout     : false,
     categeories: cats
   });
 };

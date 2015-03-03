@@ -20,7 +20,7 @@ var ArticleSchema = new Schema({
   toJSON: {virtuals: true}
 });
 
-ArticleSchema.methods.getTags = function (cb) {
+ArticleSchema.methods.getTags = function (D,cb) {
   D.tagmap.find({article_id: this._id}).exec()
     .then(function (result) {
       return result.length ? D.tag.find({
