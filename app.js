@@ -1,7 +1,4 @@
-var config = require('./config');
-if (!config.debug) {
-  require('newrelic');
-}
+require('newrelic');
 
 var express = require('express');
 var compress = require('compression');
@@ -13,7 +10,7 @@ var bodyParser = require('body-parser');
 var exhbs = require('express-handlebars');
 var routers = require('./routers');
 var mongoose = require('mongoose');
-
+var config = require('./config')
 var moment = require('moment');
 var session = require('express-session');
 var Article = require('./models/article');
