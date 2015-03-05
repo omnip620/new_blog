@@ -3,7 +3,7 @@
  */
 var config = {
   //网站运行端口
-  debug:true,
+  debug:true,//#gitignore
   port: 3000,
   //数据库
   db: {
