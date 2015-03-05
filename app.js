@@ -3,7 +3,6 @@ if (!config.debug) {
   require('newrelic');
 }
 
-var heapdump = require('heapdump');
 var express = require('express');
 var compress = require('compression');
 var path = require('path');
