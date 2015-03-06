@@ -14,6 +14,7 @@ var routers = require('./routers');
 var mongoose = require('mongoose');
 var moment = require('moment');
 var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 var Article = require('./models/article');
 var Tag = require('./models/tag');
 //var registerModels = require('./common/register_model')
@@ -79,8 +80,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'), {maxAge: 31536000}));
 app.use(session({
   secret           : 'panblog',
+  store            : new MongoStore({
+    host    : config.db.host,
+    port    : config.db.port,
+    db      : config.db.database,
+    username: config.db.user,
+    password: config.db.pwd
+  }),
   resave           : true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie           : {maxAge: 3600 * 24}
 }));
 
 //right sidebar data bind
