@@ -25,7 +25,7 @@ function formatArticles(articles, callback) {
         resolve(article);
       });
       if (article.content) {
-        article.content = md.render(article.content.substring(0, 170)).replace(/<[^>]+>/gi, '') + '...';
+        article.content = (md.render(article.content).replace(/<[^>]+>/gi, '')).substring(0, 170)+ '...';
       }
     })
   }).then(function () {
