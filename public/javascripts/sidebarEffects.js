@@ -31,11 +31,12 @@ var SidebarMenuEffects = (function () {
 
   function init() {
     var container = document.getElementsByTagName('body')[0]
-      , tool = document.getElementById('sidebar-slide'),
+      , tool = document.getElementById('sidebar-nav'),
       eventtype = mobilecheck() ? 'touchstart' : 'click',
     bodyClickFn = function (e) {
       if (!hasParentClass(e.target, 'sidebar')) {
         container.className = '';
+        e.preventDefault();
         document.removeEventListener(eventtype, bodyClickFn);
       }
     };
