@@ -35,7 +35,7 @@ var SidebarMenuEffects = (function () {
       eventtype = mobilecheck() ? 'touchstart' : 'click',
     bodyClickFn = function (e) {
       if (!hasParentClass(e.target, 'sidebar')) {
-        container.className = '';
+        container.className = 'se-menu-close';
         e.preventDefault();
         document.removeEventListener(eventtype, bodyClickFn);
       }

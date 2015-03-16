@@ -314,9 +314,10 @@ a {
 }
 a:hover {
   text-decoration: none;
-  -webkit-transition: all 200ms linear 0;
-  -o-transition: all 200ms linear 0;
-  transition: all 200ms linear 0;
+  -webkit-transition: color 150ms linear 0;
+  -o-transition: color 150ms linear 0;
+  -moz-transition: color 150ms linear 0;
+  transition: color 150ms linear 0;
   color: #06c;
 }
 .inline {
@@ -334,10 +335,11 @@ a:hover {
 .sidebar-show,
 .sidebar,
 .right-nav {
-  -webkit-transition: all 150ms ease-in-out 0;
-  -o-transition: all 150ms ease-in-out 0;
-  transition: all 150ms ease-in-out 0;
   opacity: 0.4;
+  -webkit-transition: opacity 300ms ease-in-out;
+  -o-transition: opacity 300ms ease-in-out;
+  -moz-transition: opacity 300ms ease-in-out;
+  transition: opacity 300ms ease-in-out;
 }
 .sidebar-show:hover,
 .sidebar:hover,
@@ -350,6 +352,7 @@ a:hover {
   position: fixed;
   border-right: 1px solid #d1d1d1;
   height: 100%;
+  z-index: 10;
 }
 .sidebar .avatar {
   width: 120px;
@@ -372,6 +375,7 @@ a:hover {
   position: fixed;
   bottom: 15px;
   left: 15px;
+  z-index: 99;
 }
 .nav-button a {
   text-decoration: none;
@@ -426,9 +430,6 @@ a:hover {
   text-decoration: underline;
 }
 .main-wrapper {
-  -webkit-transition: transform 0.15s;
-  -o-transition: transform 0.15s;
-  transition: transform 0.15s;
   width: 100%;
   float: left;
   padding-left: 260px;
@@ -442,9 +443,6 @@ a:hover {
   height: 0;
   content: '';
   opacity: 0;
-  -webkit-transition: all 1s 1s;
-  -o-transition: all 1s 1s;
-  transition: all 1s 1s;
 }
 .main-wrapper .main {
   min-height: 500px;
@@ -467,18 +465,22 @@ a:hover {
   border-top: 1px dashed transparent;
   -webkit-transition: border 150ms linear 0;
   -o-transition: border 150ms linear 0;
+  -moz-transition: border 150ms linear 0;
   transition: border 150ms linear 0;
 }
 .main-wrapper .main .articles .content a {
   text-decoration: none;
 }
 .main-wrapper .main .articles .content h2 {
-  font: 300 24px/40px 'Microsoft YaHei';
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 40px;
   margin: 0 auto;
 }
 .main-wrapper .main .articles .content .summary {
   margin-top: 10px;
-  font: 16px/24px 'Microsoft YaHei';
+  font-size: 16px;
+  line-height: 24px;
 }
 .main-wrapper .main .articles .content .summary a:hover {
   color: #222;
@@ -562,6 +564,7 @@ a:hover {
   .main-wrapper .main .articles:hover {
     -webkit-transition: border 150ms ease-in-out 0;
     -o-transition: border 150ms ease-in-out 0;
+    -moz-transition: border 150ms ease-in-out 0;
     transition: border 150ms ease-in-out 0;
     border-bottom: 1px dashed #858585;
     border-top: 1px dashed #858585;
@@ -570,40 +573,45 @@ a:hover {
 @media screen and (max-width: 900px) {
   .nav-button {
     display: block;
-    z-index: 99;
   }
   .se-menu-open {
     overflow-x: hidden;
     -ms-overflow-x: hidden;
   }
+  .main-wrapper {
+    position: relative;
+    z-index: 20;
+    background-color: #fff;
+  }
   .sidebar {
-    transform: translate(-100%, 0);
-    -ms-transform: translate(-100%, 0); /* IE 9 */
-    -webkit-transform: translate(-100%, 0); /* Safari and Chrome */
-    -o-transform: translate(-100%, 0); /* Opera */
-    -moz-transform: translate(-100%, 0); /* Firefox */
+    opacity: 1;
+    margin-left: -100%;
   }
   .se-menu-open .main-wrapper {
-    transform: translate(260px, 0);
-    -ms-transform: translate(260px, 0); /* IE 9 */
-    -webkit-transform: translate(260px, 0); /* Safari and Chrome */
-    -o-transform: translate(260px, 0); /* Opera */
-    -moz-transform: translate(260px, 0); /* Firefox */
-  }
-  .se-menu-open .main-wrapper:after {
-    width: 100%;
-    height: 100%;
-    opacity: 1;
-    -webkit-transition: opacity 1s 1s;
-    -o-transition: opacity 1s 1s;
-    transition: opacity 1s 1s;
+    -webkit-transition: margin-left 300ms ease 50ms;
+    -o-transition: margin-left 300ms ease 50ms;
+    -moz-transition: margin-left 300ms ease 50ms;
+    transition: margin-left 300ms ease 50ms;
+    margin-left: 260px;
   }
   .se-menu-open .sidebar {
-    transform: translate(0, 0);
-    -ms-transform: translate(0, 0); /* IE 9 */
-    -webkit-transform: translate(0, 0); /* Safari and Chrome */
-    -o-transform: translate(0, 0); /* Opera */
-    -moz-transform: translate(0, 0); /* Firefox */
+    -webkit-transition: margin-left 300ms ease 0;
+    -o-transition: margin-left 300ms ease 0;
+    -moz-transition: margin-left 300ms ease 0;
+    transition: margin-left 300ms ease 0;
+    margin-left: 0;
+  }
+  .se-menu-close .main-wrapper {
+    -webkit-transition: margin-left 300ms ease 0;
+    -o-transition: margin-left 300ms ease 0;
+    -moz-transition: margin-left 300ms ease 0;
+    transition: margin-left 300ms ease 0;
+  }
+  .se-menu-close .sidebar {
+    -webkit-transition: margin-left 300ms ease 50ms;
+    -o-transition: margin-left 300ms ease 50ms;
+    -moz-transition: margin-left 300ms ease 50ms;
+    transition: margin-left 300ms ease 50ms;
   }
   .right-nav {
     display: none;
