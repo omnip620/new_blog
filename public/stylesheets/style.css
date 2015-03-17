@@ -450,6 +450,17 @@ a:hover {
   padding-top: 50px;
   padding-right: 60px;
 }
+.main-wrapper .main .summary {
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 24px;
+}
+.main-wrapper .main .summary a {
+  color: #434343;
+}
+.main-wrapper .main .summary a:hover {
+  color: #222;
+}
 .main-wrapper .main .info {
   margin-bottom: 20px;
 }
@@ -476,14 +487,6 @@ a:hover {
   font-size: 24px;
   line-height: 40px;
   margin: 0 auto;
-}
-.main-wrapper .main .articles .content .summary {
-  margin-top: 10px;
-  font-size: 16px;
-  line-height: 24px;
-}
-.main-wrapper .main .articles .content .summary a:hover {
-  color: #222;
 }
 .main-wrapper .main .article .article-title {
   font-weight: normal;
@@ -585,33 +588,33 @@ a:hover {
   }
   .sidebar {
     opacity: 1;
-    margin-left: -100%;
+    margin-left: -35%;
   }
   .se-menu-open .main-wrapper {
-    -webkit-transition: margin-left 300ms ease 50ms;
-    -o-transition: margin-left 300ms ease 50ms;
-    -moz-transition: margin-left 300ms ease 50ms;
-    transition: margin-left 300ms ease 50ms;
+    -webkit-transition: margin-left 350ms ease 0;
+    -o-transition: margin-left 350ms ease 0;
+    -moz-transition: margin-left 350ms ease 0;
+    transition: margin-left 350ms ease 0;
     margin-left: 260px;
   }
   .se-menu-open .sidebar {
-    -webkit-transition: margin-left 300ms ease 0;
-    -o-transition: margin-left 300ms ease 0;
-    -moz-transition: margin-left 300ms ease 0;
-    transition: margin-left 300ms ease 0;
+    -webkit-transition: margin-left 350ms ease 0;
+    -o-transition: margin-left 350ms ease 0;
+    -moz-transition: margin-left 350ms ease 0;
+    transition: margin-left 350ms ease 0;
     margin-left: 0;
   }
   .se-menu-close .main-wrapper {
-    -webkit-transition: margin-left 300ms ease 0;
-    -o-transition: margin-left 300ms ease 0;
-    -moz-transition: margin-left 300ms ease 0;
-    transition: margin-left 300ms ease 0;
+    -webkit-transition: margin-left 350ms ease 0;
+    -o-transition: margin-left 350ms ease 0;
+    -moz-transition: margin-left 350ms ease 0;
+    transition: margin-left 350ms ease 0;
   }
   .se-menu-close .sidebar {
-    -webkit-transition: margin-left 300ms ease 50ms;
-    -o-transition: margin-left 300ms ease 50ms;
-    -moz-transition: margin-left 300ms ease 50ms;
-    transition: margin-left 300ms ease 50ms;
+    -webkit-transition: margin-left 350ms ease 0;
+    -o-transition: margin-left 350ms ease 0;
+    -moz-transition: margin-left 350ms ease 0;
+    transition: margin-left 350ms ease 0;
   }
   .right-nav {
     display: none;
