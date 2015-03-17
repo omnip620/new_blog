@@ -1,9 +1,8 @@
 /**
  * Created by panew on 14-12-7.
  */
-var config = {
+module.exports = {
   //网站运行端口
-  debug:true,//#gitignore
   port: 3000,
   //数据库
   db: {
@@ -29,4 +28,3 @@ var config = {
     '2':'术业'
   }
 };
-module.exports = config;

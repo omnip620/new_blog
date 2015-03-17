@@ -26,5 +26,6 @@ router.use('/api',require('./api/admin'));
 router.use('/common',require('./common'));
 
 router.get('/404',errors[404]);
+router.get('/500',errors[500]);
 
 module.exports = router;
