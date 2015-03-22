@@ -375,7 +375,6 @@ a:hover {
   position: fixed;
   bottom: 15px;
   left: 15px;
-  z-index: 99;
 }
 .nav-button a {
   text-decoration: none;
@@ -576,6 +575,7 @@ a:hover {
 @media screen and (max-width: 900px) {
   .nav-button {
     display: block;
+    z-index: 99;
   }
   .se-menu-open {
     overflow-x: hidden;
@@ -588,33 +588,45 @@ a:hover {
   }
   .sidebar {
     opacity: 1;
-    margin-left: -35%;
+    -webkit-transform: translate(-91px, 0);
+    -moz-transform: translate(-91px, 0);
+    -ms-transform: translate(-91px, 0);
+    -o-transform: translate(-91px, 0);
+    transform: translate(-91px, 0);
   }
   .se-menu-open .main-wrapper {
-    -webkit-transition: margin-left 350ms ease 0;
-    -o-transition: margin-left 350ms ease 0;
-    -moz-transition: margin-left 350ms ease 0;
-    transition: margin-left 350ms ease 0;
-    margin-left: 260px;
+    -webkit-transition: 350ms;
+    -o-transition: 350ms;
+    -moz-transition: 350ms;
+    transition: 350ms;
+    -webkit-transform: translate(260px, 0);
+    -moz-transform: translate(260px, 0);
+    -ms-transform: translate(260px, 0);
+    -o-transform: translate(260px, 0);
+    transform: translate(260px, 0);
   }
   .se-menu-open .sidebar {
-    -webkit-transition: margin-left 350ms ease 0;
-    -o-transition: margin-left 350ms ease 0;
-    -moz-transition: margin-left 350ms ease 0;
-    transition: margin-left 350ms ease 0;
-    margin-left: 0;
+    -webkit-transition: 350ms;
+    -o-transition: 350ms;
+    -moz-transition: 350ms;
+    transition: 350ms;
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
   }
   .se-menu-close .main-wrapper {
-    -webkit-transition: margin-left 350ms ease 0;
-    -o-transition: margin-left 350ms ease 0;
-    -moz-transition: margin-left 350ms ease 0;
-    transition: margin-left 350ms ease 0;
+    -webkit-transition: 350ms;
+    -o-transition: 350ms;
+    -moz-transition: 350ms;
+    transition: 350ms;
   }
   .se-menu-close .sidebar {
-    -webkit-transition: margin-left 350ms ease 0;
-    -o-transition: margin-left 350ms ease 0;
-    -moz-transition: margin-left 350ms ease 0;
-    transition: margin-left 350ms ease 0;
+    -webkit-transition: 350ms;
+    -o-transition: 350ms;
+    -moz-transition: 350ms;
+    transition: 350ms;
   }
   .right-nav {
     display: none;
