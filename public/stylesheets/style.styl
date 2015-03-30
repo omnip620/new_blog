@@ -17,6 +17,15 @@ text-bright = rgb(204, 0, 0, 1)
 text-muted = rgb(149, 149, 149, 1)
 link-color = rgb(0, 0, 153, 1)
 link-hover-color = rgb(0, 102, 204, 1)
+
+transform()
+  -webkit-transform: arguments
+  -moz-transform: arguments
+  -ms-transform: arguments
+  -o-transform: arguments
+  transform: arguments
+
+
 body
   font-family "Microsoft YaHei","LiHei Pro Medium","WenQuanYi Micro He",Sans-serif;
   font-size 16px
@@ -107,6 +116,8 @@ sidebar-width = 260px
   z-index 10
   @extend .sidebar-show
   @extend .clearfix
+  &:hover
+    box-shadow: 2px 2px 10px #C5C5C5;
   .avatar
     width 120px
     border-radius 60px
@@ -219,7 +230,6 @@ right-nav-r = 60px
           font-weight 500
           font-size 24px
           line-height 40px
-
           margin 0 auto
           @extend .clearfix
 
@@ -292,7 +302,7 @@ right-nav-r = 60px
 @media screen and (min-width: 900px)
   .main-wrapper .main .articles
     &:hover
-      transition(border 150ms ease-in-out 0)
+      transition(all 300ms ease)
       border-bottom 1px dashed lighten(text-primary, 45%)
       border-top 1px dashed lighten(text-primary, 45%)
 @media screen and (max-width: 900px)
@@ -309,25 +319,13 @@ right-nav-r = 60px
     background-color #FFFFFF
   .sidebar
     opacity 1
-    -webkit-transform: translate(-260*0.35px,0)
-    -moz-transform: translate(-260*0.35px,0)
-    -ms-transform: translate(-260*0.35px,0)
-    -o-transform: translate(-260*0.35px,0)
     transform: translate(-260*0.35px,0)
   .se-menu-open .main-wrapper
     transition 350ms
-    -webkit-transform: translate(260px,0)
-    -moz-transform: translate(260px,0)
-    -ms-transform: translate(260px,0)
-    -o-transform: translate(260px,0)
     transform: translate(260px,0)
 
   .se-menu-open .sidebar{
     transition 350ms
-    -webkit-transform: translate(0, 0)
-    -moz-transform: translate(0, 0)
-    -ms-transform: translate(0, 0)
-    -o-transform: translate(0, 0)
     transform: translate(0, 0)
   }
   .se-menu-close .main-wrapper
