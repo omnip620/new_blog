@@ -5,7 +5,6 @@ var Article = require('./../models/article');
 var Tag = require('./../models/tag');
 
 module.exports = function (req, res, next) {
-
   Article.find({}, 'title views', {sort: '-views', limit: 5}).exec()
     .then(function (result) {
       res.locals.topViews = result;
@@ -22,4 +21,4 @@ module.exports = function (req, res, next) {
     .then(null, function (err) {
       return res.redirect('/404')
     })
-}
+};

@@ -13,11 +13,13 @@
  */
 var SidebarMenuEffects = (function () {
   function hasParentClass(e, classname) {
-    if (e === document) return false;
-    if ($(e).hasClass(classname)) {
-      return true;
+    while (e.parentNode) {
+      if (e.parentNode === document) return false;
+      if ($(e).hasClass(classname)) {
+        return true
+      }
+      e = e.parentNode;
     }
-    return e.parentNode && hasParentClass(e.parentNode, classname);
   }
 
   // http://coveroverflow.com/a/11381730/989439
@@ -32,14 +34,14 @@ var SidebarMenuEffects = (function () {
   function init() {
     var container = document.getElementsByTagName('body')[0]
       , tool = document.getElementById('sidebar-nav'),
-      eventtype = mobilecheck() ? 'touchstart' : 'click',
-    bodyClickFn = function (e) {
-      if (!hasParentClass(e.target, 'sidebar')) {
-        container.className = 'se-menu-close';
-        e.preventDefault();
-        document.removeEventListener(eventtype, bodyClickFn);
-      }
-    };
+        eventtype = mobilecheck() ? 'touchstart' : 'click',
+        bodyClickFn = function (e) {
+          if (!hasParentClass(e.target, 'sidebar')) {
+            container.className = 'se-menu-close';
+            e.preventDefault();
+            document.removeEventListener(eventtype, bodyClickFn);
+          }
+        };
 
     tool.addEventListener(eventtype, function (e) {
       e.stopPropagation();
@@ -48,5 +50,6 @@ var SidebarMenuEffects = (function () {
       document.addEventListener(eventtype, bodyClickFn);
     })
   }
+
   init();
 })();
