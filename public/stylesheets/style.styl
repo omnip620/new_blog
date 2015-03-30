@@ -1,0 +1,354 @@
+lesscss-percentage(n)
+  (n * 100)%
+/**
+ * Created by pan on 14-9-2.
+ */
+
+@import "../../node_modules/bootstrap-styl/bootstrap/normalize";
+@import "../../node_modules/bootstrap-styl/bootstrap/mixins";
+@import "../../node_modules/bootstrap-styl/bootstrap/utilities";
+@import "../../node_modules/bootstrap-styl/bootstrap/mixins/vendor-prefixes";
+
+bg-primary = rgb(238, 238, 238, 1)
+bg-dark = rgb(34, 34, 34, 1)
+text-primary = rgb(34, 34, 34, 1)
+text-white = rgb(238, 238, 238, 1)
+text-bright = rgb(204, 0, 0, 1)
+text-muted = rgb(149, 149, 149, 1)
+link-color = rgb(0, 0, 153, 1)
+link-hover-color = rgb(0, 102, 204, 1)
+body
+  font-family "Microsoft YaHei","LiHei Pro Medium","WenQuanYi Micro He",Sans-serif;
+  font-size 16px
+  color text-primary
+  overflow-x hidden
+
+*
+  box-sizing border-box
+  &:after, &:before
+    box-sizing border-box
+ul
+  margin 0
+  padding 0
+
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+::selection {
+  background: #333;
+  color: white;
+}
+
+.list-none
+  list-style none
+/*blockquote*/
+blockquote
+  p
+    margin 6px auto
+  footer
+    font-size 80%
+    color lighten(text-primary, 13%)
+    float right
+    &:before
+      content '\2014 \00A0'
+    cite
+      font-style normal
+pre
+  display block
+  padding 9.5px
+  margin 0 0 10px
+  font-size 13px
+  line-height 1.42857143
+  word-break break-all
+  word-wrap break-word
+  color #333333
+  background-color #f5f5f5
+  border 1px solid #cccccc
+  border-radius 4px
+pre code
+  padding 0
+  font-size inherit
+  color inherit
+  white-space pre-wrap
+  background-color transparent
+  border-radius 0
+a
+  color text-primary
+  &:hover
+    text-decoration none
+    transition(color 150ms linear 0)
+    color link-hover-color
+
+.inline
+  display inline-block
+.m-r-5
+  margin-right 5px
+.m-r-10
+  margin-right 10px
+
+.text-muted
+  color text-muted
+sidebar-width = 260px
+.sidebar-show
+  opacity 0.4
+  transition(opacity 300ms ease-in-out)
+  &:hover
+    opacity 1
+.sidebar
+  width sidebar-width
+  text-align center
+  position fixed
+  border-right 1px solid darken(bg-primary, 12%)
+  height 100%
+  z-index 10
+  @extend .sidebar-show
+  @extend .clearfix
+  .avatar
+    width 120px
+    border-radius 60px
+    margin-top 150px
+    margin-bottom 10px
+  .proverbs
+    margin-bottom 80px
+  nav, .me
+    a
+      padding 8px
+  nav
+    margin-bottom 30px
+
+.nav-button
+  display none
+  position fixed
+  bottom 15px
+  left 15px
+  a
+    text-decoration none
+    font-size 1.6em
+    &:hover
+      color #000000
+
+right-nav-width = 300px
+right-nav-r = 60px
+.right-nav
+  width right-nav-width
+  position fixed
+  padding-top 50px
+  right right-nav-r
+  top 0
+  font-size 14px
+  @extend .sidebar-show
+  > section
+    margin 10px 10px 20px 10px
+    header
+      padding 0 6px
+      border-bottom 1px solid text-primary
+      font-size 16px
+      a
+        @extend .pull-right
+        text-decoration none
+    ul
+      @extend .list-none
+      padding-top 6px
+      li
+        padding 6px 0 6px 8px
+        a
+          text-decoration none
+          color lighten(text-primary, 12%)
+          &:hover
+            text-decoration underline
+    .tags
+      padding 6px 8px
+      a
+        margin-right 6px
+        margin-bottom 4px
+        display inline-block
+        text-decoration none
+        color lighten(text-primary, 12%)
+        &:hover
+          text-decoration underline
+.main-wrapper
+  width 100%
+  float left
+  padding-left sidebar-width
+  padding-right (right-nav-width + right-nav-r)
+  &:after
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    content: '';
+    opacity: 0;
+  .main
+    min-height  500px
+    padding-left 80px
+    padding-top 50px
+    padding-right 60px
+
+    .summary
+      margin-top 10px
+      font-size 16px
+      line-height 24px
+      a
+        color lighten(text-primary,15%)
+        &:hover
+          color text-primary
+
+    .info
+      margin-bottom 20px
+      ul
+        @extend .clearfix
+        li
+          display inline
+          margin-right 14px
+          font 300 13px / 18px 'Microsoft YaHei'
+    .articles
+      margin-bottom 12px
+      padding-top 12px
+      border-bottom 1px dashed transparent
+      border-top 1px dashed transparent
+      transition(border 150ms linear 0)
+      .content
+        a
+          text-decoration none
+        h2
+          font-weight 500
+          font-size 24px
+          line-height 40px
+
+          margin 0 auto
+          @extend .clearfix
+
+    .article
+      .article-title
+        font-weight normal
+        margin 0
+        text-align center
+      .info
+        margin-bottom 12px
+        margin-top 8px
+        padding-bottom 12px
+        text-align center
+        color text-muted
+        a
+          text-decoration none
+          color text-muted
+          &:hover
+            color link-hover-color
+      .article-cont
+        font: 16px/26px 'Microsoft YaHei','Tahoma'
+        letter-spacing: 0.3px;
+        ul
+          padding-left 15px
+
+    .archives
+      .item
+        margin-bottom 45px
+        @extend .clearfix
+        h3
+          float: left
+          margin 0
+        .archives-list
+          @extend .list-none
+          margin-left 140px
+          a
+            text-decoration none
+          time
+            color text-muted
+            margin-right 10px
+          li
+            @extend .clearfix
+            margin-bottom  6px
+          span
+            float: right
+    .fl
+      a
+        text-decoration none
+
+@media screen and (max-width: 1440px)
+  .main-wrapper
+    .main
+      padding-left 60px
+      padding-right 40px
+      .archives
+        .item
+          ul
+           margin-left 100px
+@media screen and (max-width: 1280px)
+  .main-wrapper
+    .main
+      padding-left 40px
+      padding-right 30px
+@media screen and (max-width: 1280px)
+  .right-nav
+    display none
+  .main-wrapper
+    padding-right 0
+
+@media screen and (min-width: 900px)
+  .main-wrapper .main .articles
+    &:hover
+      transition(border 150ms ease-in-out 0)
+      border-bottom 1px dashed lighten(text-primary, 45%)
+      border-top 1px dashed lighten(text-primary, 45%)
+@media screen and (max-width: 900px)
+  .nav-button
+    display block
+    z-index 99
+  .se-menu-open{
+    overflow-x: hidden;
+    -ms-overflow-x: hidden;
+  }
+  .main-wrapper
+    position relative
+    z-index 20
+    background-color #FFFFFF
+  .sidebar
+    opacity 1
+    -webkit-transform: translate(-260*0.35px,0)
+    -moz-transform: translate(-260*0.35px,0)
+    -ms-transform: translate(-260*0.35px,0)
+    -o-transform: translate(-260*0.35px,0)
+    transform: translate(-260*0.35px,0)
+  .se-menu-open .main-wrapper
+    transition 350ms
+    -webkit-transform: translate(260px,0)
+    -moz-transform: translate(260px,0)
+    -ms-transform: translate(260px,0)
+    -o-transform: translate(260px,0)
+    transform: translate(260px,0)
+
+  .se-menu-open .sidebar{
+    transition 350ms
+    -webkit-transform: translate(0, 0)
+    -moz-transform: translate(0, 0)
+    -ms-transform: translate(0, 0)
+    -o-transform: translate(0, 0)
+    transform: translate(0, 0)
+  }
+  .se-menu-close .main-wrapper
+    transition 350ms
+  .se-menu-close .sidebar
+    transition 350ms
+
+  .right-nav
+    display none
+  .main-wrapper
+    padding 5px
+    .main
+      padding 5px
+      .articles
+        border-top 1px dashed lighten(text-primary, 45%)
+      .articles:first-child
+         border-top none
+      .archives .item
+        h3
+          float: none;
+        .archives-list
+          margin-left 0
+
+

@@ -41,11 +41,12 @@ app.use(session({
     port    : config.db.port,
     db      : config.db.database,
     username: config.db.user,
-    password: config.db.pwd
+    password: config.db.pwd,
+    ttl: 14 * 24 * 60 * 60
   }),
   resave           : true,
-  saveUninitialized: true,
-  cookie           : {maxAge: 3600 * 24}
+  saveUninitialized: true
+
 }));
 
 //right sidebar data bind and set env to views
