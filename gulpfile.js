@@ -61,6 +61,13 @@ gulp.task('frontInject', ['frontJS', 'frontCSS'], function () {
     .pipe(inject(gulp.src(['public/javascripts/all*.js', 'public/stylesheets/all*.css']), {'ignorePath': 'public'}))
     .pipe(gulp.dest('views/layouts'));
 });
+
+gulp.task('frontInjectDev', function () {
+  return gulp.src('views/layouts/layout.hbs')
+    .pipe(inject(gulp.src(frontPaths.css,frontPaths.scripts), {'ignorePath': 'public'}))
+    .pipe(gulp.dest('views/layouts'));
+});
+
 gulp.task('add', ['frontInject'], function () {
   return gulp.src('public/**/all*.*')
     .pipe(git.add());
@@ -73,12 +80,13 @@ gulp.task('build', function () {
 gulp.task('browser-sync', function () {
   browserSync({
     proxy: "127.0.0.1:3000",
-    files: "public/**/all*.*"
+    files: "public/**/*.*"
   });
 });
 
 gulp.task('watch', function () {
-  gulp.watch([frontPaths.scripts, frontPaths.css], ['build'])
+  //gulp.watch([frontPaths.scripts, frontPaths.css], ['build'])
+  gulp.watch([frontPaths.scripts, frontPaths.css], ['frontInjectDev'])
 });
 
 gulp.task('default', ['watch', 'browser-sync']);

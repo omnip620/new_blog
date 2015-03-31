@@ -25,6 +25,12 @@ transform()
   -o-transform: arguments
   transform: arguments
 
+transition()
+  -webkit-transition: arguments
+  -moz-transition: arguments
+  -ms-transition: arguments
+  -o-transition: arguments
+  transition: arguments
 
 body
   font-family "Microsoft YaHei","LiHei Pro Medium","WenQuanYi Micro He",Sans-serif;
@@ -51,6 +57,8 @@ code {
   background: #333;
   color: white;
 }
+
+
 
 .list-none
   list-style none
@@ -101,6 +109,10 @@ a
 
 .text-muted
   color text-muted
+
+.text-primary
+  color text-primary
+
 sidebar-width = 260px
 .sidebar-show
   opacity 0.4
@@ -194,20 +206,70 @@ right-nav-r = 60px
     height: 0;
     content: '';
     opacity: 0;
+  .articles
+    margin-bottom 12px
+    padding-top 12px
+    position relative
+    &:after,&:before
+      transition 1s opacity cubic-bezier(.23,1,.32,1),1s transform cubic-bezier(.23,1,.32,1)
+      transform scaleX(0) translateZ(0)
+      height 1px
+      background-color text-primary
+      content ''
+      position absolute
+      width 100%
+      opacity 0
+    &:before
+      top -2px
+
+@media screen and (min-width: 900px)
+  .main-wrapper .main .articles
+    &:hover:after, &:hover:before
+      opacity 1
+      transform scaleX(1) translateZ(0)
+
+  .content
+    a
+      text-decoration none
+    .item-title
+      position relative
+      &:hover
+        color text-primary
+      &:hover:after
+        opacity 1
+        transform scaleX(1) translateZ(0)
+      &:after
+        transition 1s opacity cubic-bezier(.23,1,.32,1),1s transform cubic-bezier(.23,1,.32,1)
+        transform scaleX(0) translateZ(0)
+        height 1.5px
+        background-color text-primary
+        content ''
+        position absolute
+        width 100%
+        left 0
+        bottom -4px
+        opacity 0
+    h2
+      font-weight 500
+      font-size 24px
+      line-height 40px
+      margin 0 auto
+      @extend .clearfix
+
+  .summary
+    margin-top 10px
+    font-size 16px
+    line-height 24px
+
+    .summary-link
+      color lighten(text-primary,15%)
+      &:hover
+        color text-primary
   .main
     min-height  500px
     padding-left 80px
     padding-top 50px
     padding-right 60px
-
-    .summary
-      margin-top 10px
-      font-size 16px
-      line-height 24px
-      a
-        color lighten(text-primary,15%)
-        &:hover
-          color text-primary
 
     .info
       margin-bottom 20px
@@ -217,21 +279,6 @@ right-nav-r = 60px
           display inline
           margin-right 14px
           font 300 13px / 18px 'Microsoft YaHei'
-    .articles
-      margin-bottom 12px
-      padding-top 12px
-      border-bottom 1px dashed transparent
-      border-top 1px dashed transparent
-      transition(border 150ms linear 0)
-      .content
-        a
-          text-decoration none
-        h2
-          font-weight 500
-          font-size 24px
-          line-height 40px
-          margin 0 auto
-          @extend .clearfix
 
     .article
       .article-title
@@ -299,12 +346,6 @@ right-nav-r = 60px
   .main-wrapper
     padding-right 0
 
-@media screen and (min-width: 900px)
-  .main-wrapper .main .articles
-    &:hover
-      transition(all 300ms ease)
-      border-bottom 1px dashed lighten(text-primary, 45%)
-      border-top 1px dashed lighten(text-primary, 45%)
 @media screen and (max-width: 900px)
   .nav-button
     display block
