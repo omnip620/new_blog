@@ -221,12 +221,10 @@ right-nav-r = 60px
       opacity 0
     &:before
       top -2px
-
-@media screen and (min-width: 900px)
-  .main-wrapper .main .articles
-    &:hover:after, &:hover:before
-      opacity 1
-      transform scaleX(1) translateZ(0)
+    @media screen and (min-width: 900px)
+      &:hover:after, &:hover:before
+        opacity 1
+        transform scaleX(1) translateZ(0)
 
   .content
     a
