@@ -53,7 +53,9 @@ app.use(session({
 }));
 
 //right sidebar data bind and set env to views
-app.use(rsb,function(req,res,next){
+app.use(rsb);
+
+app.use(function(req,res,next){
   res.locals.production = env === "production";
   next()
 });
