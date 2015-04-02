@@ -11,14 +11,16 @@ var cat = require('../../config').cat;
 
 exports.index = function (req, res) {
   var D = {tagmap: TagMap, tag: Tag};
-  Article.find({}, 'title source top created_at updated_at views cat comment_ids').exec()
+  Article.find({}, 'title source tag_ids top created_at updated_at views cat comment_ids').exec()
     .then(function (articles) {
       return Promise.map(articles, function (article) {
+        console.log(article.tag_ids)
         return new Promise(function (resolve, reject) {
           article.getTags(D,function (err, tags) {
             if (err) {
               reject(err);
             }
+
             article._doc.tags = tags;
             resolve(article);
           });
@@ -81,6 +83,8 @@ exports.generate = function (req, res) {
       obj.cat = 2;
       return 'false';
     })();
+
+    obj.testArray=['1','2','3'];
     obj.views = Math.round(Math.random() * 1000);
     Article.create(obj, function (err, article) {
       if (err) {

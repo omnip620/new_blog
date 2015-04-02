@@ -6,27 +6,35 @@ var Schema = mongoose.Schema;
 
 
 var ArticleSchema = new Schema({
-  title: {type: String},
-  content: {type: String},
-  source: {type: String},
-  top: {type: Boolean, default: false},
-  created_at: {type: Date, default: Date.now},
-  updated_at: {type: Date, default: Date.now},
-  views: {type: Number, default: 0},
+  title      : {type: String},
+  content    : {type: String},
+  source     : {type: String},
+  top        : {type: Boolean, default: false},
+  created_at : {type: Date, default: Date.now},
+  updated_at : {type: Date, default: Date.now},
+  views      : {type: Number, default: 0},
   comment_ids: {type: Array, default: []},
-  cat: {type: Number}
+  tag_ids    : {type: Array, default: []},
+  cat        : {type: Number}
 }, {
   toJSON: {virtuals: true}
 });
 
-ArticleSchema.methods.getTags = function (D,cb) {
+ArticleSchema.methods.getTags = function (D, cb) {
+  var that = this;
   D.tagmap.find({article_id: this._id}).exec()
     .then(function (result) {
+      var tag_ids = result.map(function (item) {
+        return item.tag_id;
+      });
+      that.tag_ids = tag_ids;
+      that.save(function (err) {
+        if (err) return console.log(err);
+        console.log('saved');
+      });
       return result.length ? D.tag.find({
         _id: {
-          $in: result.map(function (item) {
-            return item.tag_id;
-          })
+          $in: tag_ids
         }
       }).exec() : []
     })
