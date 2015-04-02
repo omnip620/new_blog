@@ -14,13 +14,11 @@ exports.index = function (req, res) {
   Article.find({}, 'title source tag_ids top created_at updated_at views cat comment_ids').exec()
     .then(function (articles) {
       return Promise.map(articles, function (article) {
-        console.log(article.tag_ids)
         return new Promise(function (resolve, reject) {
           article.getTags(D,function (err, tags) {
             if (err) {
               reject(err);
             }
-
             article._doc.tags = tags;
             resolve(article);
           });
