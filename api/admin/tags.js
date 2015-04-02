@@ -3,30 +3,24 @@
  */
 var Tag = require('../../models/tag');
 var TagMap = require('../../models/tagmap');
+var Article = require('../../models/article');
 var Promise = require('bluebird');
 var _ = require('lodash');
 
 
 exports.index = function (req, res) {
-  var tags = null;
   Tag.find({}).exec()
-    .then(function (result) {
-      tags = result;
-      return TagMap.aggregate([{$group: {"_id": "$tag_id", count: {$sum: 1}}}]).exec();
-    })
-    .then(function (tms) {
-      tags.forEach(function (tag) {
-        tag._doc.count = tag._doc.count || 0;
-        tms.forEach(function (tm) {
-          if (tag._id == tm._id) {
-            tag._doc.count = tm.count;
-          }
+    .then(function (tags) {
+      Promise.map(tags, function (tag) {
+        return Article.find({"tag_ids": tag._id}).exec()
+          .then(function (articles) {
+            tag._doc.count = articles.length;
+            return tag
+          })
+      })
+        .then(function (result) {
+          return res.json(200, result);
         })
-      });
-      return res.json(200, tags);
-    })
-    .then(null, function (err) {
-      console.log(err)
     })
 };
 
