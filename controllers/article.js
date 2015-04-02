@@ -7,7 +7,6 @@ var Tag = require('../models/tag');
 var md = require('markdown-it')({html: true, linkify: true, typographer: true});
 
 exports.show = function (req, res) {
-  var D = {tagmap: TagMap, tag: Tag};
   Article.findById(req.params.id, function (err, article) {
     if (err) {
       return res.redirect('/404')
@@ -16,7 +15,7 @@ exports.show = function (req, res) {
     if (article.content) {
       article.content = md.render(article.content)
     }
-    article.getTags(D,function (err, tags) {
+    article.getTags(Tag,function (err, tags) {
       article.tags = tags;
       return res.render('article', article);
     })

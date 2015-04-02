@@ -20,32 +20,16 @@ var ArticleSchema = new Schema({
   toJSON: {virtuals: true}
 });
 
-ArticleSchema.methods.getTags = function (D, cb) {
-  var that = this;
-  D.tagmap.find({article_id: this._id}).exec()
-    .then(function (result) {
-      var tag_ids = result.map(function (item) {
-        return item.tag_id;
-      });
-      that.tag_ids = tag_ids;
-      that.save(function (err) {
-        if (err) return console.log(err);
-        console.log('saved');
-      });
-      return result.length ? D.tag.find({
-        _id: {
-          $in: tag_ids
-        }
-      }).exec() : []
-    })
+ArticleSchema.methods.getTags = function (Tag, cb) {
+  Tag.find({_id: {$in: this.tag_ids}}).exec()
     .then(function (tags) {
       cb(null, tags.length ? tags.map(function (tag) {
-        return tag.name;
-      }) : []);
+        return tag.name
+      }) : [])
     })
-    .then(null, function (e) {
-      cb(e);
-    })
+    .then(null, function (err) {
+      cb(err)
+    });
 };
 
 ArticleSchema.virtual('comments').get(function () {

@@ -14,10 +14,9 @@ var bcrypt = require('bcrypt');
 
 
 function formatArticles(articles, callback) {
-  var D = {tagmap: TagMap, tag: Tag};
   Promise.map(articles, function (article) {
     return new Promise(function (resolve, reject) {
-      article.getTags(D,function (err, tags) {
+      article.getTags(Tag,function (err, tags) {
         if (err) {
           reject(err);
         }
