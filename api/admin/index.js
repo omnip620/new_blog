@@ -17,10 +17,8 @@ router.post('/articles/delete', articles.destroy);
 router.post('/articles/update', articles.update);
 router.get('/articles/generate/:num', articles.generate);
 
-
 router.post('/tags', tags.create);
 router.post('/tags/delete', tags.destroy);
-router.post('/tags/save',tags.save);//save article tags
 router.get('/tags', tags.index);
 router.get('/tags/get', tags.get);
 router.get('/tags/getatag', tags.getatag);

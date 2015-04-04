@@ -2,11 +2,9 @@
  * Created by panew on 15-2-4.
  */
 var Tag = require('../../models/tag');
-var TagMap = require('../../models/tagmap');
-var Article = require('../../models/article');
 var Promise = require('bluebird');
+var Article = require('../../models/article');
 var _ = require('lodash');
-
 
 exports.index = function (req, res) {
   Tag.find({}).exec()
@@ -35,49 +33,16 @@ exports.get = function (req, res) {
 };
 
 exports.getatag = function (req, res) {
-  var id = req.query.id;
-  TagMap.find({article_id: id}).exec()
-    .then(function (result) {
-      if (!result.length) {
-        return res.json(200, []);
-      }
-      var ids = result.map(function (item) {
-        return item.tag_id;
-      });
-      return new Promise.resolve(ids);
-    })
-    .then(function (ids) {
-      return Tag.find({_id: {$in: ids}}).exec();
-    })
-    .then(function (atags) {
-      return res.json(200, atags);
+  var ids = req.query.tagIds;
+  if (typeof ids === 'string')
+    ids = [ids]
+  Tag.find({_id: {$in: ids}}).exec()
+    .then(function (tags) {
+      return res.json(200, tags)
     })
     .then(null, function (err) {
       return handleError(res, err);
     })
-};
-
-exports.save = function (req, res) {
-  var items = req.body;
-  TagMap.remove({article_id: items.id}).exec()
-    .then(function () {
-      if (!items.tags.length) {
-        return res.json(200, 'deleted');
-      }
-      items.tags = items.tags.map(function (item) {
-        return {article_id: items.id, tag_id: item}
-      });
-      TagMap.collection.insert(items.tags, function (err, tags) {
-        if (err) {
-          return Promise.reject(err);
-        }
-        return Promise.resolve(tags)
-      })
-    }).then(function (tags) {
-      return res.json(200, tags);
-    }).then(null, function (err) {
-      return handleError(res, err);
-    });
 };
 
 exports.create = function (req, res) {
@@ -113,12 +78,14 @@ exports.destroy = function (req, res) {
   var ids = req.body;
   Tag.remove({_id: {$in: ids}}).exec()
     .then(function () {
-      return TagMap.remove({tag_id: {$in: ids}}).exec()
+      return Promise.map(ids, function (id) {
+        return Article.update({tag_ids: id}, {$pull: {tag_ids: id}}, {multi: true}).exec()
+      })
     })
     .then(function () {
       return res.send(204);
     })
-    .then(null, function (e) {
+    .then(null, function (err) {
       return res.send(500, err);
     });
 

@@ -2,7 +2,7 @@
  * Created by panew on 14-12-23.
  */
 var Article = require('../../models/article');
-var TagMap = require('../../models/tagmap');
+
 var Tag = require('../../models/tag');
 var async = require('async');
 var Promise = require('bluebird');
@@ -15,7 +15,7 @@ exports.index = function (req, res) {
     .then(function (articles) {
       return Promise.map(articles, function (article) {
         return new Promise(function (resolve, reject) {
-          article.getTags(Tag,function (err, tags) {
+          article.getTags(Tag, function (err, tags) {
             if (err) {
               reject(err);
             }
@@ -62,7 +62,6 @@ exports.show = function (req, res) {
     if (err) {
       return handleError(res, err);
     }
-
     return res.json(200, article);
   });
 };
@@ -82,7 +81,7 @@ exports.generate = function (req, res) {
       return 'false';
     })();
 
-    obj.testArray=['1','2','3'];
+    obj.testArray = ['1', '2', '3'];
     obj.views = Math.round(Math.random() * 1000);
     Article.create(obj, function (err, article) {
       if (err) {

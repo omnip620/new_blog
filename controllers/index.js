@@ -5,7 +5,6 @@
 
 var Article = require('../models/article');
 var Tag = require('../models/tag');
-var TagMap = require('../models/tagmap');
 var _ = require('lodash');
 var moment = require('moment');
 var md = require('markdown-it')({html: true, linkify: true, typographer: true});
@@ -16,7 +15,7 @@ var bcrypt = require('bcrypt');
 function formatArticles(articles, callback) {
   Promise.map(articles, function (article) {
     return new Promise(function (resolve, reject) {
-      article.getTags(Tag,function (err, tags) {
+      article.getTags(Tag, function (err, tags) {
         if (err) {
           reject(err);
         }
@@ -24,7 +23,7 @@ function formatArticles(articles, callback) {
         resolve(article);
       });
       if (article.content) {
-        article.content = (md.render(article.content).replace(/<[^>]+>/gi, '')).substring(0, 170)+ '...';
+        article.content = (md.render(article.content).replace(/<[^>]+>/gi, '')).substring(0, 170) + '...';
       }
     })
   }).then(function () {
@@ -34,19 +33,12 @@ function formatArticles(articles, callback) {
 
 function page(query, num, callback) {
   if (query.tag) {
-    var articleIds = '';
-    TagMap.find({tag_id: query.tag}).exec()
-      .then(function (results) {
-        articleIds = results.map(function (item) {
-          return item.article_id;
-        });
-        return Article.find({_id: {$in: articleIds}}, '', {
-            sort : '-updated_at',
-            skip : (num - 1) * 10,
-            limit: 10
-          }
-        ).exec()
-      })
+    Article.find({tag_ids: query.tag}, '', {
+        sort : '-updated_at',
+        skip : (num - 1) * 10,
+        limit: 10
+      }
+    ).exec()
       .then(function (articles) {
         formatArticles(articles, callback);
       });

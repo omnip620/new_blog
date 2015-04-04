@@ -9,8 +9,8 @@ angular.module('admin').controller('ArticleController', function ($scope, $route
   $scope.tagsControl = {};
   //获得文章分类
   $http({
-    method: 'get',
-    url: baseUrl + 'cat',
+    method : 'get',
+    url    : baseUrl + 'cat',
     headers: {'Content-Type': 'application/json'}
   }).success(function (data) {
     $scope.cats = _.pairs(data);
@@ -19,8 +19,8 @@ angular.module('admin').controller('ArticleController', function ($scope, $route
   $scope.articleId = id;
   if (id !== 'add') {
     $http({
-      method: 'get',
-      url: baseUrl + id,
+      method : 'get',
+      url    : baseUrl + id,
       headers: {'Content-Type': 'application/json'}
     }).success(function (data, status) {
       $scope.article = data;
@@ -29,9 +29,9 @@ angular.module('admin').controller('ArticleController', function ($scope, $route
   }
   $scope.processForm = function () {
     $http({
-      method: 'post',
-      url: baseUrl,
-      data: $scope.article,
+      method : 'post',
+      url    : baseUrl,
+      data   : $scope.article,
       headers: {'Content-Type': 'application/json'}
     }).success(function (data, status) {
       $location.path("articles");
@@ -44,18 +44,18 @@ angular.module('admin').controller('ArticleController', function ($scope, $route
   $scope.applyUploader = function () {
     $('#upimgs').on('shown.bs.modal', function () {
       var uploader = Qiniu.uploader({
-        runtimes: 'html5,flash,html4',
+        runtimes     : 'html5,flash,html4',
         browse_button: 'pickfiles',
-        container: 'container',
-        drop_element: 'container',
+        container    : 'container',
+        drop_element : 'container',
         max_file_size: '100mb',
         flash_swf_url: '/javascripts/plupload/Moxie.swf',
-        dragdrop: true,
-        chunk_size: '4mb',
-        uptoken_url: '/common/qnuptoken',
-        auto_start: true,
-        domain: '7u2pew.com1.z0.glb.clouddn.com',
-        init: {
+        dragdrop     : true,
+        chunk_size   : '4mb',
+        uptoken_url  : '/common/qnuptoken',
+        auto_start   : true,
+        domain       : '7u2pew.com1.z0.glb.clouddn.com',
+        init         : {
           'UploadProgress': function (up, file) {
             // 每个文件上传时,处理相关的事情
             console.log(file.percent + "%", up.total.bytesPerSec);
@@ -63,7 +63,7 @@ angular.module('admin').controller('ArticleController', function ($scope, $route
             //var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
             //progress.setProgress(file.percent + "%", up.total.bytesPerSec, chunk_size);
           },
-          'FileUploaded': function (up, file, info) {
+          'FileUploaded'  : function (up, file, info) {
             // 每个文件上传成功后,处理相关的事情
             // 其中 info 是文件上传成功后，服务端返回的json，形式如
             // {
@@ -85,7 +85,7 @@ angular.module('admin').controller('ArticleController', function ($scope, $route
 angular.module('admin').directive('tagsStyle', function () {
   return {
     require: 'ngModel',
-    link: function (scope, element, attrs, ctrl) {
+    link   : function (scope, element, attrs, ctrl) {
       ctrl.$parsers.push(function (data) {
         if (data) {
           data = data.replace(/，/g, ',').split(',');
@@ -104,6 +104,7 @@ angular.module('admin').directive('tagsStyle', function () {
 
 angular.module('admin').directive('tags', function ($http) {
     var scope;
+
     function getCursortPosition(ctrl) {//获取光标位置函数
       var CaretPos = 0;	// IE Support
       if (document.selection) {
@@ -128,24 +129,14 @@ angular.module('admin').directive('tags', function ($http) {
       });
     }
 
-    function save() {
-      $http({
-        method: 'post',
-        url: '/api/tags/save',
-        data: {
-          id: scope.articleId,
-          tags: scope.items.map(function (item) {
-            return item._id;
-          })
-        }
-      })
-    }
-
     function remove(id) {
-      _.remove(scope.items, function (o) {
-        if (o._id == id)
-          return true
+      _.remove(scope.tagIds, function (i) {
+        return i == id;
       });
+      _.remove(scope.items, function (o) {
+        return o._id == id
+      });
+      console.log(scope.tagIds, id)
     }
 
     function buildMethod() {
@@ -153,11 +144,6 @@ angular.module('admin').directive('tags', function ($http) {
         var item = this.item;
         remove(item._id);
       };
-
-      scope.save = function () {
-        save();
-      };
-
       scope.inputKeydown = function (event) {
         var self = event.target;
         var e = event || window.event || arguments.callee.caller.arguments[0];
@@ -187,9 +173,9 @@ angular.module('admin').directive('tags', function ($http) {
           }
           t = setTimeout(function () {
             $http({
-              method: 'get',
-              url: '/api/tags/get',
-              params: {word: value},
+              method : 'get',
+              url    : '/api/tags/get',
+              params : {word: value},
               headers: {'Content-Type': 'application/json'}
             }).success(function (data) {
               if (data.length) {
@@ -209,6 +195,7 @@ angular.module('admin').directive('tags', function ($http) {
           }
         });
         if (!isHas) {
+          scope.tagIds.push(tag._id);
           scope.items.push({_id: tag._id, name: tag.name})
         }
       }
@@ -216,20 +203,23 @@ angular.module('admin').directive('tags', function ($http) {
 
     function build(s, el) {
       scope = s;
-      scope.internalControl = s.control || {};
-      scope.internalControl.saveTags = function () {
-        save();
-      };
       scope.showDropdown = false;
-      $http({
-        method: 'get',
-        url: '/api/tags/getatag/',
-        params: {id: scope.articleId}
-      }).success(function (result) {
-        scope.items = result;
+
+      if (scope.tagIds.length) {
+        $http({
+          method: 'get',
+          url   : '/api/tags/getatag/',
+          params: {"tagIds": scope.tagIds}
+        }).success(function (result) {
+          scope.items = result;
+          focusTrigger(el);
+          buildMethod();
+        })
+      } else {
+        scope.items = [];
         focusTrigger(el);
         buildMethod();
-      })
+      }
     }
 
     return {
@@ -239,12 +229,15 @@ angular.module('admin').directive('tags', function ($http) {
         '          <input type="text" ng-keyup="inputKeyup($event)" ng-keydown="inputKeydown($event)"/>',
         '          <span class="tag-dropdown" ng-show="showDropdown"><ul><li ng-repeat="tag in tags" value="{{tag._id}}" ng-click="dropdownClick()">{{tag.name}}</li></ul></span>',
         '        </div>'].join(""),
-      scope: {
-        articleId: '@',
-        control: '='
+      scope   : {
+        tagIds: '='
       },
-      link: function (scope, element, attrs, ctrl) {
-        build(scope, element);
+      link    : function (scope, element, attrs, ctrl) {
+        scope.$watch('tagIds', function (newValue) {
+          if (newValue !== undefined) {
+            build(scope, element);
+          }
+        });
       }
     }
   }

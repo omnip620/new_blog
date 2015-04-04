@@ -2,7 +2,6 @@
  * Created by panew on 14-12-5.
  */
 var Article = require('../models/article');
-var TagMap = require('../models/tagmap');
 var Tag = require('../models/tag');
 var md = require('markdown-it')({html: true, linkify: true, typographer: true});
 
