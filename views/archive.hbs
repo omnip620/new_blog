@@ -1,9 +1,9 @@
 <article class="archives">
   {{#each articles}}
     <div class="item">
-      <h3>{{date}}</h3>
+      <h3>{{@key}}</h3>
       <ul class="archives-list">
-        {{#each item}}
+        {{#each this}}
           <li>
             <time>{{getDay updated_at}}日</time>
             <a href="/article/{{_id}}">{{title}} </a>

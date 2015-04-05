@@ -88,7 +88,7 @@ exports.page = function (req, res) {
 };
 
 exports.tags = function (req, res) {
-  var name =decodeURI(req.params.name);
+  var name = decodeURI(req.params.name);
   Tag.findOne({name: name}).exec()
     .then(function (tag) {
       page({tag: tag._id}, 1, function (err, articles) {
@@ -101,19 +101,12 @@ exports.tags = function (req, res) {
 };
 
 exports.archive = function (req, res) {
-  Article.find({}, 'title updated_at created_at comment_ids', {sort: '-updated_at'}).exec()
+  Article.find({}, 'title updated_at created_at comment_ids', {sort: '-created_at'}).exec()
     .then(function (articles) {
-      var groupedByMonth =
-            _.groupBy(articles, function (item) {
-              return JSON.stringify(item._doc.updated_at).substring(1, 8)
+       articles =_.groupBy(articles, function (item) {
+              return JSON.stringify(item.created_at).substring(1, 8)
             });
-      groupedByMonth = _.map(groupedByMonth, function (item, i) {
-        return {
-          date: i,
-          item: item
-        }
-      });
-      return res.render('archive', {articles: groupedByMonth});
+      return res.render('archive', {articles: articles});
     })
     .then(null, function () {
       return res.redirect('/404')
