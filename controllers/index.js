@@ -88,13 +88,16 @@ exports.page = function (req, res) {
 };
 
 exports.tags = function (req, res) {
-  var id = req.params.id;
-  page({tag: id}, 1, function (err, articles) {
-    if (err) {
-      return res.json('404', err)
-    }
-    return res.render('index', {articles: articles});
-  })
+  var name =decodeURI(req.params.name);
+  Tag.findOne({name: name}).exec()
+    .then(function (tag) {
+      page({tag: tag._id}, 1, function (err, articles) {
+        if (err) {
+          return res.json('404', err)
+        }
+        return res.render('index', {articles: articles});
+      })
+    })
 };
 
 exports.archive = function (req, res) {

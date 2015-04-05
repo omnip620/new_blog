@@ -104,7 +104,6 @@ angular.module('admin').directive('tagsStyle', function () {
 
 angular.module('admin').directive('tags', function ($http) {
     var scope;
-
     function getCursortPosition(ctrl) {//获取光标位置函数
       var CaretPos = 0;	// IE Support
       if (document.selection) {

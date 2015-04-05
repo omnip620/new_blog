@@ -13,7 +13,7 @@ var auth=require('./common/auth');
 router.get('/page',index.page);
 router.get('/',index.show);
 router.get('/article/:id',article.show);
-router.get('/tags/:id',index.tags);
+router.get('/tags/:name',index.tags);
 router.get('/archive',index.archive);
 router.get('/login',index.login);
 router.post('/login',index.loginto);
