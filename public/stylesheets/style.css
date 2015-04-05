@@ -268,6 +268,9 @@ code {
   background: #333;
   color: #fff;
 }
+.text-center {
+  text-align: center;
+}
 .list-none,
 .right-nav > section ul,
 .main-wrapper .main .archives .item .archives-list {

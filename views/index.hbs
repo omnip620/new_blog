@@ -1,171 +1,178 @@
-{{#each articles}}
-  <div class="articles">
-    <div class="excerpt">
-      <div class="content">
-        <h2><a class="item-title" href="/article/{{_id}}">{{title}}</a></h2>
+{{#if articles.length}}
+  {{#each articles}}
+    <div class="articles">
+      <div class="excerpt">
+        <div class="content">
+          <h2><a class="item-title" href="/article/{{_id}}">{{title}}</a></h2>
 
-        <p class="summary">
-          <a class="summary-link" href="/article/{{_id}}">
-            {{content}} </a></p>
-        <div class="info">
-          <ul>
-            <li>{{formatDate updated_at}}</li>
-            {{#if tags}}
-              <li>
-                {{#each tags}}
-                  <a href="javascript:;">{{this}}</a>
-                  {{#unless @last}}
-                    |
-                  {{/unless}}
-                {{/each}}
-              </li>
-            {{/if}}
-            <li>阅读（{{views}}）</li>
-            <li>评论（{{comments}}）</li>
-          </ul>
+          <p class="summary">
+            <a class="summary-link" href="/article/{{_id}}">
+              {{content}} </a></p>
+
+          <div class="info">
+            <ul>
+              <li>{{formatDate updated_at}}</li>
+              {{#if tags}}
+                <li>
+                  {{#each tags}}
+                    <a href="javascript:;">{{this}}</a>
+                    {{#unless @last}}
+                      |
+                    {{/unless}}
+                  {{/each}}
+                </li>
+              {{/if}}
+              <li>阅读（{{views}}）</li>
+              <li>评论（{{comments}}）</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
+  {{/each}}
+  <div id="lazydata">
   </div>
-{{/each}}
-<div id="lazydata">
-</div>
 
-{{#contentFor 'pagescripts'}}
-  <script type="text/javascript">
-    Handlebars.registerHelper('formatDate', function (item, url) {
-      if (moment().isSame(item, 'day')) {
-        return moment(item).format('HH:mm');
-      }
-      return moment(item).format('MM-DD HH:mm');
-    });
-    (function () {
-      var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
-      templates['index.hbs'] = template({
-        "1": function (depth0, helpers, partials, data) {
-          var stack1, helper, functionType = "function", helperMissing = helpers.helperMissing, escapeExpression = this.escapeExpression, buffer = "  <div class=\"articles\">\n    <div class=\"excerpt\">\n      <div class=\"content\">\n        <h2><a href=\"/article/"
-            + escapeExpression(((helper = (helper = helpers._id || (depth0 != null ? depth0._id : depth0)) != null ? helper : helperMissing), (typeof helper === functionType ? helper.call(depth0, {
-              "name": "_id",
-              "hash": {},
-              "data": data
-            }) : helper)))
-            + "\">"
-            + escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helperMissing), (typeof helper === functionType ? helper.call(depth0, {
-              "name": "title",
-              "hash": {},
-              "data": data
-            }) : helper)))
-            + "</a></h2>\n\n        <p class=\"summary\">\n          <a href=\"/article/"
-            + escapeExpression(((helper = (helper = helpers._id || (depth0 != null ? depth0._id : depth0)) != null ? helper : helperMissing), (typeof helper === functionType ? helper.call(depth0, {
-              "name": "_id",
-              "hash": {},
-              "data": data
-            }) : helper)))
-            + "\">\n            "
-            + escapeExpression(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : helperMissing), (typeof helper === functionType ? helper.call(depth0, {
-              "name": "content",
-              "hash": {},
-              "data": data
-            }) : helper)))
-            + " </a></p>\n\n        <div class=\"info\">\n          <ul>\n            <li>"
-            + escapeExpression(((helpers.formatDate || (depth0 && depth0.formatDate) || helperMissing).call(depth0, (depth0 != null ? depth0.updated_at : depth0), {
-              "name": "formatDate",
-              "hash": {},
-              "data": data
-            })))
-            + "</li>\n";
-          stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.tags : depth0), {
-            "name": "if",
-            "hash": {},
-            "fn": this.program(2, data),
-            "inverse": this.noop,
-            "data": data
-          });
-          if (stack1 != null) {
-            buffer += stack1;
-          }
-          return buffer + "            <li>阅读（"
-            + escapeExpression(((helper = (helper = helpers.views || (depth0 != null ? depth0.views : depth0)) != null ? helper : helperMissing), (typeof helper === functionType ? helper.call(depth0, {
-              "name": "views",
-              "hash": {},
-              "data": data
-            }) : helper)))
-            + "）</li>\n            <li>评论（"
-            + escapeExpression(((helper = (helper = helpers.comments || (depth0 != null ? depth0.comments : depth0)) != null ? helper : helperMissing), (typeof helper === functionType ? helper.call(depth0, {
-              "name": "comments",
-              "hash": {},
-              "data": data
-            }) : helper)))
-            + "）</li>\n          </ul>\n        </div>\n      </div>\n    </div>\n  </div>\n";
-        }, "2": function (depth0, helpers, partials, data) {
-          var stack1, buffer = "              <li>\n";
-          stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.tags : depth0), {
-            "name": "each",
-            "hash": {},
-            "fn": this.program(3, data),
-            "inverse": this.noop,
-            "data": data
-          });
-          if (stack1 != null) {
-            buffer += stack1;
-          }
-          return buffer + "              </li>\n";
-        }, "3": function (depth0, helpers, partials, data) {
-          var stack1, lambda = this.lambda, escapeExpression = this.escapeExpression, buffer = "                  <a href=\"javascript:;\">"
-            + escapeExpression(lambda(depth0, depth0))
-            + "</a>\n";
-          stack1 = helpers.unless.call(depth0, (data && data.last), {
-            "name": "unless",
-            "hash": {},
-            "fn": this.program(4, data),
-            "inverse": this.noop,
-            "data": data
-          });
-          if (stack1 != null) {
-            buffer += stack1;
-          }
-          return buffer;
-        }, "4": function (depth0, helpers, partials, data) {
-          return "                    |\n";
-        }, "compiler": [6, ">= 2.0.0-beta.1"], "main": function (depth0, helpers, partials, data) {
-          var stack1, buffer = "";
-          stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.articles : depth0), {
-            "name": "each",
-            "hash": {},
-            "fn": this.program(1, data),
-            "inverse": this.noop,
-            "data": data
-          });
-          if (stack1 != null) {
-            buffer += stack1;
-          }
-          return buffer;
-        }, "useData": true
-      });
-    })();
-    $(function () {
-      var template = Handlebars.templates['index.hbs'];
-      var num = 2;
-      var isEnd = false;
-      var cat = location.search.substr(1).split('=')[1];
-      var lp = location.pathname;
-      var tag = lp.indexOf('tags') !== -1 ? lp.substr(lp.indexOf('tags')).split('/')[1] : '';
-      window.onscroll = function () {
-        var scrollTop = $(this).scrollTop();
-        var scrollHeight = $(document).height();
-        var windowHeight = $(this).height();
-        if (!isEnd && scrollTop + windowHeight >= scrollHeight) {
-          $.get('/page', {num: num, cat: cat, tag: tag}, function (data, status) {
-            if (data.length == 0) {
-              isEnd = true;
-              $("#lazydata").append('<p style="text-align: center;margin-bottom: 55px">没有数据了</p>');
-            } else {
-              $("#lazydata").append(template({articles: data}));
-              num++;
-            }
-          })
+  {{#contentFor 'pagescripts'}}
+    <script type="text/javascript">
+      Handlebars.registerHelper('formatDate', function (item, url) {
+        if (moment().isSame(item, 'day')) {
+          return moment(item).format('HH:mm');
         }
-      }
-    })
-  </script>
-{{/contentFor}}
+        return moment(item).format('MM-DD HH:mm');
+      });
+      (function () {
+        var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
+        templates['index.hbs'] = template({
+          "1"          : function (depth0, helpers, partials, data) {
+            var stack1, helper, functionType = "function", helperMissing = helpers.helperMissing, escapeExpression = this.escapeExpression, buffer = "  <div class=\"articles\">\n    <div class=\"excerpt\">\n      <div class=\"content\">\n        <h2><a href=\"/article/"
+              + escapeExpression(((helper = (helper = helpers._id || (depth0 != null ? depth0._id : depth0)) != null ? helper : helperMissing), (typeof helper === functionType ? helper.call(depth0, {
+                "name": "_id",
+                "hash": {},
+                "data": data
+              }) : helper)))
+              + "\">"
+              + escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helperMissing), (typeof helper === functionType ? helper.call(depth0, {
+                "name": "title",
+                "hash": {},
+                "data": data
+              }) : helper)))
+              + "</a></h2>\n\n        <p class=\"summary\">\n          <a href=\"/article/"
+              + escapeExpression(((helper = (helper = helpers._id || (depth0 != null ? depth0._id : depth0)) != null ? helper : helperMissing), (typeof helper === functionType ? helper.call(depth0, {
+                "name": "_id",
+                "hash": {},
+                "data": data
+              }) : helper)))
+              + "\">\n            "
+              + escapeExpression(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : helperMissing), (typeof helper === functionType ? helper.call(depth0, {
+                "name": "content",
+                "hash": {},
+                "data": data
+              }) : helper)))
+              + " </a></p>\n\n        <div class=\"info\">\n          <ul>\n            <li>"
+              + escapeExpression(((helpers.formatDate || (depth0 && depth0.formatDate) || helperMissing).call(depth0, (depth0 != null ? depth0.updated_at : depth0), {
+                "name": "formatDate",
+                "hash": {},
+                "data": data
+              })))
+              + "</li>\n";
+            stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.tags : depth0), {
+              "name"   : "if",
+              "hash"   : {},
+              "fn"     : this.program(2, data),
+              "inverse": this.noop,
+              "data"   : data
+            });
+            if (stack1 != null) {
+              buffer += stack1;
+            }
+            return buffer + "            <li>阅读（"
+              + escapeExpression(((helper = (helper = helpers.views || (depth0 != null ? depth0.views : depth0)) != null ? helper : helperMissing), (typeof helper === functionType ? helper.call(depth0, {
+                "name": "views",
+                "hash": {},
+                "data": data
+              }) : helper)))
+              + "）</li>\n            <li>评论（"
+              + escapeExpression(((helper = (helper = helpers.comments || (depth0 != null ? depth0.comments : depth0)) != null ? helper : helperMissing), (typeof helper === functionType ? helper.call(depth0, {
+                "name": "comments",
+                "hash": {},
+                "data": data
+              }) : helper)))
+              + "）</li>\n          </ul>\n        </div>\n      </div>\n    </div>\n  </div>\n";
+          }, "2"       : function (depth0, helpers, partials, data) {
+            var stack1, buffer = "              <li>\n";
+            stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.tags : depth0), {
+              "name"   : "each",
+              "hash"   : {},
+              "fn"     : this.program(3, data),
+              "inverse": this.noop,
+              "data"   : data
+            });
+            if (stack1 != null) {
+              buffer += stack1;
+            }
+            return buffer + "              </li>\n";
+          }, "3"       : function (depth0, helpers, partials, data) {
+            var stack1, lambda = this.lambda, escapeExpression = this.escapeExpression, buffer = "                  <a href=\"javascript:;\">"
+              + escapeExpression(lambda(depth0, depth0))
+              + "</a>\n";
+            stack1 = helpers.unless.call(depth0, (data && data.last), {
+              "name"   : "unless",
+              "hash"   : {},
+              "fn"     : this.program(4, data),
+              "inverse": this.noop,
+              "data"   : data
+            });
+            if (stack1 != null) {
+              buffer += stack1;
+            }
+            return buffer;
+          }, "4"       : function (depth0, helpers, partials, data) {
+            return "                    |\n";
+          }, "compiler": [6, ">= 2.0.0-beta.1"], "main": function (depth0, helpers, partials, data) {
+            var stack1, buffer = "";
+            stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.articles : depth0), {
+              "name"   : "each",
+              "hash"   : {},
+              "fn"     : this.program(1, data),
+              "inverse": this.noop,
+              "data"   : data
+            });
+            if (stack1 != null) {
+              buffer += stack1;
+            }
+            return buffer;
+          }, "useData" : true
+        });
+      })();
+      $(function () {
+        var template = Handlebars.templates['index.hbs'];
+        var num = 2;
+        var isEnd = false;
+        var cat = location.search.substr(1).split('=')[1];
+        var lp = location.pathname;
+        var tag = lp.indexOf('tags') !== -1 ? lp.substr(lp.indexOf('tags')).split('/')[1] : '';
+        window.onscroll = function () {
+          var scrollTop = $(this).scrollTop();
+          var scrollHeight = $(document).height();
+          var windowHeight = $(this).height();
+          if (!isEnd && scrollTop + windowHeight >= scrollHeight) {
+            $.get('/page', {num: num, cat: cat, tag: tag}, function (data, status) {
+              if (data.length == 0) {
+                isEnd = true;
+                $("#lazydata").append('<p style="text-align: center;margin-bottom: 55px">没有数据了</p>');
+              } else {
+                $("#lazydata").append(template({articles: data}));
+                num++;
+              }
+            })
+          }
+        }
+      })
+    </script>
+  {{/contentFor}}
+
+  {{else}}
+    <h1 class="text-center">暂无数据</h1>
+{{/if}}
+

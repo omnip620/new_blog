@@ -27,7 +27,7 @@ module.exports = {
       return moment(item).format('DD');
     },
     titlesplice: function (title) {
-      return title.length > 16 ? title.substring(0.16) : title;
+      return title.length > 16 ? title.substring(0,16) : title;
     }
   }
 }

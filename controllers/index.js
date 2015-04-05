@@ -20,11 +20,11 @@ function formatArticles(articles, callback) {
           reject(err);
         }
         article.tags = tags;
+        if (article.content) {
+          article.content = (md.render(article.content).replace(/<[^>]+>/gi, '')).substring(0, 170) + '...';
+        }
         resolve(article);
       });
-      if (article.content) {
-        article.content = (md.render(article.content).replace(/<[^>]+>/gi, '')).substring(0, 170) + '...';
-      }
     })
   }).then(function () {
     callback(null, articles)
@@ -103,9 +103,9 @@ exports.tags = function (req, res) {
 exports.archive = function (req, res) {
   Article.find({}, 'title updated_at created_at comment_ids', {sort: '-created_at'}).exec()
     .then(function (articles) {
-       articles =_.groupBy(articles, function (item) {
-              return JSON.stringify(item.created_at).substring(1, 8)
-            });
+      articles = _.groupBy(articles, function (item) {
+        return JSON.stringify(item.created_at).substring(1, 8)
+      });
       return res.render('archive', {articles: articles});
     })
     .then(null, function () {
