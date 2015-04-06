@@ -21,7 +21,6 @@ router.post('/tags', tags.create);
 router.post('/tags/delete', tags.destroy);
 router.get('/tags', tags.index);
 router.get('/tags/get', tags.get);
-router.get('/tags/getatag', tags.getatag);
 
 
 module.exports = router;

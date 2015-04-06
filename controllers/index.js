@@ -14,26 +14,18 @@ var bcrypt = require('bcrypt');
 
 function formatArticles(articles, callback) {
   Promise.map(articles, function (article) {
-    return new Promise(function (resolve, reject) {
-      article.getTags(Tag, function (err, tags) {
-        if (err) {
-          reject(err);
-        }
-        article.tags = tags;
-        if (article.content) {
-          article.content = (md.render(article.content).replace(/<[^>]+>/gi, '')).substring(0, 170) + '...';
-        }
-        resolve(article);
-      });
-    })
+    if (article.content) {
+      article.content = (md.render(article.content).replace(/<[^>]+>/gi, '')).substring(0, 170) + '...';
+    }
+    return article;
   }).then(function () {
     callback(null, articles)
   })
 }
 
 function page(query, num, callback) {
-  if (query.tag) {
-    Article.find({tag_ids: query.tag}, '', {
+  if (query.tagName) {
+    Article.find({tags: query.tagName}, '', {
         sort : '-updated_at',
         skip : (num - 1) * 10,
         limit: 10
@@ -88,16 +80,13 @@ exports.page = function (req, res) {
 };
 
 exports.tags = function (req, res) {
-  var name = decodeURI(req.params.name);
-  Tag.findOne({name: name}).exec()
-    .then(function (tag) {
-      page({tag: tag._id}, 1, function (err, articles) {
-        if (err) {
-          return res.json('404', err)
-        }
-        return res.render('index', {articles: articles});
-      })
-    })
+  var query = {tagName:decodeURI(req.params.name)};
+  page(query, 1, function (err, articles) {
+    if (err) {
+      return res.json('404', err)
+    }
+    return res.render('index', {articles: articles});
+  })
 };
 
 exports.archive = function (req, res) {

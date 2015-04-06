@@ -2,7 +2,6 @@
  * Created by panew on 14-12-5.
  */
 var Article = require('../models/article');
-var Tag = require('../models/tag');
 var md = require('markdown-it')({html: true, linkify: true, typographer: true});
 
 exports.show = function (req, res) {
@@ -14,9 +13,6 @@ exports.show = function (req, res) {
     if (article.content) {
       article.content = md.render(article.content)
     }
-    article.getTags(Tag,function (err, tags) {
-      article.tags = tags;
-      return res.render('article', article);
-    })
+    return res.render('article', article);
   });
 };

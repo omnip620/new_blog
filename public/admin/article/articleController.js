@@ -104,6 +104,7 @@ angular.module('admin').directive('tagsStyle', function () {
 
 angular.module('admin').directive('tags', function ($http) {
     var scope;
+
     function getCursortPosition(ctrl) {//获取光标位置函数
       var CaretPos = 0;	// IE Support
       if (document.selection) {
@@ -128,20 +129,15 @@ angular.module('admin').directive('tags', function ($http) {
       });
     }
 
-    function remove(id) {
-      _.remove(scope.tagIds, function (i) {
-        return i == id;
-      });
+    function remove(name) {
       _.remove(scope.items, function (o) {
-        return o._id == id
+        return o === name
       });
-      console.log(scope.tagIds, id)
     }
 
     function buildMethod() {
       scope.remove = function () {
-        var item = this.item;
-        remove(item._id);
+        remove(this.item);
       };
       scope.inputKeydown = function (event) {
         var self = event.target;
@@ -189,13 +185,12 @@ angular.module('admin').directive('tags', function ($http) {
         var tag = this.tag;
         var isHas = false;
         scope.items.forEach(function (item) {
-          if (item._id == tag._id) {
+          if (item === tag.name) {
             isHas = true;
           }
         });
         if (!isHas) {
-          scope.tagIds.push(tag._id);
-          scope.items.push({_id: tag._id, name: tag.name})
+          scope.items.push(tag.name)
         }
       }
     }
@@ -203,36 +198,23 @@ angular.module('admin').directive('tags', function ($http) {
     function build(s, el) {
       scope = s;
       scope.showDropdown = false;
-
-      if (scope.tagIds.length) {
-        $http({
-          method: 'get',
-          url   : '/api/tags/getatag/',
-          params: {"tagIds": scope.tagIds}
-        }).success(function (result) {
-          scope.items = result;
-          focusTrigger(el);
-          buildMethod();
-        })
-      } else {
-        scope.items = [];
-        focusTrigger(el);
-        buildMethod();
-      }
+      scope.items = scope.tagNames;
+      focusTrigger(el);
+      buildMethod();
     }
 
     return {
       restrict: 'EA',
       template: [' <div class="form-control tags-input">',
-        '          <span ng-repeat="item in items" class="label label-default" data-value="{{item._id}}">{{item.name}}<span data-role="remove" ng-click="remove()"></span></span>',
+        '          <span ng-repeat="item in items" class="label label-default">{{item}}<span data-role="remove" ng-click="remove()"></span></span>',
         '          <input type="text" ng-keyup="inputKeyup($event)" ng-keydown="inputKeydown($event)"/>',
         '          <span class="tag-dropdown" ng-show="showDropdown"><ul><li ng-repeat="tag in tags" value="{{tag._id}}" ng-click="dropdownClick()">{{tag.name}}</li></ul></span>',
         '        </div>'].join(""),
       scope   : {
-        tagIds: '='
+        tagNames : '='
       },
       link    : function (scope, element, attrs, ctrl) {
-        scope.$watch('tagIds', function (newValue) {
+        scope.$watch('tagNames', function (newValue) {
           if (newValue !== undefined) {
             build(scope, element);
           }

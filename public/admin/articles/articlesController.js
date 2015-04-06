@@ -11,7 +11,6 @@ angular.module('admin').controller('ArticlesController', function ($scope, $http
       download: true,
       header: true,
       complete: function (results) {
-        console.log(results)
         $scope.titles = results.data;
       }
     });

@@ -7,12 +7,12 @@ var Article = require('../../models/article');
 var _ = require('lodash');
 
 exports.index = function (req, res) {
-  Tag.find({}).exec()
+  Tag.find().lean().exec()
     .then(function (tags) {
       Promise.map(tags, function (tag) {
-        return Article.find({"tag_ids": tag._id}).exec()
+        return Article.find({"tags": tag.name}).lean().exec()
           .then(function (articles) {
-            tag._doc.count = articles.length;
+            tag.count = articles.length;
             return tag
           })
       })
@@ -32,18 +32,6 @@ exports.get = function (req, res) {
   });
 };
 
-exports.getatag = function (req, res) {
-  var ids = req.query.tagIds;
-  if (typeof ids === 'string')
-    ids = [ids]
-  Tag.find({_id: {$in: ids}}).exec()
-    .then(function (tags) {
-      return res.json(200, tags)
-    })
-    .then(null, function (err) {
-      return handleError(res, err);
-    })
-};
 
 exports.create = function (req, res) {
   Tag.create(req.body, function (err, tag) {
@@ -65,7 +53,6 @@ exports.update = function (req, res) {
     id = req.body._id;
     delete req.body._id;
   }
-  req.body.updated_at = new Date();
   Tag.update({_id: id}, req.body, function (err, tag) {
     if (err) {
       return handleError(res, err);
@@ -76,10 +63,11 @@ exports.update = function (req, res) {
 
 exports.destroy = function (req, res) {
   var ids = req.body;
-  Tag.remove({_id: {$in: ids}}).exec()
-    .then(function () {
-      return Promise.map(ids, function (id) {
-        return Article.update({tag_ids: id}, {$pull: {tag_ids: id}}, {multi: true}).exec()
+  Tag.find({_id: {$in: ids}}).exec()
+    .then(function (tags) {
+      Tag.remove({_id: {$in: ids}}).exec()
+      return Promise.map(tags, function (tag) {
+        return Article.update({tags: tag.name}, {$pull: {tags: tag.name}}, {multi: true}).exec()
       })
     })
     .then(function () {

@@ -3,7 +3,6 @@
  */
 var Article = require('../../models/article');
 
-var Tag = require('../../models/tag');
 var async = require('async');
 var Promise = require('bluebird');
 var _ = require('lodash');
@@ -11,7 +10,7 @@ var cat = require('../../config').cat;
 
 exports.index = function (req, res) {
 
-  Article.find({}, 'title source tag_ids tags top created_at updated_at views cat comment_ids').exec()
+  Article.find({}, 'title source tags top created_at updated_at views cat comment_ids').exec()
     .then(function (articles) {
       return res.json(200, articles);
     })
@@ -67,8 +66,6 @@ exports.generate = function (req, res) {
       obj.cat = 2;
       return 'false';
     })();
-
-    obj.testArray = ['1', '2', '3'];
     obj.views = Math.round(Math.random() * 1000);
     Article.create(obj, function (err, article) {
       if (err) {

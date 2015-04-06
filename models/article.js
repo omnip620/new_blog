@@ -21,23 +21,6 @@ var ArticleSchema = new Schema({
   toJSON: {virtuals: true}
 });
 
-ArticleSchema.methods.getTags = function (Tag, cb) {
-  var that = this;
-  Tag.find({_id: {$in: this.tag_ids}}).exec()
-    .then(function (tags) {
-      tags = tags.length ? tags.map(function (tag) {
-        return tag.name
-      }) : [];
-      that.tags = tags;
-      //that.save()
-
-      cb(null, tags)
-    })
-    .then(null, function (err) {
-      cb(err)
-    });
-};
-
 ArticleSchema.virtual('comments').get(function () {
   return this.comment_ids ? this.comment_ids.length : 0;
 });
