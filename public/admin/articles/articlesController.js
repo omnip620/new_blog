@@ -19,6 +19,7 @@ angular.module('admin').controller('ArticlesController', function ($scope, $http
       url: '/api/articles',
       headers: {'Content-Type': 'application/json;charset=utf8'}
     }).success(function (data) {
+      console.log(data)
       $scope.articles = data;
       $scope.sort('-updated_at', false);
       $scope.pageCount = Math.ceil($scope.articles.length / $scope.pageSize) - 1;
