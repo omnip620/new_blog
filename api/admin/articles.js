@@ -11,7 +11,7 @@ var cat = require('../../config').cat;
 
 exports.index = function (req, res) {
 
-  Article.find({}, 'title source tag_ids top created_at updated_at views cat comment_ids').exec()
+  Article.find({}, 'title source tag_ids tags top created_at updated_at views cat comment_ids').exec()
     .then(function (articles) {
       return Promise.map(articles, function (article) {
         return new Promise(function (resolve, reject) {

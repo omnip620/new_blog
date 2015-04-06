@@ -15,17 +15,23 @@ var ArticleSchema = new Schema({
   views      : {type: Number, default: 0},
   comment_ids: {type: Array, default: []},
   tag_ids    : {type: Array, default: []},
+  tags       : {type: Array, default: []},
   cat        : {type: Number}
 }, {
   toJSON: {virtuals: true}
 });
 
 ArticleSchema.methods.getTags = function (Tag, cb) {
+  var that = this;
   Tag.find({_id: {$in: this.tag_ids}}).exec()
     .then(function (tags) {
-      cb(null, tags.length ? tags.map(function (tag) {
+      tags = tags.length ? tags.map(function (tag) {
         return tag.name
-      }) : [])
+      }) : [];
+      that.tags = tags;
+      that.save()
+
+      cb(null, tags)
     })
     .then(null, function (err) {
       cb(err)
