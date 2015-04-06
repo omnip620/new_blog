@@ -29,7 +29,7 @@ ArticleSchema.methods.getTags = function (Tag, cb) {
         return tag.name
       }) : [];
       that.tags = tags;
-      that.save()
+      //that.save()
 
       cb(null, tags)
     })
