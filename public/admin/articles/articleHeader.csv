@@ -6,5 +6,4 @@ name,value,width,active
 标签,tags,200px,
 浏览量,views,100px,
 评论量,comments,100px,
-日期,updated_at,500px,
-哈哈,tags,100px,
+日期,updated_at,500px
