@@ -3,7 +3,7 @@
  */
 var Article = require('../../models/article');
 
-var async = require('async');
+
 var Promise = require('bluebird');
 var _ = require('lodash');
 var cat = require('../../config').cat;

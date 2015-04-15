@@ -6,7 +6,7 @@ var shortId = require('shortid');
 var Schema = mongoose.Schema;
 var ObjectID = Schema.ObjectId;
 
-var TagSchema = new Schema({
+var Tag= new Schema({
   _id: {
     type: String,
     unique: true,
@@ -15,6 +15,6 @@ var TagSchema = new Schema({
   name: {type: String}
 });
 
-TagSchema.index({name: -1});
+Tag.index({name: -1});
 
-module.exports = mongoose.model('Tag', TagSchema);
+module.exports = mongoose.model('Tag', Tag);
