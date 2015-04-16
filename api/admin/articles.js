@@ -55,7 +55,6 @@ exports.show = function (req, res) {
 exports.generate = function (req, res) {
   var num = req.params.num;
   var obj = {title: '', top: '', views: ''};
-  console.log(num);
   for (var i = 0; i < num; i++) {
     obj.title = Math.random().toString(16).substring(2);
     obj.top = (function () {
@@ -67,7 +66,7 @@ exports.generate = function (req, res) {
       return 'false';
     })();
     obj.views = Math.round(Math.random() * 1000);
-    Article.create(obj, function (err, article) {
+    Article.create(obj, function (err) {
       if (err) {
         console.log(err);
       }
