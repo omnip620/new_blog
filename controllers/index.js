@@ -21,12 +21,16 @@ function page(query, num, callback) {
     limit: 10
   }).exec()
     .then(function (articles) {
-      Promise.map(articles, function (article) {
+     return Promise.map(articles, function (article) {
         if (article.content) {
           article.content = (md.render(article.content).replace(/<[^>]+>/gi, '')).substring(0, 170) + '...';
         }
+        return article;
       })
-      callback(null, articles)
+      
+    })
+    .then(function(articles){
+        callback(null, articles)
     })
     .then(null, function (err) {
       callback(err);
