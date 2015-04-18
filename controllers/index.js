@@ -15,7 +15,7 @@ function page(query, num, callback) {
     query = {tags: query.tagName}
   }
   Article.find(query, '', {
-    sort : '-updated_at',
+    sort : '-created_at',
     skip : (num - 1) * 10,
     limit: 10
   }).exec()
