@@ -198,7 +198,7 @@ angular.module('admin').directive('tags', function ($http) {
     function build(s, el) {
       scope = s;
       scope.showDropdown = false;
-      scope.items = scope.tagNames;
+      scope.items = scope.tagNames ? scope.tagNames : [];
       focusTrigger(el);
       buildMethod();
     }
@@ -211,11 +211,11 @@ angular.module('admin').directive('tags', function ($http) {
         '          <span class="tag-dropdown" ng-show="showDropdown"><ul><li ng-repeat="tag in tags" value="{{tag._id}}" ng-click="dropdownClick()">{{tag.name}}</li></ul></span>',
         '        </div>'].join(""),
       scope   : {
-        tagNames : '='
+        tagNames: '='
       },
       link    : function (scope, element, attrs, ctrl) {
         scope.$watch('tagNames', function (newValue) {
-          if (newValue !== undefined||!!window.location.pathname.indexOf('add')) {
+          if (newValue !== undefined || !!window.location.pathname.indexOf('add')) {
             build(scope, element);
           }
         });
