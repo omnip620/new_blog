@@ -18,7 +18,7 @@ var routers = require('./routers');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var rsb = require('./common/rightsidebar');
-var hbshelper=require('./common/hbshelper');
+var hbshelper = require('./common/hbshelper');
 //var registerModels = require('./common/register_model')
 var app = express();
 //registerModels(app);
@@ -45,7 +45,7 @@ app.use(session({
     db      : config.db.database,
     username: config.db.user,
     password: config.db.pwd,
-    ttl: 14 * 24 * 60 * 60
+    ttl     : 14 * 24 * 60 * 60
   }),
   resave           : true,
   saveUninitialized: true
@@ -55,7 +55,7 @@ app.use(session({
 //right sidebar data bind and set env to views
 app.use(rsb);
 
-app.use(function(req,res,next){
+app.use(function (req, res, next) {
   res.locals.production = env === "production";
   next()
 });
@@ -66,27 +66,28 @@ app.use('/', routers);
 app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
+  res.status(err.status);
   next(err);
 });
 
 /// error handlers
 
-// development error handler
-// will print stacktrace
-if (env === 'development') {
-  app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error  : err
-    });
-  });
-}
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function (err, req, res,next) {
-  res.redirect('/'+err.status||500);
+app.use(function (err, req, res, next) {
+  var data = {layout: false};
+  if (env === 'development') {
+    data.message = err.message;
+    data.error = err;
+  }
+  else {
+    data.title = {
+      404: '木有这个页面，orz',
+      500: '伍佰来了，次奥'
+    }[res.statusCode]
+  }
+  res.render('err', data);
 });
 
 

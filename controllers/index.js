@@ -7,7 +7,6 @@ var Article = require('../models/article');
 var Tag = require('../models/tag');
 var _ = require('lodash');
 var moment = require('moment');
-var md = require('markdown-it')({html: true, linkify: true, typographer: true});
 var Promise = require('bluebird');
 var bcrypt = require('bcrypt');
 
@@ -21,16 +20,7 @@ function page(query, num, callback) {
     limit: 10
   }).exec()
     .then(function (articles) {
-     return Promise.map(articles, function (article) {
-        if (article.content) {
-          article.content = (md.render(article.content).replace(/<[^>]+>/gi, '')).substring(0, 170) + '...';
-        }
-        return article;
-      })
-      
-    })
-    .then(function(articles){
-        callback(null, articles)
+      callback(null, articles)
     })
     .then(null, function (err) {
       callback(err);
@@ -45,7 +35,7 @@ exports.show = function (req, res) {
   }
   page(query, 1, function (err, articles) {
     if (err) {
-      return res.redirect('/404')
+      return res.status(500).json(err);
     }
     return res.render('index', {articles: articles});
   })
@@ -61,7 +51,7 @@ exports.page = function (req, res) {
   }
   page(query, pageNum, function (err, articles) {
     if (err) {
-      return res.json('404', err)
+      return res.status(500).json(err);
     }
     return res.json(articles);
   })
@@ -71,7 +61,7 @@ exports.tags = function (req, res) {
   var query = {tagName: decodeURI(req.params.name)};
   page(query, 1, function (err, articles) {
     if (err) {
-      return res.json('404', err)
+      return res.status(500).json(err);
     }
     return res.render('index', {articles: articles});
   })
@@ -85,8 +75,8 @@ exports.archive = function (req, res) {
       });
       return res.render('archive', {articles: articles});
     })
-    .then(null, function () {
-      return res.redirect('/404')
+    .then(null, function (err) {
+      return res.status(500).json(err);
     })
 };
 

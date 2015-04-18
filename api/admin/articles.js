@@ -9,7 +9,6 @@ var _ = require('lodash');
 var cat = require('../../config').cat;
 
 exports.index = function (req, res) {
-
   Article.find({}, 'title source tags top created_at updated_at views cat comment_ids').exec()
     .then(function (articles) {
       return res.json(200, articles);
