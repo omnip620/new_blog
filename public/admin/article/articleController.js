@@ -215,7 +215,7 @@ angular.module('admin').directive('tags', function ($http) {
       },
       link    : function (scope, element, attrs, ctrl) {
         scope.$watch('tagNames', function (newValue) {
-          if (newValue !== undefined) {
+          if (newValue !== undefined||!!window.location.pathname.indexOf('add')) {
             build(scope, element);
           }
         });
