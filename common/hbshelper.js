@@ -2,7 +2,7 @@
  * Created by panew on 15-3-17.
  */
 var moment = require('moment');
-var md = require('markdown-it')({html: true, linkify: true, typographer: true});
+var md = require('markdown-it')({html: true, linkify: true, typographer: true}).enable([ 'newline', 'emphasis' ]);;
 
 module.exports = {
   extname      : 'hbs',

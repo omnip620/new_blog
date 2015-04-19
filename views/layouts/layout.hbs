@@ -7,15 +7,18 @@
   <meta name="description" content="Panew:潘无处不在的博客">
   <meta name="keywords" content="nodejs,express,npm,node,js,javascript,mongo,css,angular,css3,html,html5">
   <title>
-    {{#if title}}
-      {{title}}
-    {{else}}
-      潘无处不在
-    {{/if}}
+   {{#if title}}
+    {{title}}
+   {{else}}
+     潘无处不在
+   {{/if}}
   </title>
   <!-- inject:css -->
-  <link rel="stylesheet" href="/stylesheets/all-7JExwZf3.min.css">
+  <link rel="stylesheet" href="/stylesheets/font.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
   <!-- endinject -->
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/8.5/styles/github.min.css">
+
 </head>
 <body class="">
 <div class="nav-button">
@@ -41,7 +44,7 @@
 </aside>
 <div id="main-wrapper" class="main-wrapper">
   <div class="main">
-    {{{ body }}}
+   {{{ body }}}
   </div>
 </div>
 <aside class="right-nav">
@@ -50,11 +53,11 @@
       最多浏览
     </header>
     <ul>
-      {{#each topViews}}
-        <li>
-          <a href="/article/{{_id}}">{{titlesplice title}}</a>
-        </li>
-      {{/each}}
+     {{#each topViews}}
+       <li>
+         <a href="/article/{{_id}}">{{titlesplice title}}</a>
+       </li>
+     {{/each}}
     </ul>
   </section>
 
@@ -63,11 +66,11 @@
       最多评论
     </header>
     <ul>
-      {{#each topComments}}
-        <li>
-          <a href="/article/{{_id}}">{{titlesplice title}}</a>
-        </li>
-      {{/each}}
+     {{#each topComments}}
+       <li>
+         <a href="/article/{{_id}}">{{titlesplice title}}</a>
+       </li>
+     {{/each}}
     </ul>
   </section>
 
@@ -76,29 +79,55 @@
       标签
     </header>
     <div class="tags">
-      {{#each tagList}}
-        <a href="/tags/{{name}}">{{name}}</a>
-      {{/each}}
+     {{#each tagList}}
+       <a href="/tags/{{name}}">{{name}}</a>
+     {{/each}}
     </div>
   </section>
 </aside>
 
 <!-- inject:js -->
 <script src="/javascripts/all-7JExwZf3.min.js"></script>
+
 <!-- endinject -->
+<script src="//cdn.bootcss.com/highlight.js/8.5/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  $(function () {
+    $('pre code').each(function () {
+      var lines = $(this).text().split('\n').length - 1;
+      var $numbering = $('<ul/>').addClass('line-numbers');
+      $(this)
+        .addClass('has-numbering')
+        .parent()
+        .append($numbering);
+      for (i = 1; i <= lines; i++) {
+        $numbering.append($('<li/>').text(i));
+      }
+    });
+  })
 
-{{{block 'pagescripts'}}}
-{{#if production}}
-<script src="/javascripts/newrelic-browser.js"></script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-60240170-1', 'auto');
-  ga('send', 'pageview');
 </script>
+{{{block 'pagescripts'}}}
+
+{{#if production}}
+  <script src="/javascripts/newrelic-browser.js"></script>
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-60240170-1', 'auto');
+    ga('send', 'pageview');
+  </script>
 {{/if}}
 </body>
 </html>

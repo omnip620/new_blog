@@ -301,9 +301,10 @@ pre {
   word-break: break-all;
   word-wrap: break-word;
   color: #333;
-  background-color: #f5f5f5;
-  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  border: 1px solid #e5e5e5;
   border-radius: 4px;
+  position: relative;
 }
 pre code {
   padding: 0;
@@ -312,6 +313,19 @@ pre code {
   white-space: pre-wrap;
   background-color: transparent;
   border-radius: 0;
+}
+.line-numbers {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  padding: 1.4em 9px 1.4em 0 !important;
+  border-right: 1px solid #e7e7e7;
+  text-align: right;
+  list-style: none;
+  color: #bebebe;
+}
+.has-numbering {
+  margin-left: 2.5em;
 }
 a {
   color: #222;
@@ -562,6 +576,17 @@ a:hover {
   margin-right: 14px;
   font: 300 13px/18px 'Microsoft YaHei';
 }
+.main-wrapper .main .article blockquote {
+  padding: 10px 15px;
+  border-left-style: solid;
+  border-left-width: 10px;
+  margin: 0 0 20px;
+  border-color: #d6dbdf;
+  background: none repeat scroll 0 0 rgba(102,128,153,0.05);
+}
+.main-wrapper .main .article ul {
+  padding-left: 15px;
+}
 .main-wrapper .main .article .article-title {
   font-weight: normal;
   margin: 0;
@@ -584,9 +609,6 @@ a:hover {
 .main-wrapper .main .article .article-cont {
   font: 16px/26px 'Microsoft YaHei', 'Tahoma';
   letter-spacing: 0.3px;
-}
-.main-wrapper .main .article .article-cont ul {
-  padding-left: 15px;
 }
 .main-wrapper .main .archives .item {
   margin-bottom: 45px;
