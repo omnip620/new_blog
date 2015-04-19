@@ -9,6 +9,7 @@ var _ = require('lodash');
 var moment = require('moment');
 var Promise = require('bluebird');
 var bcrypt = require('bcrypt');
+var md = require('markdown-it')({html: true, linkify: true, typographer: true}).enable(['newline', 'emphasis']);
 
 function page(query, num, callback) {
   if (query.tagName) {
@@ -20,6 +21,13 @@ function page(query, num, callback) {
     limit: 10
   }).exec()
     .then(function (articles) {
+      return Promise.map(articles, function (article) {
+        article.content = article.content ? (md.render(article.content).replace(/<[^>]+>/gi, '')).substring(0, 170) + '...' : '';
+        return article
+      })
+    })
+    .then(function (articles) {
+
       callback(null, articles)
     })
     .then(null, function (err) {
@@ -53,6 +61,7 @@ exports.page = function (req, res) {
     if (err) {
       return res.status(500).json(err);
     }
+    console.log(articles)
     return res.json(articles);
   })
 };

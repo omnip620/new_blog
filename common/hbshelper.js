@@ -2,7 +2,7 @@
  * Created by panew on 15-3-17.
  */
 var moment = require('moment');
-var md = require('markdown-it')({html: true, linkify: true, typographer: true}).enable([ 'newline', 'emphasis' ]);;
+
 
 module.exports = {
   extname      : 'hbs',
@@ -30,9 +30,6 @@ module.exports = {
     },
     titlesplice: function (title) {
       return title.length > 16 ? title.substring(0, 16) : title;
-    },
-    getSummary : function (item) {
-      return item ? (md.render(item).replace(/<[^>]+>/gi, '')).substring(0, 170) + '...' : '';
     }
   }
-}
+};
