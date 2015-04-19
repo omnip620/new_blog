@@ -61,7 +61,6 @@ exports.page = function (req, res) {
     if (err) {
       return res.status(500).json(err);
     }
-    console.log(articles)
     return res.json(articles);
   })
 };
