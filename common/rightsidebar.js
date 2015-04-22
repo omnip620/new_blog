@@ -3,6 +3,7 @@
  */
 var Article = require('./../models/article');
 var Tag = require('./../models/tag');
+var Promise=require('bluebird');
 
 module.exports = function (req, res, next) {
    Promise.
