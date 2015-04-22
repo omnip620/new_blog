@@ -36,7 +36,8 @@ if (env === "development") {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public'), {maxAge: 31536000}));
+app.use(['/stylesheets','/javascripts'],express.static(path.join(__dirname, 'public'), {maxAge: 31536000}));
+
 app.use(session({
   secret           : 'panblog',
   store            : new MongoStore({
@@ -49,7 +50,6 @@ app.use(session({
   }),
   resave           : true,
   saveUninitialized: true
-
 }));
 
 //right sidebar data bind and set env to views
