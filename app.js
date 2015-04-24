@@ -37,9 +37,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 
-app.use('/stylesheets', express.static(path.join(__dirname, '/public/stylesheets'), {maxAge: 31536000}));
-app.use('/javascripts', express.static(path.join(__dirname, '/public/javascripts'), {maxAge: 31536000}));
-app.use('/img', express.static(path.join(__dirname, '/public/img'), {maxAge: 31536000}));
+//app.use('/stylesheets', express.static(path.join(__dirname, '/public/stylesheets'), {maxAge: 31536000}));
+//app.use('/javascripts', express.static(path.join(__dirname, '/public/javascripts'), {maxAge: 31536000}));
+//app.use('/img', express.static(path.join(__dirname, '/public/img'), {maxAge: 31536000}));
 
 app.use(session({
   secret           : 'panblog',
