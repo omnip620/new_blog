@@ -11,7 +11,7 @@ var cat = require('../../config').cat;
 exports.index = function (req, res) {
   Article.find({}, 'title source tags top created_at updated_at views cat comment_ids').exec()
     .then(function (articles) {
-      return res.json(200, articles);
+      return res.status(200).json(articles)
     })
     .then(null, function (err) {
       return handleError(res, err);
