@@ -7,7 +7,6 @@ if (env === "production") {
 require('./service/dbconnect')(config);
 
 var express = require('express');
-var compress = require('compression');
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
@@ -27,7 +26,6 @@ app.engine('hbs', exhbs(hbshelper));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-app.use(compress());
 app.use(favicon(__dirname + '/public/xingshu.ico'));
 if (env === "development") {
   app.use(logger('dev'));
@@ -36,10 +34,6 @@ if (env === "development") {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
-
-//app.use('/', express.static(path.join(__dirname, '/public/'), {maxAge: 31536000}));
-
-
 app.use(session({
   secret           : 'panblog',
   store            : new MongoStore({
