@@ -63,8 +63,9 @@ gulp.task('frontInject', ['frontJS', 'frontCSS'], function () {
 });
 
 gulp.task('frontInjectDev', function () {
+  console.log()
   return gulp.src('views/layouts/layout.hbs')
-    .pipe(inject(gulp.src(frontPaths.css,frontPaths.scripts), {'ignorePath': 'public'}))
+    .pipe(inject(gulp.src(frontPaths.css.concat(frontPaths.scripts)), {'ignorePath': 'public'}))
     .pipe(gulp.dest('views/layouts'));
 });
 
@@ -79,7 +80,7 @@ gulp.task('build', function () {
 
 gulp.task('browser-sync', function () {
   browserSync({
-    proxy: "127.0.0.1:3000",
+    proxy: "127.0.0.1:8080",
     files: "public/**/*.*"
   });
 });

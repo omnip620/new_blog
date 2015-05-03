@@ -166,11 +166,10 @@ sidebar-width = 260px
   position fixed
   bottom 15px
   left 15px
-  a
-    text-decoration none
-    font-size 1.6em
-    &:hover
-      color #000000
+  z-index 99
+  cursor pointer
+  font-size 1.6em
+
 
 right-nav-width = 300px
 right-nav-r = 60px
@@ -372,7 +371,7 @@ right-nav-r = 60px
 @media screen and (max-width: 900px)
   .nav-button
     display block
-    z-index 99
+
   .se-menu-open{
     overflow-x: hidden;
     -ms-overflow-x: hidden;

@@ -14,7 +14,6 @@ module.exports = function (req, res, next) {
     cacheGetAsync('taglist'),
     cacheGetAsync('topcomments'), function (topviews, taglist, topcomments) {
       if (topviews && taglist && topcomments) {
-        console.log(topviews)
         res.locals.topViews = topviews;
         res.locals.tagList = taglist;
         res.locals.topComments = topcomments;
