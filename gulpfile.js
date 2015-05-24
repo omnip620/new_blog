@@ -63,7 +63,6 @@ gulp.task('frontInject', ['frontJS', 'frontCSS'], function () {
 });
 
 gulp.task('frontInjectDev', function () {
-  console.log()
   return gulp.src('views/layouts/layout.hbs')
     .pipe(inject(gulp.src(frontPaths.css.concat(frontPaths.scripts)), {'ignorePath': 'public'}))
     .pipe(gulp.dest('views/layouts'));

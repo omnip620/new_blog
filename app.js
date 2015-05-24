@@ -1,23 +1,23 @@
 var config = require('./config');
-var env = process.env.NODE_ENV;
+var env    = process.env.NODE_ENV;
 if (env === "production") {
   require('newrelic');
 }
 //数据库连接
 require('./service/dbconnect')(config);
 
-var express = require('express');
-var path = require('path');
-var favicon = require('static-favicon');
-var logger = require('morgan');
+var express      = require('express');
+var path         = require('path');
+var favicon      = require('static-favicon');
+var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var exhbs = require('express-handlebars');
-var routers = require('./routers');
-var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
-var rsb = require('./common/rightsidebar');
-var hbshelper = require('./common/hbshelper');
+var bodyParser   = require('body-parser');
+var exhbs        = require('express-handlebars');
+var routers      = require('./routers');
+var session      = require('express-session');
+var MongoStore   = require('connect-mongo')(session);
+var rsb          = require('./common/rightsidebar');
+var hbshelper    = require('./common/hbshelper');
 //var registerModels = require('./common/register_model')
 var app = express();
 //registerModels(app);
@@ -26,7 +26,7 @@ app.engine('hbs', exhbs(hbshelper));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-app.use(favicon(__dirname + '/public/xingshu.ico'));
+// app.use(favicon(__dirname + '/public/xingshu.ico'));
 if (env === "development") {
   app.use(logger('dev'));
 }
