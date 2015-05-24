@@ -8,7 +8,6 @@ require('./service/dbconnect')(config);
 
 var express      = require('express');
 var path         = require('path');
-var favicon      = require('static-favicon');
 var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
@@ -26,7 +25,6 @@ app.engine('hbs', exhbs(hbshelper));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-// app.use(favicon(__dirname + '/public/xingshu.ico'));
 if (env === "development") {
   app.use(logger('dev'));
 }

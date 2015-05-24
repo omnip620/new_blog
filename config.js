@@ -13,10 +13,10 @@ module.exports = {
     database: 'blog'
   },
   //后台管理侧边栏
-  sidebar: [
-    {'文章': '/articles'},
-    {'设置': '/settings'}
-  ],
+  // sidebar: [
+  //   {'文章': '/articles'},
+  //   {'设置': '/settings'}
+  // ],
   //七牛配置
   qn:{
     ACCESS_KEY:'bwrScr6Rz9JCF5tKZMohuAbCr3VDa3attPQja-Br',
