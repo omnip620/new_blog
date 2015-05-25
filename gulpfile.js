@@ -12,6 +12,7 @@ var gulp            = require('gulp'),
     browserSync     = require('browser-sync'),
     shortId         = require('shortid'),
     randomId        = '';
+    stylus          = require('gulp-stylus');
 
 
 livereload({start: true});
@@ -84,8 +85,16 @@ gulp.task('browser-sync', function () {
   });
 });
 
+gulp.task('compileStylus',function(){
+  gulp.src('public/stylesheets/*.styl')
+      .pipe(stylus())
+      .pipe(gulp.dest('public/stylesheets/'));
+
+})
+
 gulp.task('watch', function () {
   //gulp.watch([frontPaths.scripts, frontPaths.css], ['build'])
+  gulp.watch('public/stylesheets/*.styl',['compileStylus'])
   gulp.watch([frontPaths.scripts, frontPaths.css], ['frontInjectDev'])
 });
 
