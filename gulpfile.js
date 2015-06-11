@@ -80,7 +80,7 @@ gulp.task('build', function () {
 
 gulp.task('browser-sync', function () {
   browserSync({
-    proxy: "127.0.0.1:8080",
+    proxy: "127.0.0.1:80",
     files: "public/**/*.*"
   });
 });
@@ -90,12 +90,12 @@ gulp.task('compileStylus',function(){
       .pipe(stylus())
       .pipe(gulp.dest('public/stylesheets/'));
 
-})
+});
 
 gulp.task('watch', function () {
   //gulp.watch([frontPaths.scripts, frontPaths.css], ['build'])
-  gulp.watch('public/stylesheets/*.styl',['compileStylus'])
-  gulp.watch([frontPaths.scripts, frontPaths.css], ['frontInjectDev'])
+  gulp.watch('public/stylesheets/*.styl',['compileStylus']);
+  gulp.watch([frontPaths.scripts, frontPaths.css], ['frontInjectDev']);
 });
 
 gulp.task('default', ['watch', 'browser-sync']);

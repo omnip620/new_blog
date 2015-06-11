@@ -30,8 +30,8 @@ var SidebarMenuEffects = (function () {
   }
 
   function init() {
-    var container = document.getElementsByTagName('body')[0]
-      , tool = document.getElementById('sidebar-nav'),
+    var container = document.getElementsByTagName('body')[0],
+        tool = document.getElementById('sidebar-nav'),
         eventtype = mobilecheck() ? 'touchstart' : 'click',
         bodyClickFn = function (e) {
           if (!hasParentClass(e.target, 'sidebar')) {
@@ -45,7 +45,7 @@ var SidebarMenuEffects = (function () {
       e.stopPropagation();
       container.className = 'se-menu-open';
       document.addEventListener(eventtype, bodyClickFn);
-    })
+    });
   }
 
   init();

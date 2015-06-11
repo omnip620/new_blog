@@ -65,7 +65,7 @@ exports.destroy = function (req, res) {
 	var ids = req.body;
 	Tag.find({_id: {$in: ids}}).exec()
 		.then(function (tags) {
-			Tag.remove({_id: {$in: ids}}).exec()
+			Tag.remove({_id: {$in: ids}}).exec();
 			return Promise.map(tags, function (tag) {
 				return Article.update({tags: tag.name}, {$pull: {tags: tag.name}}, {multi: true}).exec()
 			})

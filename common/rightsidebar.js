@@ -31,7 +31,7 @@ module.exports = function (req, res, next) {
           cache.set('topviews', topviews, 1800);
           cache.set('taglist', taglist, 1800);
           cache.set('topcomments', topcomments, 1800);
-          next();
+          return next();
         })
         .catch(function (err) {
           return res.redirect('/404')

@@ -17,6 +17,7 @@ var session      = require('express-session');
 var MongoStore   = require('connect-mongo')(session);
 var rsb          = require('./common/rightsidebar');
 var hbshelper    = require('./common/hbshelper');
+var proverbs     = require('./common/proverbs');
 //var registerModels = require('./common/register_model')
 var app = express();
 //registerModels(app);
@@ -49,9 +50,12 @@ app.use(session({
 //right sidebar data bind and set env to views
 app.use(rsb);
 
+//proverbs
+app.use(proverbs);
+
 app.use(function (req, res, next) {
   res.locals.production = env === "production";
-  next()
+  next();
 });
 
 app.use('/', routers);
@@ -79,7 +83,7 @@ app.use(function (err, req, res, next) {
     data.title = {
       404: '木有这个页面，orz',
       500: '伍佰来了，次奥'
-    }[res.statusCode]
+    }[res.statusCode];
   }
   res.render('err', data);
 });
