@@ -6,7 +6,7 @@ var moment = require('moment');
 var cache = require('../service/cache');
 var Promise = require('bluebird');
 var data = fs.readFileSync('./public/proverbs.txt', 'utf-8').split(/\t{1,2}|\r{1,2}|\n{1,2}/gi);
-var oldDate = data[0], counter = data[1];
+var oldDate = data[0];
 var dateNow = moment().format("YYYY-MM-DD");
 
 
@@ -24,7 +24,6 @@ module.exports = function (req, res, next) {
       oldDate != dateNow && changeProverb();
       cache.set('proverbs', data[data[1]], 7200);
       res.locals.proverbs = data[data[1]];
-      console.log(data[data[1]], '11111111111111')
     }
   });
 
