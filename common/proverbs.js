@@ -16,12 +16,11 @@ module.exports = function (req, res, next) {
     if (proverbs) {
       res.locals.proverbs = proverbs;
     } else {
-      function changeProverb() {
-        data[0] = (data[1]++, dateNow);
+      if (oldDate != dateNow) {
+        data[0] = dateNow;
+        data[1]++;
         fs.writeFileSync('./public/proverbs.txt', data.join('\n\n'));
       }
-
-      oldDate != dateNow && changeProverb();
       cache.set('proverbs', data[data[1]], 7200);
       res.locals.proverbs = data[data[1]];
     }
