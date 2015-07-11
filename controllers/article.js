@@ -2,7 +2,7 @@
  * Created by panew on 14-12-5.
  */
 var Article = require('../models/article');
-var md = require('markdown-it')({html: true, linkify: true, typographer: true});
+var md = require('markdown-it')({html: true, linkify: false, typographer: true});
 
 exports.show = function (req, res) {
   Article.findById(req.params.id, function (err, article) {
