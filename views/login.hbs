@@ -3,53 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <title>登录</title>
-
+  <link rel="stylesheet" href="/stylesheets/materialize.min.css">
   <style type="text/css">
-    .form-wrap{
-      width: 500px;
-      margin: 0 auto;
-      text-align: center;
-      margin-top: 130px;
-    }
-    .form-group {
-      height: 36px;
-    }
-    .login-label {
-      float: left;
-      width: 100px;
-    }
-    .login-input{
-      float: left;
+    .form-wrap {
+      margin-top: 40px;
+      width: 320px;
     }
   </style>
 
 </head>
 <body>
-<form action="/login" method="post" class="form-wrap">
-  <div class="form-group">
-    <label for="username" class="login-label">
-      登录名：
-    </label>
-    <div class="login-input">
-      <input type="text" id="username" name="username"/>
+<div class="row form-wrap">
+  <form action="/login" method="post" class="row">
+    <div class="input-field col s12">
+      <input type="text" id="username" name="username" autocomplete="off"/>
+      <label for="username" class="">
+        登录名：
+      </label>
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="pwd" class="login-label">
-      密码：
-    </label>
+    <div class="input-field col s12">
+      <input type="password" id="pwd" name="pwd" autocomplete="off"/>
+      <label for="pwd" class="">
+        密码：
+      </label>
 
-    <div class="login-input">
-      <input type="password" id="pwd" name="pwd"/>
     </div>
-  </div>
-
-  <div class="form-group">
-    <div >
-      <input type="submit" value="登录"/>
+    <div class="input-field col s12">
+      <a class="waves-effect waves-light btn right" id="submit">登录</a>
     </div>
-  </div>
-</form>
+
+
+  </form>
+</div>
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/materialize.min.js"></script>
+<script type="text/javascript">
+  $(function () {
+    $('#submit').on('click',function(){
+      $('form').submit();
+    })
+  });
+</script>
 </body>
 </html>

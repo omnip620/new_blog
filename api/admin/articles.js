@@ -2,20 +2,18 @@
  * Created by panew on 14-12-23.
  */
 var Article = require('../../models/article');
-
-
 var Promise = require('bluebird');
 var _ = require('lodash');
 var cat = require('../../config').cat;
 
 exports.index = function (req, res) {
-  Article.find({}, 'title source tags top created_at updated_at views cat comment_ids').exec()
-    .then(function (articles) {
-      return res.status(200).json(articles)
-    })
-    .then(null, function (err) {
+  Article.find({}, 'title source tags top created_at updated_at views cat comment_ids', function (err, articles) {
+    if (err) {
       return handleError(res, err);
-    })
+    }
+    return res.status(200).json(articles)
+  })
+
 };
 
 exports.create = function (req, res) {
@@ -23,7 +21,7 @@ exports.create = function (req, res) {
     if (err) {
       return handleError(res, err);
     }
-    return res.json(201, article);
+    return res.status(201).json(article);
   });
 };
 
@@ -78,13 +76,12 @@ exports.cats = function (req, res) {
 };
 exports.destroy = function (req, res) {
   var ids = req.body;
-  Article.remove({_id: {$in: ids}}).exec()
-    .then(function () {
-      return res.send(204);
-    })
-    .then(null, function (err) {
-      return handleError(res, err)
-    })
+  Article.remove({_id: {$in: ids}}, function (err) {
+    if (err) {
+      return handleError(res, err);
+    }
+    return res.send(204);
+  });
 };
 function handleError(res, err) {
   return res.send(500, err);
