@@ -27,8 +27,7 @@ module.exports = function (req, res, next) {
         function (topviews, taglist, topcomments) {
           res.locals.topViews = topviews;
           res.locals.tagList = taglist;
-          res.locals.topComments = topcomments;
-          cache.set('topviews', topviews, 1800);
+          res.locals.topComments = topcomments;          cache.set('topviews', topviews, 1800);
           cache.set('taglist', taglist, 1800);
           cache.set('topcomments', topcomments, 1800);
           return next();

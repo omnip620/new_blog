@@ -45,7 +45,7 @@ exports.show = function (req, res) {
     if (err) {
       return handleError(res, err);
     }
-    return res.json(200, article);
+    return res.status(200).json(article);
   });
 };
 

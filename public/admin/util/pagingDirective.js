@@ -9,7 +9,7 @@ angular.module('admin').directive('paging', function () {
     scope.pageSize = parseInt(scope.pageSize) || 10;
     scope.pageCount = parseInt(scope.pageCount) || 0;
     scope.pageLinkItems = [];
-
+    
     scope.prevPage = function () {
       if (scope.currentPage > 0) {
         scope.currentPage--;
