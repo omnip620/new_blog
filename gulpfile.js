@@ -9,9 +9,10 @@ var gulp            = require('gulp'),
     clean           = require('gulp-clean'),
     git             = require('gulp-git'),
     runSequence     = require('run-sequence'),
-    browserSync     = require('browser-sync'),
+    browserSync     = require('browser-sync').create(),
     shortId         = require('shortid'),
-    randomId        = '';
+    nodemon         = require('gulp-nodemon'),
+    randomId        = '',
     stylus          = require('gulp-stylus');
 
 
@@ -79,23 +80,33 @@ gulp.task('build', function () {
 });
 
 gulp.task('browser-sync', function () {
-  browserSync({
-    proxy: "127.0.0.1:80",
-    files: "public/**/*.*"
+  browserSync.init({
+    proxy: "panblog.com"
   });
+  gulp.watch(['public/**/*.*']).on("change", browserSync.reload);
 });
 
-gulp.task('compileStylus',function(){
+gulp.task('compileStylus', function () {
   gulp.src('public/stylesheets/*.styl')
-      .pipe(stylus())
-      .pipe(gulp.dest('public/stylesheets/'));
+    .pipe(stylus())
+    .pipe(gulp.dest('public/stylesheets/'));
 
+});
+
+gulp.task('nodemonStart', function () {
+  nodemon({
+    "verbose" : true,
+    "script"  : 'bin/www',
+    "ext"     : 'js',
+    "ignore"  : ['public', '.idea', 'config.js', 'gulpfile.js', '*.hbs'],
+    //'nodeArgs': ['--debug']
+  })
 });
 
 gulp.task('watch', function () {
   //gulp.watch([frontPaths.scripts, frontPaths.css], ['build'])
-  gulp.watch('public/stylesheets/*.styl',['compileStylus']);
+  gulp.watch('public/stylesheets/*.styl', ['compileStylus']);
   gulp.watch([frontPaths.scripts, frontPaths.css], ['frontInjectDev']);
 });
 
-gulp.task('default', ['watch', 'browser-sync']);
+gulp.task('default', ['watch', 'browser-sync','nodemonStart']);

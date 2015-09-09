@@ -15,11 +15,13 @@ function page(query, num, callback) {
   if (query.tagName) {
     query = {tags: query.tagName}
   }
-  Article.find(query, '', {
-    sort : '-created_at',
-    skip : (num - 1) * 10,
-    limit: 10
-  }).exec()
+  Article
+    .find(query, '', {
+      sort : '-created_at',
+      skip : (num - 1) * 10,
+      limit: 10
+    })
+    .exec()
     .then(function (articles) {
       return Promise.map(articles, function (article) {
         article.content = article.content ? (md.render(article.content).replace(/<[^>]+>/gi, '')).substring(0, 170) + '...' : '';
@@ -94,7 +96,7 @@ exports.login = function (req, res) {
 
 exports.loginto = function (req, res) {
   var username = req.body.username, pwd = req.body.pwd,
-      encryp = '$2a$10$T3yQKKGF/RW2OQ1rtAl9w.BD9ggsaMZ8q6kNcOZ0FaPYt6gw8dlHa';
+      encryp   = '$2a$10$T3yQKKGF/RW2OQ1rtAl9w.BD9ggsaMZ8q6kNcOZ0FaPYt6gw8dlHa';
   if (bcrypt.compareSync(username + pwd, encryp)) {
     req.session.user = username;
     res.redirect('/admin/');
@@ -110,6 +112,6 @@ exports.about = function (req, res) {
 
 exports.admin = function (req, res) {
   return res.render('admin/index', {
-    layout     : false
+    layout: false
   });
 };

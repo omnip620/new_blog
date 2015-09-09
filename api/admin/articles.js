@@ -26,11 +26,7 @@ exports.create = function (req, res) {
 };
 
 exports.update = function (req, res) {
-  var id;
-  if (req.body._id) {
-    id = req.body._id;
-    delete req.body._id;
-  }
+  var id = req.body._id;
   req.body.updated_at = new Date();
   Article.update({_id: id}, req.body, function (err, article) {
     if (err) {
@@ -72,7 +68,7 @@ exports.generate = function (req, res) {
   return res.send(201);
 };
 exports.cats = function (req, res) {
-  return res.json(200, cat);
+  return res.status(200).json(cat);
 };
 exports.destroy = function (req, res) {
   var ids = req.body;

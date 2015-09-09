@@ -1,27 +1,28 @@
 var config = require('./config');
-var env    = process.env.NODE_ENV;
+var env = process.env.NODE_ENV || config.env;
 if (env === "production") {
   require('newrelic');
 }
 //数据库连接
 require('./service/dbconnect')(config);
 
-var express      = require('express');
-var path         = require('path');
-var logger       = require('morgan');
+var express = require('express');
+var path = require('path');
+var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
-var exhbs        = require('express-handlebars');
-var routers      = require('./routers');
-var session      = require('express-session');
-var MongoStore   = require('connect-mongo')(session);
-var rsb          = require('./common/rightsidebar');
-var hbshelper    = require('./common/hbshelper');
-var proverbs     = require('./common/proverbs');
+var bodyParser = require('body-parser');
+var exhbs = require('express-handlebars');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+var routers = require('./routers');
+var rsb = require('./common/rightsidebar');
+var hbshelper = require('./common/hbshelper');
+var proverbs = require('./common/proverbs');
 //var registerModels = require('./common/register_model')
 var app = express();
+process.env.PORT = config.port;
 //registerModels(app);
-// view engine setup
+
 app.engine('hbs', exhbs(hbshelper));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -29,7 +30,7 @@ app.set('view engine', 'hbs');
 if (env === "development") {
   app.use(logger('dev'));
 }
-
+proverbs.set();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
@@ -51,7 +52,7 @@ app.use(session({
 app.use(rsb);
 
 //proverbs
-app.use(proverbs);
+app.use(proverbs.get);
 
 app.use(function (req, res, next) {
   res.locals.production = env === "production";

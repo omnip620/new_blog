@@ -24,11 +24,6 @@ Article.virtual('comments').get(function () {
   return this.comment_ids ? this.comment_ids.length : 0;
 });
 
-Article.pre('remove', function (next) {
-  next();
-});
-
-
 Article.index({created_at: -1});
 
 module.exports = mongoose.model('Article', Article);

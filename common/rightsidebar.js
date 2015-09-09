@@ -1,39 +1,37 @@
 /**
  * Created by panew on 15-3-17.
  */
+
+var Promise = require('bluebird');
+var _ = require('lodash');
 var Article = require('./../models/article');
 var Tag = require('./../models/tag');
-var Promise = require('bluebird');
 var cache = require('../service/cache');
 
 module.exports = function (req, res, next) {
   var cacheGetAsync = Promise.promisify(cache.get);
 
-  Promise.
-    join(cacheGetAsync('topviews'),
-    cacheGetAsync('taglist'),
-    cacheGetAsync('topcomments'), function (topviews, taglist, topcomments) {
-      if (topviews && taglist && topcomments) {
-        res.locals.topViews = topviews;
-        res.locals.tagList = taglist;
-        res.locals.topComments = topcomments;
-        return next();
+  cacheGetAsync('sideBarData')
+    .then(function (data) {
+      if (data) {
+        return data;
       }
-      Promise.
-        join(
-        Article.find({}, 'title views', {sort: '-views', limit: 5}).exec(),
-        Tag.find({}).exec(),
-        Article.find({}, 'title comment_ids', {limit: 5, sort: '-comment_ids'}).exec(),
-        function (topviews, taglist, topcomments) {
-          res.locals.topViews = topviews;
-          res.locals.tagList = taglist;
-          res.locals.topComments = topcomments;          cache.set('topviews', topviews, 1800);
-          cache.set('taglist', taglist, 1800);
-          cache.set('topcomments', topcomments, 1800);
-          return next();
+      return Promise.
+        all([
+          Article.find({}, 'title views', {sort: '-views', limit: 5}).exec(),
+          Tag.find({}).exec(),
+          Article.find({}, 'title comment_ids', {limit: 5, sort: '-comment_ids'}).exec()])
+        .spread(function (topviews, taglist, topcomments) {
+          var sideBarData = {};
+          sideBarData.topViews = topviews;
+          sideBarData.tagList = taglist;
+          sideBarData.topComments = topcomments;
+          cache.set('sideBarData', sideBarData, 1800);
+          return sideBarData;
         })
-        .catch(function (err) {
-          return res.redirect('/404')
-        })
+    })
+    .then(function (data) {
+      _.extend(res.locals, data);
+      return next()
     });
 };
