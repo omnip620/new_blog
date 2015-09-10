@@ -611,6 +611,9 @@ a:hover {
   line-height: 26px;
   letter-spacing: 0.3px;
 }
+.main-wrapper .main .article .article-cont img {
+  max-width: 100%;
+}
 .main-wrapper .main .archives .item {
   margin-bottom: 45px;
 }
