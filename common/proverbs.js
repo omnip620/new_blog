@@ -8,7 +8,7 @@ var schedule = require('node-schedule');
 var data = fs.readFileSync('./public/proverbs.txt', 'utf-8').split(/\t{1,2}|\r{1,2}|\n{1,2}/gi);
 
 exports.set = function () {
-  var j = schedule.scheduleJob('* */0 * * *', function () {
+  var j = schedule.scheduleJob('* 0 * * *', function () {
     setProverbCache();
   });
 };
