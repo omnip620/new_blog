@@ -1,10 +1,23 @@
 @font-face {
+  font-family: 'Every Where';
+  src: url('raleway-medium-webfont.eot');
+  src: url('raleway-medium-webfont.eot?#iefix') format('embedded-opentype'),
+  url('/fonts/raleway-medium-webfont.woff2') format('woff2'),
+  url('/fonts/raleway-medium-webfont.woff') format('woff'),
+  url('/fonts/raleway-medium-webfont.ttf') format('truetype'),
+  url('/fonts/raleway-medium-webfont.svg#ralewaymedium') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'icomoon';
   src: url('/fonts/icomoon.eot?865oet');
   src: url('/fonts/icomoon.eot?#iefix865oet') format('embedded-opentype'), url('/fonts/icomoon.woff?865oet') format('woff'), url('/fonts/icomoon.ttf?865oet') format('truetype'), url('/fonts/icomoon.svg?865oet#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
+
 [class^="icon-"],
 [class*=" icon-"] {
   font-family: 'icomoon';
