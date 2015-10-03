@@ -99,7 +99,7 @@ exports.loginto = function (req, res) {
       encryp   = '$2a$10$T3yQKKGF/RW2OQ1rtAl9w.BD9ggsaMZ8q6kNcOZ0FaPYt6gw8dlHa';
   if (bcrypt.compareSync(username + pwd, encryp)) {
     req.session.user = username;
-    res.redirect('/admin/');
+    res.redirect('/admin/react');
   }
 };
 
