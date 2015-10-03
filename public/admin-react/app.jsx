@@ -25,7 +25,7 @@ function Articles() {
     , document.getElementById('content'));
 }
 
-function Tags(){
+function Tags() {
   React.render(
     <RTable src="/api/tags" page={true} del={true}>
       <RTh filed='_id' text='' checkbox={true}/>
@@ -35,11 +35,20 @@ function Tags(){
     , document.getElementById('content'));
 
 }
+
+function ReacUnmount(ctx, next) {
+  console.log(ctx)
+  React.unmountComponentAtNode(document.getElementById('content'))
+  next()
+}
+
 //
 //React.render(
 //  <PostForm url={"/api/articles/"+'55e54a5f96dc9af130e37c6c'}/>
 //  , document.getElementById('content'));
 page.base('/admin/react');
+page('*', ReacUnmount);
+
 page('/', Articles);
 page('/article/:id', Article);
 page('/tags', Tags);

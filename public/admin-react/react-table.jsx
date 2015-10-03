@@ -114,15 +114,11 @@ class Pagelist extends React.Component {
     this.pageCount = +props.pagecount || 7;
     this.perCount = +props.percount || 10;
     this.pageActCount = Math.ceil(this.count / this.perCount);
-    this.state = {curNum: 0, count: +props.count || 0}
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({curNum: 0, count: nextProps.count});
+    this.state = {curNum: 0}
   }
 
   renderList() {
-    this.pageActCount = Math.ceil(this.state.count / this.perCount);
+    this.pageActCount = Math.ceil(this.props.count / this.perCount);
     var ret = [];
     if (this.pageActCount < this.pageCount) {
       for (var i = 0, l = this.pageActCount; i < l; i++) {

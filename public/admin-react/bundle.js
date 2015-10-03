@@ -79,11 +79,20 @@
 	    React.createElement(RTh, { sort: true, filed: 'count', text: '文章数' })
 	  ), document.getElementById('content'));
 	}
+
+	function ReacUnmount(ctx, next) {
+	  console.log(ctx);
+	  React.unmountComponentAtNode(document.getElementById('content'));
+	  next();
+	}
+
 	//
 	//React.render(
 	//  <PostForm url={"/api/articles/"+'55e54a5f96dc9af130e37c6c'}/>
 	//  , document.getElementById('content'));
 	page.base('/admin/react');
+	page('*', ReacUnmount);
+
 	page('/', Articles);
 	page('/article/:id', Article);
 	page('/tags', Tags);
@@ -588,18 +597,13 @@
 	    this.pageCount = +props.pagecount || 7;
 	    this.perCount = +props.percount || 10;
 	    this.pageActCount = Math.ceil(this.count / this.perCount);
-	    this.state = { curNum: 0, count: +props.count || 0 };
+	    this.state = { curNum: 0 };
 	  }
 
 	  _createClass(Pagelist, [{
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {
-	      this.setState({ curNum: 0, count: nextProps.count });
-	    }
-	  }, {
 	    key: 'renderList',
 	    value: function renderList() {
-	      this.pageActCount = Math.ceil(this.state.count / this.perCount);
+	      this.pageActCount = Math.ceil(this.props.count / this.perCount);
 	      var ret = [];
 	      if (this.pageActCount < this.pageCount) {
 	        for (var i = 0, l = this.pageActCount; i < l; i++) {

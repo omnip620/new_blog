@@ -113,8 +113,8 @@ gulp.task('react-common', function () {
     'public/javascripts/typeahead.bundle.min.js',
     'public/javascripts/materialize-tags.js',
     'public/javascripts/lodash.min.js'])
-
     .pipe(concat('common.js'))
+    .pipe(uglify())
     .pipe(gulp.dest('public/admin-react'));
 });
 
@@ -154,6 +154,24 @@ gulp.task('webpackCompile', function () {
     }
     console.log(stats.toString({colors: true}))
   })
+});
+
+gulp.task('reactEditor', function () {
+  return gulp.src([
+    'public/editor/codemirror.js',
+    'public/editor/overlay.js',
+    'public/editor/xml.js',
+    'public/editor/markdown.js',
+    'public/editor/gfm.js',
+    'public/editor/javascript.js',
+    'public/editor/css.js',
+    'public/editor/stylus.js',
+    'public/editor/htmlmixed.js',
+    'public/editor/fullscreen.js',
+    'public/editor/meta.js'])
+    .pipe(concat('editor.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('public/admin-react'));
 });
 
 gulp.task('watch', function () {
