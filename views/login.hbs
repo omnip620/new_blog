@@ -17,13 +17,13 @@
   <form action="/login" method="post" class="row">
     <div class="input-field col s12">
       <input type="text" id="username" name="username" autocomplete="off"/>
-      <label for="username" class="">
+      <label for="username" class="active">
         登录名：
       </label>
     </div>
     <div class="input-field col s12">
       <input type="password" id="pwd" name="pwd" autocomplete="off"/>
-      <label for="pwd" class="">
+      <label for="pwd" class="active">
         密码：
       </label>
     </div>
@@ -36,7 +36,7 @@
 <script src="/javascripts/materialize.min.js"></script>
 <script type="text/javascript">
   $(function () {
-    $('#submit').on('click',function(){
+    $('#submit').on('click', function () {
       $('form').submit();
     })
   });

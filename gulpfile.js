@@ -1,5 +1,7 @@
 var gulp            = require('gulp'),
+    webpack         = require('webpack'),
     livereload      = require('gulp-livereload'),
+    nodemon         = require('gulp-nodemon'),
     inject          = require('gulp-inject'),
     order           = require('gulp-order'),
     angularFilesort = require('gulp-angular-filesort'),
@@ -11,7 +13,6 @@ var gulp            = require('gulp'),
     runSequence     = require('run-sequence'),
     browserSync     = require('browser-sync').create(),
     shortId         = require('shortid'),
-    nodemon         = require('gulp-nodemon'),
     randomId        = '',
     stylus          = require('gulp-stylus');
 
@@ -34,7 +35,7 @@ var frontPaths = {
     'public/javascripts/handlebars.runtime.min.js',
     'public/javascripts/sidebarEffects.js',
     'public/javascripts/moment.js',
-    'public/javascripts/app.js'],
+    'public/javascripts/app.jsx'],
   css    : ['public/stylesheets/font.css', 'public/stylesheets/style.css'],
   images : 'client/img/**/*'
 };
@@ -83,7 +84,7 @@ gulp.task('browser-sync', function () {
   browserSync.init({
     proxy: "panblog.com"
   });
-  gulp.watch(['public/**/*.*']).on("change", browserSync.reload);
+  gulp.watch(['public/**/*.js', 'public/**/*.css', 'views/**/*.hbs']).on("change", browserSync.reload);
 });
 
 gulp.task('compileStylus', function () {
@@ -95,18 +96,71 @@ gulp.task('compileStylus', function () {
 
 gulp.task('nodemonStart', function () {
   nodemon({
-    "verbose" : true,
-    "script"  : 'bin/www',
-    "ext"     : 'js',
-    "ignore"  : ['public', '.idea', 'config.js', 'gulpfile.js', '*.hbs'],
+    "verbose": true,
+    "script" : 'bin/www',
+    "ext"    : 'js',
+    "ignore" : ['public', '.idea', 'config.js', 'gulpfile.js', '*.hbs'],
     //'nodeArgs': ['--debug']
   })
 });
 
-gulp.task('watch', function () {
-  //gulp.watch([frontPaths.scripts, frontPaths.css], ['build'])
-  gulp.watch('public/stylesheets/*.styl', ['compileStylus']);
-  gulp.watch([frontPaths.scripts, frontPaths.css], ['frontInjectDev']);
+gulp.task('react-common', function () {
+  return gulp.src(['public/admin-react/react.js',
+    'public/javascripts/jquery.min.js',
+    'public/javascripts/moment.js',
+    'public/javascripts/page.js',
+    'public/javascripts/materialize.min.js',
+    'public/javascripts/typeahead.bundle.min.js',
+    'public/javascripts/materialize-tags.js',
+    'public/javascripts/lodash.min.js'])
+
+    .pipe(concat('common.js'))
+    .pipe(gulp.dest('public/admin-react'));
 });
 
-gulp.task('default', ['watch', 'browser-sync','nodemonStart']);
+
+var compiler = webpack({
+  entry  : {
+    app: "./public/admin-react/app.jsx",
+    //common: ["react", "jquery", "lodash", "moment"]
+  },
+  output : {
+    path    : __dirname + "/public/admin-react",
+    filename: "bundle.js"
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
+  module : {
+    loaders: [
+      {test: /\.jsx$/, exclude: /node_modules/, loader: "babel-loader"}
+    ]
+  },
+  plugins: [
+    //new webpack.optimize.CommonsChunkPlugin("common", "common.js"),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      },
+      exclude : 'bundle.js'
+    })
+  ]
+});
+
+gulp.task('webpackCompile', function () {
+  compiler.run(function (err, stats) {
+    if (err) {
+      return console.log(err)
+    }
+    console.log(stats.toString({colors: true}))
+  })
+});
+
+gulp.task('watch', function () {
+  gulp.watch('public/stylesheets/*.styl', ['compileStylus']);
+  gulp.watch([frontPaths.scripts, frontPaths.css], ['frontInjectDev']);
+  //gulp.watch(['public/admin-react/app.jsx'], ['webpackCompile']);
+});
+
+
+gulp.task('default', ['watch', 'browser-sync', 'nodemonStart']);

@@ -5,6 +5,7 @@ var Article = require('../../models/article');
 var Promise = require('bluebird');
 var _ = require('lodash');
 var cat = require('../../config').cat;
+var Tags = require('../../models/tag');
 
 exports.index = function (req, res) {
   Article.find({}, 'title source tags top created_at updated_at views cat comment_ids', function (err, articles) {
@@ -26,9 +27,28 @@ exports.create = function (req, res) {
 };
 
 exports.update = function (req, res) {
-  var id = req.body._id;
-  req.body.updated_at = new Date();
-  Article.update({_id: id}, req.body, function (err, article) {
+  var body = req.body;
+  body.updated_at = new Date();
+  var tags = body.tags.split(',');
+  Tags
+    .find({name: {$in: tags}})
+    .then(function (a) {
+      a = _(a)
+        .pluck('name')
+        .xor(tags)
+        .compact()
+        .map(function (name) {
+          return {name: name}
+        })
+        .value();
+      return a.length ? Tags.create(a) : null;
+    })
+    .then()
+    .catch(function (err) {
+      console.log(err)
+    });
+  body.tags = tags;
+  Article.update({_id: req.params.id}, body, function (err, article) {
     if (err) {
       return handleError(res, err);
     }

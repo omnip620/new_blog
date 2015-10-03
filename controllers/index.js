@@ -115,3 +115,9 @@ exports.admin = function (req, res) {
     layout: false
   });
 };
+
+exports.adminReact = function (req, res) {
+  return res.render('admin/react', {
+    layout: false
+  });
+};

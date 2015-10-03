@@ -11,15 +11,19 @@ var router = express.Router();
 
 router.get('/articles', articles.index);
 router.get('/articles/cat', articles.cats);
-router.get('/articles/:id', articles.show);
-router.post('/articles', articles.create);
 router.post('/articles/delete', articles.destroy);
-router.post('/articles/update', articles.update);
 router.get('/articles/generate/:num', articles.generate);
 
+router.route('/articles/:id')
+  .post(articles.create)
+  .put(articles.update)
+  .get(articles.show);
+
+router.route('/tags')
+  .get(tags.index)
+  .delete(tags.destroy);
+
 router.post('/tags', tags.create);
-router.post('/tags/delete', tags.destroy);
-router.get('/tags', tags.index);
 router.get('/tags/get', tags.get);
 
 

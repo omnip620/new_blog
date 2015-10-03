@@ -20,6 +20,9 @@ router.get('/login', index.login);
 router.post('/login', index.loginto);
 router.get('/friendlinks', index.friendlinks);
 router.get('/about', index.about);
+
+router.get('/admin/react*', index.adminReact);
+
 router.get('/admin/*', auth.userRequired, index.admin);
 router.get('/sitemap.xml', sm.sitemap);
 
