@@ -2,7 +2,6 @@
  * Created by pzc on 15-9-30.
  */
 var cx = require('classnames');
-import {Router, Route, Link} from 'react-router'
 //_id: "55e5494696dc9af130e37c65"
 //cat: 2
 //comment_ids: []
@@ -244,7 +243,7 @@ export class RTable extends React.Component {
       url    : this.props.src,
       method : 'DELETE',
       data   : {ids: dels},
-      success: (data)=> {
+      success: ()=> {
         this.loadData()
       }
     });

@@ -574,7 +574,9 @@ a:hover {
 .main-wrapper .main .info ul li {
   display: inline;
   margin-right: 14px;
-  font: 300 13px/18px 'Microsoft YaHei';
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 18px;
 }
 .main-wrapper .main .article blockquote {
   padding: 10px 15px;
