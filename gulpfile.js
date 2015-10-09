@@ -1,10 +1,8 @@
 var gulp            = require('gulp'),
     webpack         = require('webpack'),
-    livereload      = require('gulp-livereload'),
     nodemon         = require('gulp-nodemon'),
     inject          = require('gulp-inject'),
     order           = require('gulp-order'),
-    angularFilesort = require('gulp-angular-filesort'),
     uglify          = require('gulp-uglify'),
     concat          = require('gulp-concat'),
     minifyCSS       = require('gulp-minify-css'),
@@ -15,20 +13,6 @@ var gulp            = require('gulp'),
     shortId         = require('shortid'),
     randomId        = '',
     stylus          = require('gulp-stylus');
-
-
-livereload({start: true});
-
-gulp.task('all', function () {
-  gulp.src('public/**/*.*')
-    .pipe(livereload());
-});
-
-gulp.task('inject', function () {
-  return gulp.src('views/admin/index.hbs')
-    .pipe(inject(gulp.src(['public/admin/**/*.js']).pipe(angularFilesort()), {'ignorePath': 'public'}))
-    .pipe(gulp.dest('views/admin'));
-});
 
 var frontPaths = {
   scripts: ['public/javascripts/jquery.min.js',
@@ -99,7 +83,7 @@ gulp.task('nodemonStart', function () {
     "verbose": true,
     "script" : 'bin/www',
     "ext"    : 'js',
-    "ignore" : ['public', '.idea', 'config.js', 'gulpfile.js', '*.hbs'],
+    "ignore" : ['public', '.idea', 'config.js', 'gulpfile.js', '*.hbs','node_modules','.git'],
     //'nodeArgs': ['--debug']
   })
 });

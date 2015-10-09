@@ -634,7 +634,6 @@
 	    this.state = {
 	      data: props.data || [],
 	      fileds: props.fileds || []
-
 	    };
 	  }
 
@@ -667,7 +666,6 @@
 
 	      $.get(src, function (data) {
 	        _this4.originData = data;
-
 	        _this4.renderData(0);
 	      });
 	    }

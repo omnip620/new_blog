@@ -67,6 +67,7 @@
     "moment": "^2.10.6",
     "react-bootstrap-table": "^0.9.15",
     "run-sequence": "^1.0.2",
+    "supertest": "^1.1.0",
     "through2": "^2.0.0",
     "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0",

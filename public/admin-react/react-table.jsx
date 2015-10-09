@@ -177,7 +177,6 @@ export class RTable extends React.Component {
     this.state = {
       data  : props.data || [],
       fileds: props.fileds || []
-
     }
   }
 
@@ -201,7 +200,6 @@ export class RTable extends React.Component {
   loadData(src = this.props.src) {
     $.get(src, (data)=> {
       this.originData = data;
-
       this.renderData(0);
     });
 

@@ -71,10 +71,10 @@ exports.destroy = function (req, res) {
       })
     })
     .then(function (docs) {
-      return res.status(204);
+      return res.status(204).send();
     })
     .then(null, function (err) {
-      console.log(err)
+      console.log(err);
       return res.status(500).send(err)
     });
 

@@ -281,6 +281,9 @@ hr {
 .main-wrapper .main .archives .item .archives-list {
   list-style: none;
 }
+.text-deco-none {
+  text-decoration: none;
+}
 /*blockquote*/
 blockquote p {
   margin: 6px auto;
@@ -336,11 +339,11 @@ a {
 }
 a:hover {
   text-decoration: none;
-  -webkit-transition: color 150ms linear 0;
-  -moz-transition: color 150ms linear 0;
-  -ms-transition: color 150ms linear 0;
-  -o-transition: color 150ms linear 0;
-  transition: color 150ms linear 0;
+  -webkit-transition: color 150ms linear 0ms;
+  -moz-transition: color 150ms linear 0ms;
+  -ms-transition: color 150ms linear 0ms;
+  -o-transition: color 150ms linear 0ms;
+  transition: color 150ms linear 0ms;
   color: #06c;
 }
 .inline {
@@ -461,17 +464,7 @@ a:hover {
   padding-left: 260px;
   padding-right: 360px;
 }
-.main-wrapper:after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 0;
-  height: 0;
-  content: '';
-  opacity: 0;
-}
 .main-wrapper .articles {
-  margin-bottom: 12px;
   padding-top: 12px;
   position: relative;
 }
@@ -507,9 +500,6 @@ a:hover {
     -o-transform: scaleX(1) translateZ(0);
     transform: scaleX(1) translateZ(0);
   }
-}
-.main-wrapper .content a {
-  text-decoration: none;
 }
 .main-wrapper .content .item-title {
   position: relative;
@@ -564,9 +554,7 @@ a:hover {
 }
 .main-wrapper .main {
   min-height: 500px;
-  padding-left: 80px;
-  padding-top: 50px;
-  padding-right: 60px;
+  padding: 3% 3% 0 3%;
 }
 .main-wrapper .main .info {
   margin-bottom: 20px;
@@ -644,18 +632,8 @@ a:hover {
   text-decoration: none;
 }
 @media screen and (max-width: 1440px) {
-  .main-wrapper .main {
-    padding-left: 60px;
-    padding-right: 40px;
-  }
-  .main-wrapper .main .archives .item ul {
+  .archives .item ul {
     margin-left: 100px;
-  }
-}
-@media screen and (max-width: 1280px) {
-  .main-wrapper .main {
-    padding-left: 40px;
-    padding-right: 30px;
   }
 }
 @media screen and (max-width: 1280px) {
@@ -678,6 +656,7 @@ a:hover {
     position: relative;
     z-index: 20;
     background-color: #fff;
+    padding-left: 0;
   }
   .sidebar {
     opacity: 1;
@@ -728,22 +707,16 @@ a:hover {
   .right-nav {
     display: none;
   }
-  .main-wrapper {
-    padding: 5px;
-  }
-  .main-wrapper .main {
-    padding: 5px;
-  }
-  .main-wrapper .main .articles {
+  .articles {
     border-top: 1px dashed #858585;
   }
-  .main-wrapper .main .articles:first-child {
+  .articles:first-child {
     border-top: none;
   }
-  .main-wrapper .main .archives .item h3 {
+  .archives .item h3 {
     float: none;
   }
-  .main-wrapper .main .archives .item .archives-list {
+  .archives .item .archives-list {
     margin-left: 0;
   }
 }

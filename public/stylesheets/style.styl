@@ -10,7 +10,6 @@ lesscss-percentage(n)
 @import "../../node_modules/bootstrap-styl/bootstrap/utilities";
 @import "../../node_modules/bootstrap-styl/bootstrap/mixins/vendor-prefixes";
 
-
 bg-primary = rgb(238, 238, 238, 1)
 bg-dark = rgb(34, 34, 34, 1)
 text-primary = rgb(34, 34, 34, 1)
@@ -73,6 +72,9 @@ hr
 .list-none
   list-style none
 
+.text-deco-none
+  text-decoration none
+
 /*blockquote*/
 blockquote
   p
@@ -125,7 +127,7 @@ a
   color text-primary
   &:hover
     text-decoration none
-    transition(color 150ms linear 0)
+    transition(color 150ms linear 0ms)
     color link-hover-color
 
 .inline
@@ -229,16 +231,8 @@ right-nav-r = 60px
   float left
   padding-left sidebar-width
   padding-right (right-nav-width + right-nav-r)
-  &:after
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 0;
-    height: 0;
-    content: '';
-    opacity: 0;
+
   .articles
-    margin-bottom 12px
     padding-top 12px
     position relative
     &:after, &:before
@@ -258,8 +252,6 @@ right-nav-r = 60px
         transform scaleX(1) translateZ(0)
 
   .content
-    a
-      text-decoration none
     .item-title
       position relative
       &:hover
@@ -296,9 +288,7 @@ right-nav-r = 60px
         color text-primary
   .main
     min-height 500px
-    padding-left 80px
-    padding-top 50px
-    padding-right 60px
+    padding 3% 3% 0 3%
 
     .info
       margin-bottom 20px
@@ -369,20 +359,10 @@ right-nav-r = 60px
         text-decoration none
 
 @media screen and (max-width: 1440px)
-  .main-wrapper
-    .main
-      padding-left 60px
-      padding-right 40px
-      .archives
-        .item
-          ul
-            margin-left 100px
-
-@media screen and (max-width: 1280px)
-  .main-wrapper
-    .main
-      padding-left 40px
-      padding-right 30px
+  .archives
+    .item
+      ul
+        margin-left 100px
 
 @media screen and (max-width: 1280px)
   .right-nav
@@ -404,6 +384,7 @@ right-nav-r = 60px
     position relative
     z-index 20
     background-color #FFFFFF
+    padding-left 0
 
   .sidebar
     opacity 1
@@ -427,18 +408,15 @@ right-nav-r = 60px
   .right-nav
     display none
 
-  .main-wrapper
-    padding 5px
-    .main
-      padding 5px
-      .articles
-        border-top 1px dashed lighten(text-primary, 45%)
-      .articles:first-child
-        border-top none
-      .archives .item
-        h3
-          float: none;
-        .archives-list
-          margin-left 0
+  .articles
+    border-top 1px dashed lighten(text-primary, 45%)
+    &:first-child
+      border-top none
+
+  .archives .item
+    h3
+      float: none;
+    .archives-list
+      margin-left 0
 
 
