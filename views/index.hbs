@@ -40,109 +40,50 @@
        }
        return moment(item).format('MM-DD HH:mm');
      });
-     (function () {
+     (function() {
        var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
-       templates['index.hbs'] = template({
-         "1"          : function (depth0, helpers, partials, data) {
-           var stack1, helper, functionType = "function", helperMissing = helpers.helperMissing, escapeExpression = this.escapeExpression, buffer = "  <div class=\"articles\">\n    <div class=\"excerpt\">\n      <div class=\"content\">\n        <h2><a href=\"/article/"
-             + escapeExpression(((helper = (helper = helpers._id || (depth0 != null ? depth0._id : depth0)) != null ? helper : helperMissing), (typeof helper === functionType ? helper.call(depth0, {
-               "name": "_id",
-               "hash": {},
-               "data": data
-             }) : helper)))
-             + "\">"
-             + escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helperMissing), (typeof helper === functionType ? helper.call(depth0, {
-               "name": "title",
-               "hash": {},
-               "data": data
-             }) : helper)))
-             + "</a></h2>\n\n        <p class=\"summary\">\n          <a href=\"/article/"
-             + escapeExpression(((helper = (helper = helpers._id || (depth0 != null ? depth0._id : depth0)) != null ? helper : helperMissing), (typeof helper === functionType ? helper.call(depth0, {
-               "name": "_id",
-               "hash": {},
-               "data": data
-             }) : helper)))
-             + "\">\n            "
-             + escapeExpression(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : helperMissing), (typeof helper === functionType ? helper.call(depth0, {
-               "name": "content",
-               "hash": {},
-               "data": data
-             }) : helper)))
-             + " </a></p>\n\n        <div class=\"info\">\n          <ul>\n            <li>"
-             + escapeExpression(((helpers.formatDate || (depth0 && depth0.formatDate) || helperMissing).call(depth0, (depth0 != null ? depth0.updated_at : depth0), {
-               "name": "formatDate",
-               "hash": {},
-               "data": data
-             })))
-             + "</li>\n";
-           stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.tags : depth0), {
-             "name"   : "if",
-             "hash"   : {},
-             "fn"     : this.program(2, data),
-             "inverse": this.noop,
-             "data"   : data
-           });
-           if (stack1 != null) {
-             buffer += stack1;
-           }
-           return buffer + "            <li>阅读（"
-             + escapeExpression(((helper = (helper = helpers.views || (depth0 != null ? depth0.views : depth0)) != null ? helper : helperMissing), (typeof helper === functionType ? helper.call(depth0, {
-               "name": "views",
-               "hash": {},
-               "data": data
-             }) : helper)))
-             + "）</li>\n            <li>评论（"
-             + escapeExpression(((helper = (helper = helpers.comments || (depth0 != null ? depth0.comments : depth0)) != null ? helper : helperMissing), (typeof helper === functionType ? helper.call(depth0, {
-               "name": "comments",
-               "hash": {},
-               "data": data
-             }) : helper)))
-             + "）</li>\n          </ul>\n        </div>\n      </div>\n    </div>\n  </div>\n";
-         }, "2"       : function (depth0, helpers, partials, data) {
-           var stack1, buffer = "              <li>\n";
-           stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.tags : depth0), {
-             "name"   : "each",
-             "hash"   : {},
-             "fn"     : this.program(3, data),
-             "inverse": this.noop,
-             "data"   : data
-           });
-           if (stack1 != null) {
-             buffer += stack1;
-           }
-           return buffer + "              </li>\n";
-         }, "3"       : function (depth0, helpers, partials, data) {
-           var stack1, lambda = this.lambda, escapeExpression = this.escapeExpression, buffer = "                  <a href=\"javascript:;\">"
-             + escapeExpression(lambda(depth0, depth0))
-             + "</a>\n";
-           stack1 = helpers.unless.call(depth0, (data && data.last), {
-             "name"   : "unless",
-             "hash"   : {},
-             "fn"     : this.program(4, data),
-             "inverse": this.noop,
-             "data"   : data
-           });
-           if (stack1 != null) {
-             buffer += stack1;
-           }
-           return buffer;
-         }, "4"       : function (depth0, helpers, partials, data) {
-           return "                    |\n";
-         }, "compiler": [6, ">= 2.0.0-beta.1"], "main": function (depth0, helpers, partials, data) {
-           var stack1, buffer = "";
-           stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.articles : depth0), {
-             "name"   : "each",
-             "hash"   : {},
-             "fn"     : this.program(1, data),
-             "inverse": this.noop,
-             "data"   : data
-           });
-           if (stack1 != null) {
-             buffer += stack1;
-           }
-           return buffer;
-         }, "useData" : true
-       });
+       templates['index.hbs'] = template({"1":function(container,depth0,helpers,partials,data) {
+         var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+         return "   <div class=\"articles\">\n     <div class=\"excerpt\">\n       <div class=\"content\">\n         <h2><a class=\"item-title text-deco-none\" href=\"/article/"
+           + alias4(((helper = (helper = helpers._id || (depth0 != null ? depth0._id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"_id","hash":{},"data":data}) : helper)))
+           + "\">"
+           + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
+           + "</a></h2>\n\n         <p class=\"summary\">\n           <a class=\"summary-link text-deco-none\" href=\"/article/"
+           + alias4(((helper = (helper = helpers._id || (depth0 != null ? depth0._id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"_id","hash":{},"data":data}) : helper)))
+           + "\">\n            "
+           + alias4(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"content","hash":{},"data":data}) : helper)))
+           + " </a></p>\n\n         <div class=\"info\">\n           <ul>\n             <li>"
+           + alias4((helpers.formatDate || (depth0 && depth0.formatDate) || alias2).call(alias1,(depth0 != null ? depth0.updated_at : depth0),{"name":"formatDate","hash":{},"data":data}))
+           + "</li>\n"
+           + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.tags : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+           + "             <li>阅读（"
+           + alias4(((helper = (helper = helpers.views || (depth0 != null ? depth0.views : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"views","hash":{},"data":data}) : helper)))
+           + "）</li>\n             <li>评论（"
+           + alias4(((helper = (helper = helpers.comments || (depth0 != null ? depth0.comments : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"comments","hash":{},"data":data}) : helper)))
+           + "）</li>\n           </ul>\n         </div>\n       </div>\n     </div>\n   </div>\n";
+       },"2":function(container,depth0,helpers,partials,data) {
+         var stack1;
+
+         return "              <li>\n"
+           + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.tags : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+           + "              </li>\n";
+       },"3":function(container,depth0,helpers,partials,data) {
+         var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+
+         return "                 <a href=\"/tags/"
+           + alias2(alias1(depth0, depth0))
+           + "\">"
+           + alias2(alias1(depth0, depth0))
+           + "</a>\n"
+           + ((stack1 = helpers.unless.call(depth0 != null ? depth0 : {},(data && data.last),{"name":"unless","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+       },"4":function(container,depth0,helpers,partials,data) {
+         return "                  |\n";
+       },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+         var stack1;
+
+         return ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.articles : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+       },"useData":true});
      })();
      $(function () {
        var template = Handlebars.templates['index.hbs'];
