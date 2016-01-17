@@ -15,7 +15,7 @@ module.exports = {
     },
     contentFor : function (name, options) {
       var blocks = this._blocks || (this._blocks = {}),
-          block = blocks[name] || (blocks[name] = []);
+          block  = blocks[name] || (blocks[name] = []);
 
       block.push(options.fn(this));
     },
@@ -29,7 +29,7 @@ module.exports = {
       return moment(item).format('DD');
     },
     titlesplice: function (title) {
-      return title.length > 16 ? title.substring(0, 16) : title;
+      return !!title && title.length > 16 ? title.substring(0, 16) : title;
     }
   }
 };
