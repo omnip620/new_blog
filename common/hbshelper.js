@@ -29,7 +29,7 @@ module.exports = {
       return moment(item).format('DD');
     },
     titlesplice: function (title) {
-      return !!title && title.length > 16 ? title.substring(0, 16) : title+'111';
+      return !!title && title.length > 16 ? title.substring(0, 16) : title;
     }
   }
 };
