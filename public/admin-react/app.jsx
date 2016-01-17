@@ -37,7 +37,7 @@ function Tags() {
 }
 
 function ReacUnmount(ctx, next) {
-  React.unmountComponentAtNode(document.getElementById('content'))
+  React.unmountComponentAtNode(document.getElementById('content'));
   next()
 }
 
@@ -51,5 +51,6 @@ page('*', ReacUnmount);
 page('/', Articles);
 page('/article/:id', Article);
 page('/tags', Tags);
+
 page();
 

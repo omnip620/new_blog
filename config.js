@@ -3,14 +3,17 @@
  */
 module.exports = {
   //网站运行端口
-  port: 3012,
+  port : 3012,
   //数据库
-  db  : {
+  db   : {
     host    : '127.0.0.1',
     port    : '27017',
     user    : '',
     pwd     : '',
     database: 'blog'
+  },
+  redis: {
+    port: 6203
   },
   //后台管理侧边栏
   // sidebar: [
@@ -18,14 +21,14 @@ module.exports = {
   //   {'设置': '/settings'}
   // ],
   //七牛配置
-  qn  : {
+  qn   : {
     ACCESS_KEY : 'bwrScr6Rz9JCF5tKZMohuAbCr3VDa3attPQja-Br',
     SECRET_KEY : 'qA3Vv8-k-eD_U_klbbdptAfn0BLK_VujVb4Fsldd',
     Bucket_Name: 'panblog'
   },
-  cat : {
+  cat  : {
     '1': '生活',
     '2': '术业'
   },
-  env : 'development'
+  env  : 'development'
 };
