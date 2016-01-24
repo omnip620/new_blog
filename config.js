@@ -13,7 +13,7 @@ module.exports = {
     database: 'blog'
   },
   redis: {
-    port: 6203
+    port: 6379
   },
   //后台管理侧边栏
   // sidebar: [

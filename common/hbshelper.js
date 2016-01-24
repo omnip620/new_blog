@@ -20,10 +20,9 @@ module.exports = {
       block.push(options.fn(this));
     },
     formatDate : function (item) {
-      if (moment().isSame(item, 'day')) {
-        return moment(item).format('HH:mm');
-      }
-      return moment(item).format('MM-DD HH:mm');
+      return moment().isSame(item, 'day') ?
+        moment(item).format('HH:mm') :
+        moment(item).format('MM-DD HH:mm')
     },
     getDay     : function (item) {
       return moment(item).format('DD');
