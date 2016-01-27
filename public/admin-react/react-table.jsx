@@ -170,6 +170,7 @@ class Pagelist extends React.Component {
 export class RTable extends React.Component {
   constructor(props) {
     super();
+    console.log(props)
     this.curnum = 0;
     this.filed = '';
     this.order = '';
@@ -192,7 +193,7 @@ export class RTable extends React.Component {
   }
 
   renderData(curnum, filed, order) {
-    var items = _.sortByOrder(this.originData, filed, order);
+    var items = _.sortByOrder(this.originData, filed=this.props.sortBy, order=this.props.order);
     items = _.take(_.slice(items, (curnum * 10)), 10);
     this.setState({data: items, fileds: _.pluck(this.props.children, 'props.filed')});
   }

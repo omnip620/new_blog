@@ -11,13 +11,14 @@ var router = express.Router();
 
 router.get('/articles', articles.index);
 router.get('/articles/cat', articles.cats);
-router.post('/articles/delete', articles.destroy);
+
 router.get('/articles/generate/:num', articles.generate);
 
 router.route('/articles/:id?')
+  .get(articles.show)
   .post(articles.create)
   .put(articles.update)
-  .get(articles.show);
+  .delete(articles.destroy);
 
 router.route('/tags')
   .post(tags.create)
