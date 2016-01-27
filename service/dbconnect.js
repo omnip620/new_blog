@@ -17,5 +17,6 @@ module.exports = function (config) {
       console.error('connect to %s error: ', dburi, err.message);
       process.exit(1);
     }
+    mongoose.Promise=require('bluebird');
   });
 };
