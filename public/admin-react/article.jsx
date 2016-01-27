@@ -1,35 +1,39 @@
 export default class PostForm extends React.Component {
   constructor() {
     super();
+    this.id = '';
   }
 
   loadData() {
-    $.get(this.props.url, (data)=> {
-      //title      : {type: String},
-      //content    : {type: String},
-      //source     : {type: String},
-      //top        : {type: Boolean, default: false},
-      //created_at : {type: Date, default: Date.now},
-      //updated_at : {type: Date, default: Date.now},
-      //views      : {type: Number, default: 0},
-      //comment_ids: {type: Array, default: []},
-      //tags       : {type: Array, default: []},
-      //cat        : {type: Number}
+    this.id = this.props.url.split('/')[3];
 
-      this.assignData(data)
-    })
+    if (this.id !== 'new') {
+      $.get(this.props.url, (data)=> {
+        //title      : {type: String},
+        //content    : {type: String},
+        //source     : {type: String},
+        //top        : {type: Boolean, default: false},
+        //created_at : {type: Date, default: Date.now},
+        //updated_at : {type: Date, default: Date.now},
+        //views      : {type: Number, default: 0},
+        //comment_ids: {type: Array, default: []},
+        //tags       : {type: Array, default: []},
+        //cat        : {type: Number}
+
+        this.assignData(data)
+      })
+    }
   }
 
   saveData(data) {
-    var btn = document.getElementById('submit');
+    let btn = document.getElementById('submit');
+
     btn.setAttribute('disabled', true);
     $.ajax({
       url    : this.props.url,
-      method : 'PUT',
+      method : this.id === 'new' ? 'POST' : 'PUT',
       data   : data,
-      success: ()=> {
-        btn.removeAttribute('disabled');
-      }
+      success: ()=>  btn.removeAttribute('disabled')
     });
   }
 

@@ -91,14 +91,8 @@ exports.cats = function (req, res) {
   return res.status(200).json(cat);
 };
 exports.destroy = function (req, res) {
-  var ids = req.body;
-  Article.remove({_id: {$in: ids}}, function (err) {
-    if (err) {
-      return handleError(res, err);
-    }
-    return res.send(204);
-  });
+  Article.remove({_id: {$in: req.body}}, err=> err ? handleError(res, err) : res.send(204));
 };
 function handleError(res, err) {
-  return res.send(500, err);
+  return res.status(500).send(err)
 }

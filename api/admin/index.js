@@ -14,17 +14,15 @@ router.get('/articles/cat', articles.cats);
 router.post('/articles/delete', articles.destroy);
 router.get('/articles/generate/:num', articles.generate);
 
-router.route('/articles/:id')
+router.route('/articles/:id?')
   .post(articles.create)
   .put(articles.update)
   .get(articles.show);
 
 router.route('/tags')
+  .post(tags.create)
   .get(tags.index)
   .delete(tags.destroy);
 
-router.post('/tags', tags.create);
 router.get('/tags/get', tags.get);
-
-
 module.exports = router;

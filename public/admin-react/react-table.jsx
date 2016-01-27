@@ -206,6 +206,7 @@ export class RTable extends React.Component {
   }
 
   componentDidMount() {
+
     this.loadData();
     $('#sa').on('change', function () {
       var $rowsCheckbox = $('.rowCheckbox');
@@ -252,6 +253,10 @@ export class RTable extends React.Component {
     return (<a href="javascript:;" onClick={this.handelDel.bind(this)} className="btn btn-default left">删除</a>)
   }
 
+  renderAddBtn() {
+    return (<a href={this.props.add} className="waves-effect waves-light btn">新增</a>)
+  }
+
   renderTH() {
     return React.Children.map(this.props.children, (child)=> {
       return child.type === RTh ?
@@ -263,6 +268,7 @@ export class RTable extends React.Component {
   render() {
     return (
       <div className="container">
+        {this.props.add && this.renderAddBtn()}
         <table className="hoverable">
           <thead>
           <tr>

@@ -12,7 +12,7 @@ function Article(ctx) {
 
 function Articles() {
   React.render(
-    <RTable src="/api/articles" page={true}>
+    <RTable src="/api/articles" page={true} add="./article/new">
       <RTh filed='_id' text='' checkbox={true}/>
       <RTh sort={true} filed='title' text='标题' width="280px"/>
       <RTh sort={true} filed='source' text='来源'/>
@@ -47,7 +47,6 @@ function ReacUnmount(ctx, next) {
 //  , document.getElementById('content'));
 page.base('/admin/react');
 page('*', ReacUnmount);
-
 page('/', Articles);
 page('/article/:id', Article);
 page('/tags', Tags);
