@@ -30,7 +30,6 @@ exports.update = function (req, res) {
   var body = req.body;
   body.updated_at = new Date();
   var tags = body.tags.split(',');
-  console.log(tags)
   Tags
     .find({name: {$in: tags}})
     .then(function (a) {
@@ -44,12 +43,11 @@ exports.update = function (req, res) {
         .value();
       return a.length ? Tags.create(a) : null;
     })
-    .then()
     .catch(function (err) {
       console.log(err)
     });
   body.tags = tags;
-  console.log(body.tags)
+  console.log(body)
   Article.update({_id: req.params.id}, body, function (err, article) {
     if (err) {
       return handleError(res, err);
