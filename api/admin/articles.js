@@ -48,6 +48,7 @@ exports.update = function (req, res) {
       console.log(err)
     });
   body.tags = tags;
+  console.log(body.tags)
   Article.update({_id: req.params.id}, body, function (err, article) {
     if (err) {
       return handleError(res, err);
