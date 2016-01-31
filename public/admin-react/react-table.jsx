@@ -193,7 +193,7 @@ export class RTable extends React.Component {
   }
 
   renderData(curnum, filed, order) {
-    var items = _.sortByOrder(this.originData, filed=this.props.sortBy, order=this.props.order);
+    var items = _.sortByOrder(this.originData, filed = this.props.sortBy, order = this.props.order);
     items = _.take(_.slice(items, (curnum * 10)), 10);
     this.setState({data: items, fileds: _.pluck(this.props.children, 'props.filed')});
   }
@@ -243,9 +243,7 @@ export class RTable extends React.Component {
       url    : this.props.src,
       method : 'DELETE',
       data   : {ids: dels},
-      success: ()=> {
-        this.loadData()
-      }
+      success: ()=> this.loadData()
     });
   }
 
