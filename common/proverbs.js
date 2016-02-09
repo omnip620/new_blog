@@ -15,10 +15,7 @@ exports.set = function () {
 
 function setProverbCache() {
   cache.set('proverbs', data[data[0]]);
-  data[0]++;
-  if (+data[0] >= data.length) {
-    data[0] = 1;
-  }
+  data[0]++ >= data.length - 1 && ( data[0] = 1);
   fs.writeFileSync('./public/proverbs.txt', data.join('\n\n'));
 }
 
