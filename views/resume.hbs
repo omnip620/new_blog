@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>OmniP's resume</title>
   <link rel="stylesheet" href="/fonts/resume/style.css"/>
-  <style type="text/css">
+  <style type="text/css" media="screen,print">
     * {
       box-sizing: border-box;
       margin: 0;
@@ -17,6 +17,7 @@
       font-size: 16px;
       background-color: #fbfbfb;
       -webkit-font-smoothing: antialiased;
+      -webkit-print-color-adjust: exact;
     }
 
     ul {
@@ -102,6 +103,14 @@
       background-color: #CCCCCC;
       top: 10px;
       z-index: 1;
+    }
+    @media print {
+      .title span {
+        position: relative;
+        z-index: 2;
+        background-color: #fff;
+        padding-right: 18px;
+      }
     }
 
     #contact li {
@@ -302,7 +311,7 @@
         <h3 class="title"><span>EXPERIENCES</span></h3>
         <section class="work">
           <h4 class="title"><span>Nodejs工程师</span>
-            <small class="pull-right">2015.10-至今</small>
+            <small class="pull-right">2015.10-</small>
           </h4>
           <section class="company">平安健康互联网有限公司</section>
 
