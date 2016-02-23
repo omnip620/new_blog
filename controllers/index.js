@@ -109,6 +109,9 @@ exports.friendlinks = function (req, res) {
 exports.about = function (req, res) {
   return res.render('about', {layout: false});
 };
+exports.resume = function (req, res) {
+  return res.render('resume', {layout: false});
+};
 
 exports.admin = function (req, res) {
   return res.render('admin/index', {
