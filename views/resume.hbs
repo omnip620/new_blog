@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>OmniP's resume</title>
+  <link rel="stylesheet" href="/fonts/resume/style.css"/>
+  <style type="text/css">
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      color: #555;
+      font-family: Helvetica, Tahoma, Arial, 'Microsoft YaHei', 微软雅黑, STXihei, 华文细黑, SimSun, 宋体, Heiti, 黑体, sans-serif;
+      font-size: 16px;
+      background-color: #fbfbfb;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    [class^="icon-"], [class*=" icon-"] {
+      width: 26px;
+      display: inline-block;
+      font-size: 18px;
+      position: relative;
+      top: 2px;
+      padding-right: 8px;
+    }
+
+    .pull-right {
+      float: right;
+    }
+
+    .clearfix:before {
+      content: " ";
+      display: table
+    }
+
+    .clearfix:after {
+      content: " ";
+      display: table
+    }
+
+    #content {
+      width: 960px;
+      margin: 0 auto;
+    }
+
+    #basic-info, #more-info {
+      float: left;
+    }
+
+    #basic-info {
+      width: 260px;
+      position: fixed;
+    }
+
+    #more-info {
+      padding-left: 285px;
+      width: 100%;
+    }
+
+    #main {
+      border-left: 2px solid #ccc;
+      padding-left: 20px;
+      padding-bottom: 20px;
+    }
+
+    .title {
+      position: relative;
+      margin: 20px 0;
+    }
+
+    .title span {
+      position: relative;
+      z-index: 2;
+      background-color: #FBFBFB;
+      padding-right: 18px;
+    }
+
+    h3.title:after {
+      display: block;
+      position: absolute;
+      content: ' ';
+      width: 100%;
+      height: 2px;
+      background-color: #CCCCCC;
+      top: 10px;
+      z-index: 1;
+    }
+
+    #contact li {
+      margin: 14px 0;
+    }
+
+    .progress {
+      background-color: #ccc;
+      height: 12px;
+    }
+
+    .progress-bar {
+      background-color: #666;
+      height: 100%;
+      line-height: 12px;
+    }
+
+    .circle {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      line-height: 100px;
+      float: left;
+      margin: 10px 15px;
+      text-align: center;
+    }
+
+    .circle svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .skill-item {
+      margin: 20px 0;
+    }
+
+    .skill-item span {
+      float: left;
+    }
+
+    .skill-item .progress {
+      width: 175px;
+      margin-left: 85px;
+    }
+
+    #name {
+      text-align: right;
+    }
+
+    #name > h1 {
+      font-size: 45px;
+    }
+
+    #name > small {
+      font-size: 16px;
+    }
+
+    .work > .title {
+      margin-bottom: 2px;
+    }
+
+    .company {
+      font-size: 14px;
+      font-style: italic;
+      color: #999;
+    }
+
+    .work ul {
+      padding-left: 20px;
+      list-style: disc;
+    }
+
+    .work li {
+      padding: 4px 0;
+    }
+  </style>
+</head>
+<body>
+<article id="content">
+  <section id="basic-info">
+    {{!--<section id="logo"></section>--}}
+    <section id="contact">
+      <h3 class="title"><span>CONTACT</span></h3>
+      <ul>
+        <li class="phone"><i class="icon-mobile"></i>13167220528</li>
+        <li class="mail"><i class="icon-email"></i>412726700@qq.com</li>
+        <li class="qq"><i class="icon-qq2"></i>412726700</li>
+        <li class="web"><i class="icon-globe2"></i><a href="http://www.ewpan.com" target="_blank">www.ewpan.com</a></li>
+        <li class="github"><i class="icon-github2"></i><a href="https://github.com/p412726700" target="_blank">github.com/p412726700</a>
+        </li>
+        <li class="location"><i class="icon-map"></i>上海，徐汇区</li>
+      </ul>
+    </section>
+    <section id="skills">
+      <h3 class="title"><span>SKILLS</span></h3>
+      <ul>
+        <li class="skill-item"><span>Nodejs</span>
+
+          <div class="progress">
+            <div class="progress-bar" style="width: 85%"></div>
+          </div>
+        </li>
+        <li class="skill-item"><span>Javascript</span>
+
+          <div class="progress">
+            <div class="progress-bar" style="width: 90%"></div>
+          </div>
+        </li>
+        <li class="skill-item"><span>Html</span>
+
+          <div class="progress">
+            <div class="progress-bar" style="width: 81%"></div>
+          </div>
+        </li>
+        <li class="skill-item"><span>CSS</span>
+
+          <div class="progress">
+            <div class="progress-bar" style="width: 89%"></div>
+          </div>
+        </li>
+        <li class="skill-item"><span>ASP.NET</span>
+
+          <div class="progress">
+            <div class="progress-bar" style="width: 75%"></div>
+          </div>
+        </li>
+        <li class="skill-item"><span>Mysql</span>
+
+          <div class="progress">
+            <div class="progress-bar" style="width: 81%"></div>
+          </div>
+        </li>
+        <li class="skill-item"><span>Mongodb</span>
+
+          <div class="progress">
+            <div class="progress-bar" style="width: 75%"></div>
+          </div>
+        </li>
+        <li class="skill-item"><span>Redis</span>
+
+          <div class="progress">
+            <div class="progress-bar" style="width: 70%"></div>
+          </div>
+        </li>
+        <li class="skill-item"><span>Nginx</span>
+
+          <div class="progress">
+            <div class="progress-bar" style="width: 50%"></div>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section id="tools">
+      <h3 class="title"><span>TOOLS</span></h3>
+
+      <div id="webstorm" class="circle">
+        <span>Webstorm</span>
+      </div>
+      <div id="sublime" class="circle">
+        <span>Sublime</span>
+      </div>
+
+      <div id="atom" class="circle">
+        <span>Atom</span>
+      </div>
+
+      <div id="vs" class="circle">
+        <span>VS</span>
+      </div>
+
+    </section>
+  </section>
+  <section id="more-info">
+    <div id="main">
+      <section id="name">
+        <h1>潘志超</h1>
+        <small>nodejs工程师、前端工程师</small>
+
+      </section>
+
+      <section id="profile">
+        <h3 class="title"><span>PROFILE</span></h3>
+
+        <p>
+          3年+互联网开发经验，与政府、公司甚至个人都有过合作，熟悉前后端开发架构，热爱新技术时刻保持学习，但也会根据实际情况谨慎考虑什么情况下使用新技术。
+          2013年初曾创业半年，主要为中小企业提供建站服务，熟悉各种类型网站的布局，后来参与过手游服务端的开发，主要使用nodejs
+          天生异步的特性承载高并发，参与过微信开发，主要开发控制台界面，通过控制台来方便快速的创建各种类型的微信网站。
+        </p>
+
+        <p>
+          熟悉MVC、MVVM开发模式，熟练使用Ubuntu、Mac，熟练使用Gulp、Webpack构建工具。日常工作使用gulp-nodemon、browsersync分别针对前后端代码热
+          重启，使用babel、gulp-minify、gulp-uglify等插件对代码进行插入编译打包压缩等动作。针对工作中碰到的难题，一般是<strong>API>stackoverflow>Google>专业论坛>同事探讨</strong>的方案来解决。
+        </p>
+
+      </section>
+      <section id="experiences">
+        <h3 class="title"><span>EXPERIENCES</span></h3>
+        <section class="work">
+          <h4 class="title"><span>Nodejs工程师</span>
+            <small class="pull-right">2015.10-至今</small>
+          </h4>
+          <section class="company">平安健康互联网有限公司</section>
+
+          <ul>
+            <li>及时聊天系统，主要使用socket.io库，为医师和患者提供一个聊天平台，负责服务端及医师聊天前端界面的编写。</li>
+            <li>
+              基础组件库，编写了一个开源基础组件库node-zookeeper-dubbo，开发这个库的初衷主要是能让nodejs通过原生的dubbo协议调取数据，而并不是通过json协议，该项目截止目前已有1700的下载量。
+            </li>
+            <li>
+              运营控制台系统，商户、门店、物流控制台前后端搭建，前端使用angularjs+bootstrap，后端使用express+sequelize等组件，构成一站式javascript开发，主要管理商户、门店、物流信息所涉及的6张表及之间的增删改查功能。
+            </li>
+          </ul>
+        </section>
+
+        <section class="work">
+          <h4 class="title"><span>前端工程师</span>
+            <small class="pull-right">2014.03-2015.02</small>
+          </h4>
+          <section class="company">上海微客来技术有限公司</section>
+
+          <ul>
+            <li>后台控制页面改版，将老旧的后台前端页面使用bootstrap重构，主要功能是能方便快速的搭建微信网站。</li>
+            <li>
+              爱客项目前后台前端页面架构搭建，本项目是一个CRM系统。
+            </li>
+          </ul>
+        </section>
+
+        <section class="work">
+          <h4 class="title"><span>ASP.NET工程师</span>
+            <small class="pull-right">2013.08-2014.03</small>
+          </h4>
+          <section class="company">上海村木科技有限公司</section>
+
+          <ul>
+            <li>村木金融官网搭建</li>
+            <li>
+              斗牛（棋牌类游戏）项目服务端搭建，使用基于nodejs的pomelo架构（RPC服务）搭建游戏服务端的逻辑代码。
+            </li>
+          </ul>
+        </section>
+      </section>
+      <section id="edu">
+        <h3 class="title"><span>EDUCATION</span></h3>
+
+        <section class="work">
+          <h4 class="title"><span>计算机科学与技术</span>
+            <small class="pull-right">2010.09-2014.06</small>
+          </h4>
+          <section class="company">郑州大学</section>
+
+        </section>
+      </section>
+    </div>
+  </section>
+  <div class="clearfix"></div>
+</article>
+
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/progressbar.min.js"></script>
+
+<script>
+  var circleOpt = {
+    color      : '#666',
+    trailColor : '#ccc',
+    strokeWidth: 3,
+    trailWidth : 3
+  };
+  function circle(id, per) {
+    (new ProgressBar.Circle(id, circleOpt)).animate(per)
+  }
+
+  circle('#webstorm', .85);
+  circle('#sublime', .75);
+  circle('#atom', .7);
+  circle('#vs', .8);
+
+</script>
+
+</body>
+</html>
