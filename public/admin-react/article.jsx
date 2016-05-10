@@ -30,10 +30,10 @@ export default class PostForm extends React.Component {
 
     btn.setAttribute('disabled', true);
     $.ajax({
-      url    : this.props.url,
-      method : this.id === 'new' ? 'POST' : 'PUT',
-      data   : data,
-      success: ()=>  btn.removeAttribute('disabled')
+      url: this.props.url,
+      method: this.id === 'new' ? 'POST' : 'PUT',
+      data: data,
+      success: ()=> btn.removeAttribute('disabled')
     });
   }
 
@@ -53,18 +53,18 @@ export default class PostForm extends React.Component {
 
   assignData(data) {
     _(this.refs).forEach((value, key) => {
-      this.refs[key].getDOMNode().type == "checkbox" ?
-        this.refs[key].getDOMNode().checked = data[key] :
-        this.refs[key].getDOMNode().value = data[key] || '';
+      this.refs[key].getDOMNode().type === 'checkbox'
+        ? this.refs[key].getDOMNode().checked = data[key]
+        : this.refs[key].getDOMNode().value = data[key] || '';
     }).value();
     Materialize.updateTextFields();
 
     var tags = new Bloodhound({
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('tag'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-      prefetch      : {
-        cache : false,
-        url   : '/api/tags/',
+      prefetch: {
+        cache: false,
+        url: '/api/tags/',
         filter: function (list) {
           return _.map(list, function (tag) {
             return {tag: tag.name};
@@ -78,17 +78,17 @@ export default class PostForm extends React.Component {
     $("#tags").materialtags({
       typeaheadjs: {
         displayName: 'tag',
-        displayKey : 'tag',
-        valueKey   : 'tag',
-        source     : tags.ttAdapter()
+        displayKey: 'tag',
+        valueKey: 'tag',
+        source: tags.ttAdapter()
       }
     });
 
     var myCodeMirror = CodeMirror.fromTextArea(this.refs.content.getDOMNode(), {
       lineNumbers: true,
-      mode       : "gfm",
-      theme      : 'default',
-      extraKeys  : {
+      mode: "gfm",
+      theme: 'default',
+      extraKeys: {
         "F11": function (cm) {
           cm.setOption("fullScreen", !cm.getOption("fullScreen"));
         },

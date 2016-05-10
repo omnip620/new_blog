@@ -1,6 +1,7 @@
 /**
  * Created by panew on 15-1-31.
  */
+
 module.exports[404] = function (req, res) {
   var viewFilePath = '404';
   var statusCode = 404;
@@ -15,6 +16,6 @@ module.exports[404] = function (req, res) {
   });
 };
 
-module.exports[500] = function (err,req, res) {
+module.exports[500] = function (err, req, res) {
   return res.json(500, err);
-}
+};

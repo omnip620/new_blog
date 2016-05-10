@@ -25,7 +25,7 @@ function Articles() {
     , document.getElementById('content'));
 }
 
-function Tags() {
+function Tags () {
   React.render(
     <RTable src="/api/tags" page={true} del={true} sortBy="count" order="desc">
       <RTh filed='_id' text='' checkbox={true}/>
